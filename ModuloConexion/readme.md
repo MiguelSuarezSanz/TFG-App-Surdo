@@ -13,7 +13,7 @@ La seguridad que tienes planteada es sólida para empezar, siempre se puede refi
 
 
 ## Estructura del monorepo
-
+```
 quic-tunnel/
 ├── build.gradle              # Build raíz
 ├── settings.gradle           # Declara los módulos
@@ -25,3 +25,4 @@ quic-tunnel/
 │   └── build.gradle
 └── tunnel-ca/                # Herramientas para gestionar certificados
     └── build.gradle
+```
