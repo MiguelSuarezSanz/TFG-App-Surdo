@@ -26,3 +26,6 @@ quic-tunnel/
 └── tunnel-ca/                # Herramientas para gestionar certificados
     └── build.gradle
 ```
+
+# Notas
+- Facilitar la conexión entre servidor y clientes (estilo QR o alguna cosa así)
