@@ -1,0 +1,37 @@
+#logo {
+    transform-origin: center center;
+    will-change: transform, filter;
+    width: 30vw;
+}
+
+body {
+    gap: 4rem;
+}
+
+.botones {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    gap: 2rem;
+    max-width: min-content;
+}
+
+button {
+    min-width: 100%;
+    background-color: var(--primary-color);
+    font-size: 2rem;
+    border: 0.5rem solid var(--primary-color-lighter);
+    border-radius: 3rem;
+    padding: 1rem;
+    cursor: pointer;
+}
+
+button:hover {
+    border: 0.5rem solid var(--secundary-color);
+}
+
+#logo {
+    transition: none;
+}
