@@ -1,55 +1,93 @@
+import me.friwi.jcefmaven.CefAppBuilder;
+import me.friwi.jcefmaven.MavenCefAppHandlerAdapter;
+import org.cef.CefApp;
+import org.cef.CefClient;
+import org.cef.browser.CefBrowser;
+import org.cef.browser.CefFrame;
+import org.cef.browser.CefMessageRouter;
+import org.cef.callback.CefQueryCallback;
+import org.cef.handler.CefMessageRouterHandlerAdapter;
+
+import javax.swing.*;
+import java.awt.*;
 import java.io.File;
 
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.web.WebEngine;
-import javafx.scene.web.WebView;
-import javafx.stage.Stage;
-import javafx.concurrent.Worker;
-import netscape.javascript.JSObject;
+import org.cef.handler.CefLoadHandlerAdapter;
+import org.cef.handler.CefLoadHandler;
 
-public class AppUI extends Application {
-	
-	private PuenteJava puente = new PuenteJava();
+public class AppUI {
 
-    @Override
-    public void start(Stage escenarioPrincipal) {
-    	
-        // Creamos el componente web
-        WebView navegador = new WebView();
-        WebEngine motorWeb = navegador.getEngine();
-        
-        // Apuntamos a tu archivo HTML local
-        File archivoHtml = new File("../../Prototipo/views/index/index.html");
-        motorWeb.load(archivoHtml.toURI().toString());
-        
-        // Escuchamos los eventos del motor web
-        motorWeb.getLoadWorker().stateProperty().addListener((observable, viejoEstado, nuevoEstado) -> {
-            if (nuevoEstado == Worker.State.SUCCEEDED) {
-                
-                // Obtenemos la ventana (window) de JavaScript
-                JSObject windowJS = (JSObject) motorWeb.executeScript("window");
-                
-                // Inyectamos nuestro objeto Java y le ponemos el nombre "conexionJava"
-                windowJS.setMember("conexionJava", puente);
+    public static void iniciar(String[] args) throws Exception {
+
+        // Configurar JCEF
+        CefAppBuilder builder = new CefAppBuilder();
+        builder.getCefSettings().windowless_rendering_enabled = false;
+
+        builder.addJcefArgs("--disable-web-security");
+     	builder.getCefSettings().command_line_args_disabled = false;
+
+     	// Añadir flags de Chromium
+     	builder.addJcefArgs("--allow-file-access-from-files");
+
+        builder.setAppHandler(new MavenCefAppHandlerAdapter() {
+            @Override
+            public void stateHasChanged(CefApp.CefAppState state) {
+                if (state == CefApp.CefAppState.TERMINATED) {
+                    System.exit(0);
+                }
             }
         });
 
-        // Creamos la "Escena" (el contenido de la ventana)
-        Scene escena = new Scene(navegador, 1024, 768);
+        CefApp cefApp = builder.build();
+        CefClient client = cefApp.createClient();
 
-        // Configuramos la ventana principal
-        escenarioPrincipal.setTitle("Mi App Moderna con JavaFX");
-        escenarioPrincipal.setScene(escena);
-        
-        // ¡Magia! Maximizar la ventana sin parpadeos ni problemas
-        escenarioPrincipal.setMaximized(true); 
-        
-        // Mostramos la ventana
-        escenarioPrincipal.show();
-        
+        // Puente JS → Java
+        PuenteJava puente = new PuenteJava();
+
+        CefMessageRouter router = CefMessageRouter.create(
+            new CefMessageRouter.CefMessageRouterConfig("cefQuery", "cefQueryCancel")
+        );
+
+        router.addHandler(new CefMessageRouterHandlerAdapter() {
+            @Override
+            public boolean onQuery(CefBrowser browser, CefFrame frame,
+                                   long queryId, String request,
+                                   boolean persistent, CefQueryCallback callback) {
+                // Llamamos al mismo método que tenías en PuenteJava
+                puente.botonPulsado(request);
+                callback.success("OK");
+                return true;
+            }
+        }, true);
+
+        client.addMessageRouter(router);
+
+        // Cargar el HTML con ruta absoluta
+        File archivoHtml = new File("../../Prototipo/views/index/index.html").getAbsoluteFile();
+        CefBrowser browser = client.createBrowser(
+            archivoHtml.toURI().toString(),
+            false,
+            false
+        );
+
+        // Ventana Swing maximizada
+        JFrame ventana = new JFrame("App-Surdo");
+        ventana.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        ventana.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent e) {
+                cefApp.dispose();
+                ventana.dispose();
+            }
+        });
+
+        ventana.getContentPane().add(browser.getUIComponent(), BorderLayout.CENTER);
+        ventana.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        ventana.setSize(1024, 768);
+        ventana.setVisible(true);
+
         System.out.println("Launched");
-    
+        
+        
     }
-
 }
