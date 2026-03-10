@@ -1,11 +1,17 @@
 #logo {
     transform-origin: center center;
     will-change: transform, filter;
-    width: 30vw;
+    width: max-content;
+    font-size: 10rem;
+    text-align: center;
+}
+
+#logo * {
+    font-family: "Kablammo", system-ui;
 }
 
 body {
-    gap: 4rem;
+    gap: 8rem;
 }
 
 .botones {

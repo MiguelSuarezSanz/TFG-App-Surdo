@@ -20,7 +20,7 @@ public class AppUI extends Application {
         WebEngine motorWeb = navegador.getEngine();
         
         // Apuntamos a tu archivo HTML local
-        File archivoHtml = new File("ui/index.html");
+        File archivoHtml = new File("../../Prototipo/views/index/index.html");
         motorWeb.load(archivoHtml.toURI().toString());
         
         // Escuchamos los eventos del motor web
@@ -48,7 +48,7 @@ public class AppUI extends Application {
         // Mostramos la ventana
         escenarioPrincipal.show();
         
-        System.out.println("Launched.");
+        System.out.println("Launched");
     
     }
 

@@ -2,12 +2,6 @@ const AUDIO_PATH = "../../resources/ost/WarioWareOst.wav";
 
 const logo = document.getElementById('logo');
 
-// --- Estado de oscilación ---
-let angle = 0;
-let angleDir = 1;
-const MAX_ANGLE = 25;
-let angleSpeed  = 1.2;
-
 let audioCtx, analyser, source, dataArray, animId;
 
 async function init() {
@@ -54,23 +48,16 @@ function animate() {
   const energy = totalSum / dataArray.length / 255;
 
   const scale = 1 + bassAvg * 0.2;
-  angleSpeed = 0.8 + energy * 4;
 
-  angle += angleDir * angleSpeed;
-  if (angle >=  MAX_ANGLE) { angle =  MAX_ANGLE; angleDir = -1; }
-  if (angle <= -MAX_ANGLE) { angle = -MAX_ANGLE; angleDir =  1; }
-
-  logo.style.transform = `rotate(${angle}deg) scale(${scale})`;
+  logo.style.transform = `scale(${scale})`;
 
   const glowSize = Math.round(bassAvg * 40);
   const hue = Math.round(50 + energy * 220);
   logo.style.filter = `drop-shadow(0 0 ${glowSize}px hsl(${hue},100%,65%))`;
 }
 
-// Los navegadores bloquean AudioContext sin gesto del usuario.
-// Se intenta arrancar solo; si falla, se espera el primer clic.
 async function tryAutoStart() {
-    document.addEventListener('click', () => init(), { once: true });
+  document.addEventListener('click', () => init(), { once: true });
 }
 
 window.addEventListener('load', tryAutoStart);

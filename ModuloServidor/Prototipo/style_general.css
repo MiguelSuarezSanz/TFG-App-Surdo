@@ -1,7 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Kablammo&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Oregano:ital@0;1&display=swap');
+
 :root {
     --primary-color: #965dd6;
     --primary-color-lighter: #c490ff;
-    --secundary-color: #fa4f96;
+    --secundary-color: #ff5b9f;
     --terciary-color: #fbff00;
     --cuarternary-color: #fc7b09;
     --font-color: azure;
@@ -11,10 +14,11 @@ html {
     min-height: 100%;
 }
 
-html * {
+* {
     margin: 0;
     padding: 0;
     color: var(--font-color);
+    font-family: "Oregano", cursive;
     transition: all 0.5s;
 }
 
@@ -25,7 +29,7 @@ body {
     justify-content: center;
     flex-wrap: nowrap;
     flex-direction: column;
-    background: repeating-conic-gradient(var(--terciary-color) 0 10deg, var(--cuarternary-color) 10deg 20deg);
+    background: repeating-conic-gradient(var(--terciary-color) 0 10deg, var(--primary-color) 10deg 20deg);
 }
 
 
@@ -33,7 +37,7 @@ body::after {
     content: "";
     position: fixed;
     inset: 0;
-    background-color: rgba(0, 0, 0, 0.2);
+    background-image: radial-gradient(circle, #00000080, #00000015);
     z-index: 1;
     pointer-events: none;
 }
@@ -49,13 +53,13 @@ body::before {
     background-size: 20px 20px;
     
     background-image: 
-        /* Puntos Naranjas */
-        radial-gradient(#fc7a094b 20%, transparent 20%),
-        radial-gradient(#fc7a094b 20%, transparent 20%),
+        /* Puntos Primarios */
+        radial-gradient(#fa4f964b 20%, transparent 20%),
+        radial-gradient(#fa4f964b 20%, transparent 20%),
 
-        /* Puntos Amarillos */
-        radial-gradient(#fbff004b 20%, transparent 20%),
-        radial-gradient(#fbff004b 20%, transparent 20%);
+        /* Puntos Secundarios */
+        radial-gradient(#fc7b094b 20%, transparent 20%),
+        radial-gradient(#fc7b094b 20%, transparent 20%);
         
     background-position: 
         0 0, 10px 10px, 
@@ -66,4 +70,14 @@ body * {
     z-index: 3;
     position: relative; 
     color: var(--font-color)
+}
+
+.title-color-primary {
+    color: var(--secundary-color);
+    -webkit-text-stroke: var(--primary-color) 0.05rem;
+}
+
+.title-color-secundary {
+    color: var(--terciary-color);
+    -webkit-text-stroke: var(--cuarternary-color) 0.05rem;
 }
