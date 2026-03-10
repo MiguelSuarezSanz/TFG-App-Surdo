@@ -1,0 +1,9 @@
+dependencies {
+    // Bouncy Castle: librería criptográfica para generar
+    // y gestionar certificados desde Java
+    implementation 'org.bouncycastle:bcpkix-jdk18on:1.77'
+
+    // SLF4J + Logback igual que en el servidor
+    implementation 'org.slf4j:slf4j-api:2.0.9'
+    runtimeOnly 'ch.qos.logback:logback-classic:1.4.11'
+}

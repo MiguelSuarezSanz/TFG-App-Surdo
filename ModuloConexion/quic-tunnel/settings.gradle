@@ -1,0 +1,5 @@
+rootProject.name = 'quic-tunnel'
+
+include 'tunnel-core'
+include 'tunnel-server'
+include 'tunnel-ca'
