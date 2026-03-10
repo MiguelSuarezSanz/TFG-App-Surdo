@@ -1,0 +1,4 @@
+dependencies {
+    // SLF4J: interfaz de logging que decidimos usar
+    implementation 'org.slf4j:slf4j-api:2.0.9'
+}

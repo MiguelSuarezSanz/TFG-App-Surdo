@@ -1,0 +1,15 @@
+dependencies {
+    // tunnel-core: necesita las interfaces comunes que define
+    implementation project(':tunnel-core')
+
+    // Netty QUIC: la librería que implementa QUIC en el servidor
+    implementation 'io.netty.incubator:netty-incubator-codec-native-quic:0.0.74.Final:windows-x86_64'
+
+    // Las clases Java que acompañan al nativo
+    implementation 'io.netty.incubator:netty-incubator-codec-classes-quic:0.0.74.Final'
+
+    // SLF4J con Logback: aquí sí elegimos implementación concreta
+    // Logback es la implementación más usada de SLF4J en Java
+    implementation 'org.slf4j:slf4j-api:2.0.9'
+    runtimeOnly 'ch.qos.logback:logback-classic:1.4.11'
+}

@@ -1,5 +1,3 @@
-## Perfecto, resumen de decisiones tomadas
-
 | Aspecto | Decisión |
 |---|---|
 | Estructura | Monorepo |
@@ -26,3 +24,8 @@ quic-tunnel/
 └── tunnel-ca/                # Herramientas para gestionar certificados
     └── build.gradle
 ```
+# Chat
+https://claude.ai/project/019cb317-40ed-75b9-bf45-243d27e16375
+# Notas
+- Facilitar la conexión entre servidor y clientes (estilo QR o alguna cosa así)
+
