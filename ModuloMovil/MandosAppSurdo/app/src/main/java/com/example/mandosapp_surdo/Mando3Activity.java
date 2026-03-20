@@ -1,5 +1,6 @@
 package com.example.mandosapp_surdo;
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,6 +21,7 @@ public class Mando3Activity extends AppCompatActivity implements SensorEventList
     private float[] rotationMatrix = new float[9];
     private float[] orientationAngles = new float[3];
     private ImageView imagen;
+    private MediaPlayer cancion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +34,7 @@ public class Mando3Activity extends AppCompatActivity implements SensorEventList
             return insets;
         });
 
+        cancion = MediaPlayer.create(this, R.raw.cancion);
         imagen = findViewById(R.id.imagen);
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
 
@@ -68,8 +71,17 @@ public class Mando3Activity extends AppCompatActivity implements SensorEventList
 
         if (pitch < 10.0 && pitch > -10.0) {
             imagen.setVisibility(ImageView.VISIBLE);
+
+            if (!cancion.isPlaying()) {
+                cancion.start();
+                cancion.setLooping(true);
+            }
         } else {
             imagen.setVisibility(ImageView.GONE);
+
+            if (cancion.isPlaying()) {
+                cancion.pause();
+            }
         }
     }
 
