@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
 
         final Button mando1 = findViewById(R.id.mando1);
         final Button mando2 = findViewById(R.id.mando2);
+        final Button mando3 = findViewById(R.id.mando3);
 
         mando1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,5 +52,14 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(myIntent);
             }
         });
+
+        mando3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Intent myIntent = new Intent(MainActivity.this, Mando3Activity.class);
+                startActivity(myIntent);
+            }
+        });
+
     }
 }
