@@ -12,8 +12,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 
-import org.cef.handler.CefLoadHandlerAdapter;
-import org.cef.handler.CefLoadHandler;
+//import org.cef.handler.CefLoadHandlerAdapter;
+//import org.cef.handler.CefLoadHandler;
 
 public class AppUI {
 
