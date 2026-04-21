@@ -1,0 +1,14 @@
+dependencies {
+    // tunnel-core: necesita las interfaces comunes
+    implementation project(':tunnel-core')
+
+    // SLF4J para logging
+    implementation 'org.slf4j:slf4j-api:2.0.9'
+
+    // quiche se añadirá cuando configuremos los binarios nativos
+    // por ahora dejamos el build.gradle preparado
+    implementation project(':tunnel-core')
+    implementation 'org.slf4j:slf4j-api:2.0.9'
+
+    testRuntimeOnly 'ch.qos.logback:logback-classic:1.4.11'
+}

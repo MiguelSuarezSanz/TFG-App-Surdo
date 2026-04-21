@@ -10,6 +10,7 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/tunnel-ca" />
+            <option value="$PROJECT_DIR$/tunnel-client" />
             <option value="$PROJECT_DIR$/tunnel-core" />
             <option value="$PROJECT_DIR$/tunnel-server" />
           </set>
