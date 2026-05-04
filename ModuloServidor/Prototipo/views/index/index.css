@@ -41,3 +41,7 @@ button:hover {
 #logo {
     transition: none;
 }
+
+a {
+    min-width: 100%;
+}

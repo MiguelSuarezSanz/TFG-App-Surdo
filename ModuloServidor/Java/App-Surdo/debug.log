@@ -19,3 +19,10 @@
 [0310/105318.741:INFO:CONSOLE(31)] "The AudioContext was not allowed to start. It must be resumed (or created) after a user gesture on the page. https://goo.gl/7K7WLu", source: file:///C:/Users/Mihaku/Desktop/ProyectoTFG_App-Surdo/ModuloServidor/Prototipo/views/index/index.js (31)
 [0310/105335.446:WARNING:resource_util.cc(94)] Please customize CefSettings.root_cache_path for your application. Use of the default value may lead to unintended process singleton behavior.
 [0310/122024.566:WARNING:resource_util.cc(94)] Please customize CefSettings.root_cache_path for your application. Use of the default value may lead to unintended process singleton behavior.
+[0403/214836.085:WARNING:resource_util.cc(94)] Please customize CefSettings.root_cache_path for your application. Use of the default value may lead to unintended process singleton behavior.
+[0420/195957.828:WARNING:resource_util.cc(94)] Please customize CefSettings.root_cache_path for your application. Use of the default value may lead to unintended process singleton behavior.
+[0420/200001.035:INFO:CONSOLE(23)] "TypeError: Failed to fetch", source: file:///C:/Users/Mihaku/Desktop/ProyectoTFG_App-Surdo/ModuloServidor/Prototipo/views/index/index.js (23)
+[0420/200004.941:INFO:CONSOLE(23)] "TypeError: Failed to fetch", source: file:///C:/Users/Mihaku/Desktop/ProyectoTFG_App-Surdo/ModuloServidor/Prototipo/views/index/index.js (23)
+[0420/200006.480:INFO:CONSOLE(23)] "TypeError: Failed to fetch", source: file:///C:/Users/Mihaku/Desktop/ProyectoTFG_App-Surdo/ModuloServidor/Prototipo/views/index/index.js (23)
+[0420/200008.498:INFO:CONSOLE(23)] "TypeError: Failed to fetch", source: file:///C:/Users/Mihaku/Desktop/ProyectoTFG_App-Surdo/ModuloServidor/Prototipo/views/index/index.js (23)
+[0420/200019.923:INFO:CONSOLE(23)] "TypeError: Failed to fetch", source: file:///C:/Users/Mihaku/Desktop/ProyectoTFG_App-Surdo/ModuloServidor/Prototipo/views/index/index.js (23)
