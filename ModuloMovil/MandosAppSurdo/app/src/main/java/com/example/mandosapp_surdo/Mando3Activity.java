@@ -21,7 +21,7 @@ public class Mando3Activity extends AppCompatActivity implements SensorEventList
     private float[] rotationMatrix = new float[9];
     private float[] orientationAngles = new float[3];
     private ImageView imagen;
-    private MediaPlayer cancion;
+    private MediaPlayer cancion1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,10 +34,14 @@ public class Mando3Activity extends AppCompatActivity implements SensorEventList
             return insets;
         });
 
+        /* Al iniciar la actividad, cargo los modulos de musica y de sensores, y la imagen con, la
+        cancion correspondiente, los sensores del telefono y la imagen respectivamente */
         cancion = MediaPlayer.create(this, R.raw.cancion);
         imagen = findViewById(R.id.imagen);
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
 
+        /* Una vez cargados, si el modulo de sensores tiene guardados los sensores del telefono,
+        carga el modulo de rotacion con la informacion del giroscopio */
         if (sensorManager != null) {
             rotationSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR);
         }
@@ -69,19 +73,21 @@ public class Mando3Activity extends AppCompatActivity implements SensorEventList
         // Convertir a grados
         float pitch = (float) Math.toDegrees(orientationAngles[1]);
 
+        /*
+        Una vez obtenido la informacion de la inclinacion del telefono, compruebo si dicha
+        inclinacion es mayor y menor a 10 grados, tanto positivos como negativos, dependiendo de si
+        esta condicion se cumple o no sucederan lo siguientes casos:
+            - Si esta dentro del rango especificado, hara aparecer la imagen en la pantalla y
+            comenzara a sonar la cancion y la pondra en bucle
+            - Si no esta dentro del rango definido, ocultara la imagen y pausara la cancion
+        */
         if (pitch < 10.0 && pitch > -10.0) {
             imagen.setVisibility(ImageView.VISIBLE);
-
-            if (!cancion.isPlaying()) {
-                cancion.start();
-                cancion.setLooping(true);
-            }
+            cancion.start();
+            cancion.setLooping(true);
         } else {
             imagen.setVisibility(ImageView.GONE);
-
-            if (cancion.isPlaying()) {
-                cancion.pause();
-            }
+            cancion.pause();
         }
     }
 
