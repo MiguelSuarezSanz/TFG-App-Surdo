@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
+        // Estos son los colores que se le pasaran al segundo mando
         String[] colores = new String[] {"Rojo", "Amarillo", "Verde", "Azul"};
 
         final Button mando1 = findViewById(R.id.mando1);
@@ -41,13 +42,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        /* Cuando se quiera entrar en el segundo mando, el programa elegira de forma aleatoria uno
+        de los colores guardados, y se lo pasara a su actividad como un extra */
         mando2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 String color = colores[new Random().nextInt(colores.length)];
 
-                final Intent myIntent = new Intent(MainActivity.this, Mando2Activity.class);
+                final Intent myIntent = new Intent(MainActivity.this, ConexionMandoActivity.class);
                 myIntent.putExtra("color", color);
                 startActivity(myIntent);
             }

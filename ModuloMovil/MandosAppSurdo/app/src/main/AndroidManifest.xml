@@ -12,6 +12,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MandosAppSurdo">
         <activity
+            android:name=".ConexionMandoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MandoUnificadoActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".Mando3Activity"
             android:exported="false" />
         <activity

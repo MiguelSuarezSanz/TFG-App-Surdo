@@ -30,6 +30,8 @@ public class Mando2Activity extends AppCompatActivity {
             return insets;
         });
 
+        /* Cargo todos los valores de los botones que se modificaran cuando entre el color enviado
+        por la actividad principal */
         String[] colores;
         Bundle extras = getIntent().getExtras();
         String color = extras.getString("color");
@@ -38,6 +40,15 @@ public class Mando2Activity extends AppCompatActivity {
         MaterialButton btn3 = findViewById(R.id.btn3);
         String textobtn2 = "";
 
+        /*
+            El swicth funciona de esta manera:
+                - Dependiendo del color recibido, se cargara primero un array con la lista de
+                colores de la actividad principal, salvo el color pasado por ella misma
+                - Despues, el color de fondo del primer boton se cambiara al color recibido
+                - Luego, se modificara el segundo boton para que muestre como texto, uno de los
+                colores del array, con las letras del color recibido
+                - Por ultimo, se le agregara al tercer boton el color recibido como texto
+        */
         switch (color) {
             case "Rojo":
                 colores = new String[] {"Amarillo", "Verde", "Azul"};
@@ -73,6 +84,10 @@ public class Mando2Activity extends AppCompatActivity {
                 break;
         }
 
+        /* Una vez la personalizacion ha concluido, se elegira un numero al azar entre el 1 y el 3,
+        los botones tienen preasignados un numero de ese rango, al pulsar cualquiera de los tres
+        botones, se comprobara el numero que tiene asignado dicho boton con el elegido, si coinciden
+        ambos numeros, ese boton es el correcto */
         int numRandom = (int) (Math.random() * 3) + 1;
 
         btn1.setOnClickListener(new View.OnClickListener() {
