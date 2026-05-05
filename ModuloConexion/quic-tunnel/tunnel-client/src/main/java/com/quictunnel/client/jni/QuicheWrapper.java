@@ -27,7 +27,7 @@ public class QuicheWrapper {
      * Así los tests pueden instanciar QuicheWrapper sin necesitar el .so.
      */
     public static void loadNativeLibrary() {
-        System.loadLibrary("quiche");
+        System.loadLibrary("quiche_jni");
     }
 
     // ─────────────────────────────────────────────

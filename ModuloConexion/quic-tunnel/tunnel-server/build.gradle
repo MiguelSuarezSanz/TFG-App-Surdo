@@ -19,4 +19,7 @@ dependencies {
     // Solo para pruebas: genera certificados autofirmados en memoria
     testImplementation 'io.netty:netty-handler:4.1.124.Final'
     testImplementation 'org.bouncycastle:bcpkix-jdk18on:1.77'
+
+    testImplementation 'io.netty.incubator:netty-incubator-codec-native-quic:0.0.74.Final:windows-x86_64'
+    testImplementation 'io.netty.incubator:netty-incubator-codec-classes-quic:0.0.74.Final'
 }
