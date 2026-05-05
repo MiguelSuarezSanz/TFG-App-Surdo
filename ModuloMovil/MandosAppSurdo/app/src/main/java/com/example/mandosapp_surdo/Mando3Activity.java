@@ -36,7 +36,7 @@ public class Mando3Activity extends AppCompatActivity implements SensorEventList
 
         /* Al iniciar la actividad, cargo los modulos de musica y de sensores, y la imagen con, la
         cancion correspondiente, los sensores del telefono y la imagen respectivamente */
-        cancion = MediaPlayer.create(this, R.raw.cancion);
+        cancion1 = MediaPlayer.create(this, R.raw.cancion);
         imagen = findViewById(R.id.imagen);
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
 
@@ -83,11 +83,11 @@ public class Mando3Activity extends AppCompatActivity implements SensorEventList
         */
         if (pitch < 10.0 && pitch > -10.0) {
             imagen.setVisibility(ImageView.VISIBLE);
-            cancion.start();
-            cancion.setLooping(true);
+            cancion1.start();
+            cancion1.setLooping(true);
         } else {
             imagen.setVisibility(ImageView.GONE);
-            cancion.pause();
+            cancion1.pause();
         }
     }
 

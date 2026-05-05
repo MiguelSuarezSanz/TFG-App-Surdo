@@ -26,9 +26,9 @@
 
     <TextView
         android:id="@+id/respuesta"
-        android:layout_width="343dp"
-        android:layout_height="106dp"
-        android:layout_marginTop="100dp"
+        android:layout_width="344dp"
+        android:layout_height="160dp"
+        android:layout_marginTop="60dp"
         android:text="TextView"
         android:textAlignment="center"
         android:textColor="#FFFFFF"
@@ -39,7 +39,7 @@
 
     <LinearLayout
         android:layout_width="365dp"
-        android:layout_height="385dp"
+        android:layout_height="185dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -51,13 +51,15 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:backgroundTint="#FB0000"
             android:text="Hola" />
 
         <Button
             android:id="@+id/button2"
             android:layout_width="wrap_content"
-            android:layout_height="385dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
+            android:backgroundTint="#3F51B5"
             android:text="Adios" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
