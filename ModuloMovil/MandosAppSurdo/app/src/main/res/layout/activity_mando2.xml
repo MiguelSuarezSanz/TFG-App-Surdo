@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#313131"
+    android:gravity="center"
+    android:orientation="horizontal"
+    tools:context=".Mando2Activity">
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn1"
+        android:layout_width="0dp"
+        android:layout_height="250dp"
+        android:layout_margin="5px"
+        android:layout_weight="1"
+        android:text=""
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:backgroundTint="#FFEB3B"
+        app:cornerRadius="250dp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn2"
+        android:layout_width="0dp"
+        android:layout_height="250dp"
+        android:layout_margin="5px"
+        android:layout_weight="1"
+        android:text=""
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:backgroundTint="#B6B6B6"
+        app:cornerRadius="260dp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn3"
+        android:layout_width="0dp"
+        android:layout_height="250dp"
+        android:layout_margin="5px"
+        android:layout_weight="1"
+        android:text=""
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:backgroundTint="#B6B6B6"
+        app:cornerRadius="260dp" />
+</LinearLayout>
