@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
+import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
 import com.quictunnel.core.TunnelConfig;
 import com.quictunnel.core.TunnelConnection;
@@ -23,7 +25,7 @@ public class ConexionMandoActivity extends AppCompatActivity {
 
         try {
             TunnelConfig config = TunnelConfig.builder()
-                    .host("IP_DEL_PC_DE_MIGUEL")
+                    .host("192.168.3.16")
                     .port(4242)
                     .caCert(copyAssetToFile("ca.crt"))
                     .cert(copyAssetToFile("client.crt"))
