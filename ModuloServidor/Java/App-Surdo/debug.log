@@ -26,3 +26,6 @@
 [0420/200006.480:INFO:CONSOLE(23)] "TypeError: Failed to fetch", source: file:///C:/Users/Mihaku/Desktop/ProyectoTFG_App-Surdo/ModuloServidor/Prototipo/views/index/index.js (23)
 [0420/200008.498:INFO:CONSOLE(23)] "TypeError: Failed to fetch", source: file:///C:/Users/Mihaku/Desktop/ProyectoTFG_App-Surdo/ModuloServidor/Prototipo/views/index/index.js (23)
 [0420/200019.923:INFO:CONSOLE(23)] "TypeError: Failed to fetch", source: file:///C:/Users/Mihaku/Desktop/ProyectoTFG_App-Surdo/ModuloServidor/Prototipo/views/index/index.js (23)
+[0505/104638.358:WARNING:resource_util.cc(94)] Please customize CefSettings.root_cache_path for your application. Use of the default value may lead to unintended process singleton behavior.
+[0505/104641.633:INFO:CONSOLE(23)] "TypeError: Failed to fetch", source: file:///C:/Users/Mihaku/Desktop/ProyectoTFG_App-Surdo/ModuloServidor/Prototipo/views/index/index.js (23)
+[0505/104654.878:INFO:CONSOLE(23)] "TypeError: Failed to fetch", source: file:///C:/Users/Mihaku/Desktop/ProyectoTFG_App-Surdo/ModuloServidor/Prototipo/views/index/index.js (23)
