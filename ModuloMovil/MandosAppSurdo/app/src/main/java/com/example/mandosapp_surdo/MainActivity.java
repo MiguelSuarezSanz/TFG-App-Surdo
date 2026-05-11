@@ -26,7 +26,7 @@ import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
-    private QuicTunnelClient tunnel;
+    //private QuicTunnelClient tunnel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         mando1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final Intent myIntent = new Intent(MainActivity.this, Mando1Activity.class);
+                final Intent myIntent = new Intent(MainActivity.this, VentanaMinijuegosActivity.class);
                 startActivity(myIntent);
             }
         });
@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        try {
+        /*try {
             TunnelConfig config = TunnelConfig.builder()
                     .host("192.168.3.16")
                     .port(4242)
@@ -112,9 +112,9 @@ public class MainActivity extends AppCompatActivity {
 
         } catch (TunnelException | java.io.IOException e) {
             Log.e("Tunnel", "Error al iniciar: " + e.getMessage());
-        }
+        } */
     }
-
+    /*
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -133,4 +133,6 @@ public class MainActivity extends AppCompatActivity {
         }
         return outFile.getAbsolutePath();
     }
+
+     */
 }
