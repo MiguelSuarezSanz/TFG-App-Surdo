@@ -68,14 +68,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        mando3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final Intent myIntent = new Intent(MainActivity.this, Mando3Activity.class);
-                startActivity(myIntent);
-            }
-        });
-
         /*try {
             TunnelConfig config = TunnelConfig.builder()
                     .host("192.168.3.16")
