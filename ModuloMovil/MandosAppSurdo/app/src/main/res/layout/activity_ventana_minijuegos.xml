@@ -6,9 +6,9 @@
     android:layout_height="match_parent"
     android:background="#1E1E2E">
 
-    <!-- =========================================================
+    <!-- =====================================================
          PANTALLA 1: MENÚ PRINCIPAL
-    ========================================================= -->
+    ===================================================== -->
     <LinearLayout
         android:id="@+id/pantallaMenu"
         android:layout_width="match_parent"
@@ -49,9 +49,9 @@
 
     </LinearLayout>
 
-    <!-- =========================================================
+    <!-- =====================================================
          PANTALLA 2: EXPLICACIÓN DEL MINIJUEGO
-    ========================================================= -->
+    ===================================================== -->
     <LinearLayout
         android:id="@+id/pantallaExplicacion"
         android:layout_width="match_parent"
@@ -76,12 +76,12 @@
             android:id="@+id/txtExplicacion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Explicación del minijuego aquí"
+            android:text=""
             android:textColor="#D0D0E8"
-            android:textSize="18sp"
+            android:textSize="17sp"
             android:gravity="center"
             android:lineSpacingMultiplier="1.4"
-            android:layout_marginBottom="48dp"/>
+            android:layout_marginBottom="32dp"/>
 
         <TextView
             android:id="@+id/txtPuntuacionActual"
@@ -91,7 +91,7 @@
             android:textColor="#6C63FF"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:layout_marginBottom="48dp"/>
+            android:layout_marginBottom="40dp"/>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnListo"
@@ -106,9 +106,9 @@
 
     </LinearLayout>
 
-    <!-- =========================================================
-         PANTALLA 3: JUEGO (contiene todos los minijuegos)
-    ========================================================= -->
+    <!-- =====================================================
+         PANTALLA 3: JUEGO (todos los minijuegos aquí)
+    ===================================================== -->
     <LinearLayout
         android:id="@+id/pantallaJuego"
         android:layout_width="match_parent"
@@ -117,7 +117,7 @@
         android:gravity="center"
         android:visibility="gone">
 
-        <!-- Temporizador visible en todos los minijuegos que lo usen -->
+        <!-- Temporizador compartido -->
         <TextView
             android:id="@+id/txtTemporizador"
             android:layout_width="wrap_content"
@@ -128,7 +128,7 @@
             android:textStyle="bold"
             android:layout_marginBottom="8dp"/>
 
-        <!-- MINIJUEGO BOTONES (vertical: apilados) -->
+        <!-- MINIJUEGO: BOTONES (apilados en vertical) -->
         <LinearLayout
             android:id="@+id/contenedorBotones"
             android:layout_width="match_parent"
@@ -144,8 +144,7 @@
                 android:layout_height="100dp"
                 android:layout_marginBottom="16dp"
                 android:text=""
-                android:textSize="22sp"
-                android:textStyle="bold"
+                android:textSize="20sp"
                 android:textAllCaps="false"
                 app:cornerRadius="20dp"/>
 
@@ -155,8 +154,7 @@
                 android:layout_height="100dp"
                 android:layout_marginBottom="16dp"
                 android:text=""
-                android:textSize="22sp"
-                android:textStyle="bold"
+                android:textSize="20sp"
                 android:textAllCaps="false"
                 app:cornerRadius="20dp"/>
 
@@ -165,14 +163,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:text=""
-                android:textSize="22sp"
-                android:textStyle="bold"
+                android:textSize="20sp"
                 android:textAllCaps="false"
                 app:cornerRadius="20dp"/>
 
         </LinearLayout>
 
-        <!-- MINIJUEGO GIROSCOPIO -->
+        <!-- MINIJUEGO: GIROSCOPIO -->
         <LinearLayout
             android:id="@+id/contenedorGiroscopio"
             android:layout_width="match_parent"
@@ -196,11 +193,12 @@
                 android:text="Inclina el móvil..."
                 android:textColor="#A0A0C0"
                 android:textSize="18sp"
+                android:gravity="center"
                 android:layout_marginTop="24dp"/>
 
         </LinearLayout>
 
-        <!-- MINIJUEGO ACELERÓMETRO (sacudida / movimiento) -->
+        <!-- MINIJUEGO: MOVIMIENTO ADELANTE/ATRÁS -->
         <LinearLayout
             android:id="@+id/contenedorAcelerometro"
             android:layout_width="match_parent"
@@ -229,11 +227,94 @@
 
         </LinearLayout>
 
+        <!-- MINIJUEGO: PESCA -->
+        <LinearLayout
+            android:id="@+id/contenedorPesca"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="24dp"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/txtEmojiPesca"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="🎣"
+                android:textSize="80sp"/>
+
+            <TextView
+                android:id="@+id/txtEstadoPesca"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="#D0D0E8"
+                android:textSize="18sp"
+                android:gravity="center"
+                android:layout_marginTop="20dp"/>
+
+        </LinearLayout>
+
+        <!-- MINIJUEGO: DIBUJAR FIGURAS -->
+        <!-- FrameLayout para superponer el canvas de dibujo con los textos -->
+        <FrameLayout
+            android:id="@+id/contenedorDibujo"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:visibility="gone">
+
+            <!-- FiguraView se inserta aquí por código (posición 0, detrás de los textos) -->
+
+            <!-- Textos superpuestos encima del canvas -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:padding="16dp"
+                android:layout_gravity="top">
+
+                <TextView
+                    android:id="@+id/txtFiguraObjetivo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Dibuja: ○ Círculo"
+                    android:textColor="#FFFFFF"
+                    android:textSize="26sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="4dp"/>
+
+                <TextView
+                    android:id="@+id/txtEstadoDibujo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Figura 1 de 3"
+                    android:textColor="#A0A0C0"
+                    android:textSize="15sp"
+                    android:gravity="center"/>
+
+            </LinearLayout>
+
+            <!-- Resultado (correcto/incorrecto) centrado en el canvas -->
+            <TextView
+                android:id="@+id/txtResultadoDibujo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="#FFFFFF"
+                android:textSize="28sp"
+                android:textStyle="bold"
+                android:layout_gravity="center"/>
+
+        </FrameLayout>
+
     </LinearLayout>
 
-    <!-- =========================================================
+    <!-- =====================================================
          PANTALLA 4: GAME OVER
-    ========================================================= -->
+    ===================================================== -->
     <LinearLayout
         android:id="@+id/pantallaGameOver"
         android:layout_width="match_parent"
