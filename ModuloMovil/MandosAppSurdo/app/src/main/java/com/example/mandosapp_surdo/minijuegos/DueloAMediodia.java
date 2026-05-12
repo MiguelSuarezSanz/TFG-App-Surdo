@@ -33,7 +33,7 @@ public class DueloAMediodia implements Minijuego {
 
     @Override
     public String getExplicacion() {
-        return "Pon el móvil HORIZONTAL apoyado sobre uno de sus laterales y mantenlo así durante 1,5 segundos.\n\n¡Tienes 5 segundos!";
+        return "Lo que todo hombre deseo una vez, un duelo a muerte de vaqueros.\n\n¡Desenfunde rapido forastero!";
     }
 
     @Override

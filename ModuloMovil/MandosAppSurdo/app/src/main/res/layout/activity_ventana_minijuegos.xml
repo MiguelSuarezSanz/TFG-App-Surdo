@@ -310,6 +310,34 @@
 
         </FrameLayout>
 
+        <!-- MINIJUEGO Un simple boton -->
+        <LinearLayout
+            android:id="@+id/contenedorSimpleBoton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="24dp"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/txtInstruccionSimpleBoton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#FFFFFF"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:layout_marginBottom="40dp"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/botonSimple"
+                android:layout_width="180dp"
+                android:layout_height="180dp"
+                app:cornerRadius="90dp"/>
+
+        </LinearLayout>
+
     </LinearLayout>
 
     <!-- =====================================================

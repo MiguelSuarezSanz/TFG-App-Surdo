@@ -28,6 +28,7 @@ import com.example.mandosapp_surdo.Minijuego;
 import com.example.mandosapp_surdo.ResultadoCallback;
 import com.example.mandosapp_surdo.minijuegos.DueloAMediodia;
 import com.example.mandosapp_surdo.minijuegos.ElijeElBoton;
+import com.example.mandosapp_surdo.minijuegos.SimpleBoton;
 import com.google.android.material.button.MaterialButton;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -60,6 +61,11 @@ public class VentanaMinijuegosActivity extends AppCompatActivity implements Sens
 
     // Juego — compartido
     private TextView txtTemporizador;
+
+    // Minijuego: Un Simple Boton
+    private LinearLayout contenedorBoton;
+    private MaterialButton btnSimple;
+    private TextView instruccionesBtnSimple;
 
     // Minijuego: Botones
     private LinearLayout contenedorBotones;
@@ -177,6 +183,7 @@ public class VentanaMinijuegosActivity extends AppCompatActivity implements Sens
     // =========================================================
 
     private void vincularVistas() {
+
         pantallaMenu        = findViewById(R.id.pantallaMenu);
         pantallaExplicacion = findViewById(R.id.pantallaExplicacion);
         pantallaJuego       = findViewById(R.id.pantallaJuego);
@@ -188,10 +195,16 @@ public class VentanaMinijuegosActivity extends AppCompatActivity implements Sens
         txtPuntuacionActual = findViewById(R.id.txtPuntuacionActual);
         txtTemporizador     = findViewById(R.id.txtTemporizador);
 
+        // Minijuego: Elije el Boton
         contenedorBotones = findViewById(R.id.contenedorBotones);
         btn1 = findViewById(R.id.btn1);
         btn2 = findViewById(R.id.btn2);
         btn3 = findViewById(R.id.btn3);
+
+        // Minijuego: Un Simple Boton
+        contenedorBoton = findViewById(R.id.contenedorSimpleBoton);
+        btnSimple = findViewById(R.id.botonSimple);
+        instruccionesBtnSimple = findViewById(R.id.txtInstruccionSimpleBoton);
 
         contenedorGiroscopio = findViewById(R.id.contenedorGiroscopio);
         imagen               = findViewById(R.id.imagen);
@@ -254,6 +267,7 @@ public class VentanaMinijuegosActivity extends AppCompatActivity implements Sens
         listaMinijuegos = new ArrayList<>();
         listaMinijuegos.add(new ElijeElBoton(contenedorBotones, btn1, btn2, btn3));
         listaMinijuegos.add(new DueloAMediodia(contenedorGiroscopio, imagen, txtEstadoGiro, txtTemporizador));
+        listaMinijuegos.add(new SimpleBoton(contenedorBoton, btnSimple, instruccionesBtnSimple, txtTemporizador));
         listaMinijuegos.add(new MiniJuegoMovimiento());
         listaMinijuegos.add(new MiniJuegoPesca());           // NUEVO
         listaMinijuegos.add(new MiniJuegoDibujoFiguras());   // NUEVO*/
