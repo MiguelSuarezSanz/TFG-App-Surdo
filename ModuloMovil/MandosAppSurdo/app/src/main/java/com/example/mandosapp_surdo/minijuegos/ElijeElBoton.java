@@ -34,18 +34,18 @@ public class ElijeElBoton implements Minijuego {
 
     @Override
     public String getExplicacion() {
-        return "Pulsa el botón cuyo COLOR de fondo coincida con el COLOR indicado por el texto del botón del medio.\n\n¡Un fallo y pierdes!";
+        return "Tienes a elegir entre tres botones, pulsa el que te pidan." +
+                "\n\nNo te preocupes, aqui no hay ninguna punchline :)";
     }
 
     @Override
-    public void iniciar(ResultadoCallback cb) {
-        this.callback = cb;
-        this.activo   = true;
-        botonera.setVisibility(View.VISIBLE);
+    public void iniciar(ResultadoCallback callback) {
 
+        this.callback = callback;
+        this.activo = true;
+        botonera.setVisibility(View.VISIBLE);
         int idxObj = random.nextInt(NOMBRES.length);
         int colorObj = COLORES[idxObj];
-
         int otro1, otro2;
         do { otro1 = random.nextInt(NOMBRES.length); } while (otro1 == idxObj);
         do { otro2 = random.nextInt(NOMBRES.length); } while (otro2 == idxObj || otro2 == otro1);
@@ -72,7 +72,12 @@ public class ElijeElBoton implements Minijuego {
 
     private void evaluar(int pulsado, int objetivo) {
         activo = false;
-        if (pulsado == objetivo) callback.onGano(); else callback.onPerdio();
+
+        if (pulsado == objetivo) {
+            callback.onGano();
+        } else {
+            callback.onPerdio();
+        }
     }
 
     @Override
