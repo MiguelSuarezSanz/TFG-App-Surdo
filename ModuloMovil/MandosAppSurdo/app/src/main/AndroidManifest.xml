@@ -25,15 +25,6 @@
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Mando3Activity"
-            android:exported="false" />
-        <activity
-            android:name=".Mando2Activity"
-            android:exported="false" />
-        <activity
-            android:name=".Mando1Activity"
-            android:exported="false" />
-        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
