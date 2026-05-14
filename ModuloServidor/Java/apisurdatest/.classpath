@@ -44,8 +44,8 @@
 			<attribute name="m2e-apt" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Mihaku/Desktop/ProyectoTFG_App-Surdo/Compartidos/tunnel-core-1.0.0.jar" sourcepath="C:/Users/Mihaku/Desktop/ProyectoTFG_App-Surdo/Compartidos/tunnel-core-1.0.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Mihaku/Desktop/ProyectoTFG_App-Surdo/Compartidos/tunnel-server-1.0.0.jar" sourcepath="C:/Users/Mihaku/Desktop/ProyectoTFG_App-Surdo/Compartidos/tunnel-server-1.0.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/ibano/[02_ESTUDIOS]/DAM_2/Proyecto Intermodular/TFG-App-Surdo/ModuloServidor/Java/apisurdatest/libs/tunnel-core-1.0.0.jar" sourcepath="C:/Users/Mihaku/Desktop/ProyectoTFG_App-Surdo/Compartidos/tunnel-core-1.0.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/ibano/[02_ESTUDIOS]/DAM_2/Proyecto Intermodular/TFG-App-Surdo/ModuloServidor/Java/apisurdatest/libs/tunnel-server-1.0.0.jar" sourcepath="C:/Users/Mihaku/Desktop/ProyectoTFG_App-Surdo/Compartidos/tunnel-server-1.0.0.jar"/>
 	<classpathentry kind="src" output="target/test-classes" path="target/generated-test-sources/test-annotations">
 		<attributes>
 			<attribute name="optional" value="true"/>
