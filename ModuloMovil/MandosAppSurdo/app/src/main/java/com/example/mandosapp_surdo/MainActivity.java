@@ -26,7 +26,7 @@ import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
-    private QuicTunnelClient tunnel;
+    //private QuicTunnelClient tunnel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         mando1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final Intent myIntent = new Intent(MainActivity.this, Mando1Activity.class);
+                final Intent myIntent = new Intent(MainActivity.this, VentanaMinijuegosActivity.class);
                 startActivity(myIntent);
             }
         });
@@ -68,18 +68,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        mando3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final Intent myIntent = new Intent(MainActivity.this, Mando3Activity.class);
-                startActivity(myIntent);
-            }
-        });
-
-        try {
+        /*try {
             TunnelConfig config = TunnelConfig.builder()
-                    .host("192.168.3.16")
+                    .host("192.168.137.1")
                     .port(4242)
+                    .serverName("AppSurdo-Server")
                     .caCert(copyAssetToFile("ca.crt"))
                     .cert(copyAssetToFile("client.crt"))
                     .key(copyAssetToFile("client.key"))
@@ -112,9 +105,9 @@ public class MainActivity extends AppCompatActivity {
 
         } catch (TunnelException | java.io.IOException e) {
             Log.e("Tunnel", "Error al iniciar: " + e.getMessage());
-        }
+        } */
     }
-
+    /*
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -123,14 +116,14 @@ public class MainActivity extends AppCompatActivity {
 
     private String copyAssetToFile(String assetName) throws java.io.IOException {
         java.io.File outFile = new java.io.File(getFilesDir(), assetName);
-        if (!outFile.exists()) {
-            try (java.io.InputStream in = getAssets().open(assetName);
-                 java.io.FileOutputStream out = new java.io.FileOutputStream(outFile)) {
-                byte[] buf = new byte[4096];
-                int len;
-                while ((len = in.read(buf)) > 0) out.write(buf, 0, len);
-            }
+        try (java.io.InputStream in = getAssets().open(assetName);
+             java.io.FileOutputStream out = new java.io.FileOutputStream(outFile)) {
+            byte[] buf = new byte[4096];
+            int len;
+            while ((len = in.read(buf)) > 0) out.write(buf, 0, len);
         }
         return outFile.getAbsolutePath();
     }
+
+     */
 }
