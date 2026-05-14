@@ -29,3 +29,62 @@
 [0505/104638.358:WARNING:resource_util.cc(94)] Please customize CefSettings.root_cache_path for your application. Use of the default value may lead to unintended process singleton behavior.
 [0505/104641.633:INFO:CONSOLE(23)] "TypeError: Failed to fetch", source: file:///C:/Users/Mihaku/Desktop/ProyectoTFG_App-Surdo/ModuloServidor/Prototipo/views/index/index.js (23)
 [0505/104654.878:INFO:CONSOLE(23)] "TypeError: Failed to fetch", source: file:///C:/Users/Mihaku/Desktop/ProyectoTFG_App-Surdo/ModuloServidor/Prototipo/views/index/index.js (23)
+[0513/131104.382:WARNING:resource_util.cc(94)] Please customize CefSettings.root_cache_path for your application. Use of the default value may lead to unintended process singleton behavior.
+[0513/131107.342:INFO:CONSOLE(23)] "TypeError: Failed to fetch", source: file:///C:/Users/Mihaku/Desktop/ProyectoTFG_App-Surdo/ModuloServidor/Prototipo/views/index/index.js (23)
+[0513/142837.619:WARNING:resource_util.cc(94)] Please customize CefSettings.root_cache_path for your application. Use of the default value may lead to unintended process singleton behavior.
+[0513/142841.211:INFO:CONSOLE(21)] "Uncaught SyntaxError: Unexpected identifier 'a'", source: file:///C:/Users/Mihaku/Desktop/ProyectoTFG_App-Surdo/ModuloServidor/Prototipo/views/index/index.html (21)
+[0513/142955.948:WARNING:resource_util.cc(94)] Please customize CefSettings.root_cache_path for your application. Use of the default value may lead to unintended process singleton behavior.
+[0513/144103.790:WARNING:resource_util.cc(94)] Please customize CefSettings.root_cache_path for your application. Use of the default value may lead to unintended process singleton behavior.
+[0513/144154.155:WARNING:resource_util.cc(94)] Please customize CefSettings.root_cache_path for your application. Use of the default value may lead to unintended process singleton behavior.
+[0513/144344.352:WARNING:resource_util.cc(94)] Please customize CefSettings.root_cache_path for your application. Use of the default value may lead to unintended process singleton behavior.
+[0513/144422.670:WARNING:resource_util.cc(94)] Please customize CefSettings.root_cache_path for your application. Use of the default value may lead to unintended process singleton behavior.
+[0513/144433.529:WARNING:resource_util.cc(94)] Please customize CefSettings.root_cache_path for your application. Use of the default value may lead to unintended process singleton behavior.
+[0513/144448.591:WARNING:resource_util.cc(94)] Please customize CefSettings.root_cache_path for your application. Use of the default value may lead to unintended process singleton behavior.
+[0513/144615.800:WARNING:resource_util.cc(94)] Please customize CefSettings.root_cache_path for your application. Use of the default value may lead to unintended process singleton behavior.
+[0513/144625.582:WARNING:resource_util.cc(94)] Please customize CefSettings.root_cache_path for your application. Use of the default value may lead to unintended process singleton behavior.
+[0513/144704.974:WARNING:resource_util.cc(94)] Please customize CefSettings.root_cache_path for your application. Use of the default value may lead to unintended process singleton behavior.
+[0513/144728.943:WARNING:resource_util.cc(94)] Please customize CefSettings.root_cache_path for your application. Use of the default value may lead to unintended process singleton behavior.
+[0513/144743.512:WARNING:resource_util.cc(94)] Please customize CefSettings.root_cache_path for your application. Use of the default value may lead to unintended process singleton behavior.
+[0513/150201.721:WARNING:resource_util.cc(94)] Please customize CefSettings.root_cache_path for your application. Use of the default value may lead to unintended process singleton behavior.
+[0513/150231.290:WARNING:resource_util.cc(94)] Please customize CefSettings.root_cache_path for your application. Use of the default value may lead to unintended process singleton behavior.
+[0513/150233.205:INFO:CONSOLE(23)] "TypeError: Failed to fetch", source: file:///C:/Users/Mihaku/Desktop/ProyectoTFG_App-Surdo/ModuloServidor/Prototipo/views/index/index.js (23)
+[0513/150306.011:WARNING:resource_util.cc(94)] Please customize CefSettings.root_cache_path for your application. Use of the default value may lead to unintended process singleton behavior.
+[0513/150307.806:INFO:CONSOLE(23)] "TypeError: Failed to fetch", source: file:///C:/Users/Mihaku/Desktop/ProyectoTFG_App-Surdo/ModuloServidor/Prototipo/views/index/index.js (23)
+[0513/150547.890:INFO:CONSOLE(23)] "TypeError: Failed to fetch", source: file:///C:/Users/Mihaku/Desktop/ProyectoTFG_App-Surdo/ModuloServidor/Prototipo/views/index/index.js (23)
+[0513/151856.225:WARNING:resource_util.cc(94)] Please customize CefSettings.root_cache_path for your application. Use of the default value may lead to unintended process singleton behavior.
+[0513/151858.099:INFO:CONSOLE(23)] "TypeError: Failed to fetch", source: file:///C:/Users/Mihaku/Desktop/ProyectoTFG_App-Surdo/ModuloServidor/Prototipo/views/index/index.js (23)
+[0513/152419.375:WARNING:resource_util.cc(94)] Please customize CefSettings.root_cache_path for your application. Use of the default value may lead to unintended process singleton behavior.
+[0513/152420.046:INFO:CONSOLE(5)] "Java respondió: OK", source: file:///C:/Users/Mihaku/Desktop/ProyectoTFG_App-Surdo/ModuloServidor/Prototipo/script_general.js (5)
+[0513/152429.009:INFO:CONSOLE(5)] "Java respondió: OK", source: file:///C:/Users/Mihaku/Desktop/ProyectoTFG_App-Surdo/ModuloServidor/Prototipo/script_general.js (5)
+[0513/152516.643:INFO:CONSOLE(5)] "Java respondió: OK", source: file:///C:/Users/Mihaku/Desktop/ProyectoTFG_App-Surdo/ModuloServidor/Prototipo/script_general.js (5)
+[0513/152518.439:INFO:CONSOLE(5)] "Java respondió: OK", source: file:///C:/Users/Mihaku/Desktop/ProyectoTFG_App-Surdo/ModuloServidor/Prototipo/script_general.js (5)
+[0513/153246.508:WARNING:resource_util.cc(94)] Please customize CefSettings.root_cache_path for your application. Use of the default value may lead to unintended process singleton behavior.
+[0513/153247.183:INFO:CONSOLE(5)] "Java respondió: OK", source: file:///C:/Users/Mihaku/Desktop/ProyectoTFG_App-Surdo/ModuloServidor/Prototipo/script_general.js (5)
+[0513/153248.257:INFO:CONSOLE(5)] "Java respondió: OK", source: file:///C:/Users/Mihaku/Desktop/ProyectoTFG_App-Surdo/ModuloServidor/Prototipo/script_general.js (5)
+[0513/153253.171:INFO:CONSOLE(5)] "Java respondió: OK", source: file:///C:/Users/Mihaku/Desktop/ProyectoTFG_App-Surdo/ModuloServidor/Prototipo/script_general.js (5)
+[0513/153255.358:INFO:CONSOLE(5)] "Java respondió: OK", source: file:///C:/Users/Mihaku/Desktop/ProyectoTFG_App-Surdo/ModuloServidor/Prototipo/script_general.js (5)
+[0513/181758.670:WARNING:resource_util.cc(94)] Please customize CefSettings.root_cache_path for your application. Use of the default value may lead to unintended process singleton behavior.
+[0513/181800.068:INFO:CONSOLE(5)] "Java respondió: OK", source: file:///C:/Users/Mihaku/Desktop/ProyectoTFG_App-Surdo/ModuloServidor/Prototipo/script_general.js (5)
+[0513/181808.766:INFO:CONSOLE(5)] "Java respondió: OK", source: file:///C:/Users/Mihaku/Desktop/ProyectoTFG_App-Surdo/ModuloServidor/Prototipo/script_general.js (5)
+[0513/181816.144:INFO:CONSOLE(5)] "Java respondió: OK", source: file:///C:/Users/Mihaku/Desktop/ProyectoTFG_App-Surdo/ModuloServidor/Prototipo/script_general.js (5)
+[0513/181826.027:INFO:CONSOLE(5)] "Java respondió: OK", source: file:///C:/Users/Mihaku/Desktop/ProyectoTFG_App-Surdo/ModuloServidor/Prototipo/script_general.js (5)
+[0514/102546.761:WARNING:resource_util.cc(94)] Please customize CefSettings.root_cache_path for your application. Use of the default value may lead to unintended process singleton behavior.
+[0514/102548.380:INFO:CONSOLE(5)] "Java respondió: OK", source: file:///C:/Users/Mihaku/Desktop/ProyectoTFG_App-Surdo/ModuloServidor/Prototipo/script_general.js (5)
+[0514/102558.372:INFO:CONSOLE(5)] "Java respondió: OK", source: file:///C:/Users/Mihaku/Desktop/ProyectoTFG_App-Surdo/ModuloServidor/Prototipo/script_general.js (5)
+[0514/102620.849:INFO:CONSOLE(5)] "Java respondió: OK", source: file:///C:/Users/Mihaku/Desktop/ProyectoTFG_App-Surdo/ModuloServidor/Prototipo/script_general.js (5)
+[0514/102630.146:INFO:CONSOLE(5)] "Java respondió: OK", source: file:///C:/Users/Mihaku/Desktop/ProyectoTFG_App-Surdo/ModuloServidor/Prototipo/script_general.js (5)
+[0514/102640.052:INFO:CONSOLE(5)] "Java respondió: OK", source: file:///C:/Users/Mihaku/Desktop/ProyectoTFG_App-Surdo/ModuloServidor/Prototipo/script_general.js (5)
+[0514/102654.089:INFO:CONSOLE(5)] "Java respondió: OK", source: file:///C:/Users/Mihaku/Desktop/ProyectoTFG_App-Surdo/ModuloServidor/Prototipo/script_general.js (5)
+[0514/103027.503:WARNING:resource_util.cc(94)] Please customize CefSettings.root_cache_path for your application. Use of the default value may lead to unintended process singleton behavior.
+[0514/103028.229:INFO:CONSOLE(5)] "Java respondió: OK", source: file:///C:/Users/Mihaku/Desktop/ProyectoTFG_App-Surdo/ModuloServidor/Prototipo/script_general.js (5)
+[0514/103029.202:INFO:CONSOLE(5)] "Java respondió: OK", source: file:///C:/Users/Mihaku/Desktop/ProyectoTFG_App-Surdo/ModuloServidor/Prototipo/script_general.js (5)
+[0514/103029.894:INFO:CONSOLE(5)] "Java respondió: OK", source: file:///C:/Users/Mihaku/Desktop/ProyectoTFG_App-Surdo/ModuloServidor/Prototipo/script_general.js (5)
+[0514/103031.576:INFO:CONSOLE(5)] "Java respondió: OK", source: file:///C:/Users/Mihaku/Desktop/ProyectoTFG_App-Surdo/ModuloServidor/Prototipo/script_general.js (5)
+[0514/134946.497:WARNING:resource_util.cc(94)] Please customize CefSettings.root_cache_path for your application. Use of the default value may lead to unintended process singleton behavior.
+[0514/134947.461:INFO:CONSOLE(5)] "Java respondió: OK", source: file:///C:/Users/Mihaku/Desktop/ProyectoTFG_App-Surdo/ModuloServidor/Prototipo/script_general.js (5)
+[0514/134949.396:INFO:CONSOLE(5)] "Java respondió: OK", source: file:///C:/Users/Mihaku/Desktop/ProyectoTFG_App-Surdo/ModuloServidor/Prototipo/script_general.js (5)
+[0514/135008.880:INFO:CONSOLE(5)] "Java respondió: OK", source: file:///C:/Users/Mihaku/Desktop/ProyectoTFG_App-Surdo/ModuloServidor/Prototipo/script_general.js (5)
+[0514/135113.910:WARNING:resource_util.cc(94)] Please customize CefSettings.root_cache_path for your application. Use of the default value may lead to unintended process singleton behavior.
+[0514/135114.655:INFO:CONSOLE(5)] "Java respondió: OK", source: file:///C:/Users/Mihaku/Desktop/ProyectoTFG_App-Surdo/ModuloServidor/Prototipo/script_general.js (5)
+[0514/135115.866:INFO:CONSOLE(5)] "Java respondió: OK", source: file:///C:/Users/Mihaku/Desktop/ProyectoTFG_App-Surdo/ModuloServidor/Prototipo/script_general.js (5)
+[0514/135122.589:INFO:CONSOLE(5)] "Java respondió: OK", source: file:///C:/Users/Mihaku/Desktop/ProyectoTFG_App-Surdo/ModuloServidor/Prototipo/script_general.js (5)
