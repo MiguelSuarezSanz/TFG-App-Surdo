@@ -49,15 +49,15 @@ public class AppUI {
         );
 
         router.addHandler(new CefMessageRouterHandlerAdapter() {
-            @Override
-            public boolean onQuery(CefBrowser browser, CefFrame frame,
-                                   long queryId, String request,
-                                   boolean persistent, CefQueryCallback callback) {
-                // Llamamos al mismo método que tenías en PuenteJava
-                puente.botonPulsado(request);
-                callback.success("OK");
-                return true;
-            }
+        	@Override
+        	public boolean onQuery(CefBrowser browser, CefFrame frame,
+        	                       long queryId, String request,
+        	                       boolean persistent, CefQueryCallback callback) {
+
+        	    puente.botonPulsado(request);
+        	    callback.success("OK");
+        	    return true;
+        	}
         }, true);
 
         client.addMessageRouter(router);
@@ -87,7 +87,6 @@ public class AppUI {
         ventana.setVisible(true);
 
         System.out.println("Launched");
-        
         
     }
 }

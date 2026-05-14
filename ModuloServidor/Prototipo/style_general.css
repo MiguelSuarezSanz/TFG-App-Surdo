@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Kablammo&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Oregano:ital@0;1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap');
 
 :root {
     --primary-color: #965dd6;
@@ -7,6 +8,7 @@
     --secundary-color: #ff5b9f;
     --terciary-color: #fbff00;
     --cuarternary-color: #fc7b09;
+    --cuarternary-color-lighter: #ffb758;
     --font-color: azure;
 }
 
@@ -80,4 +82,22 @@ body * {
 .title-color-secundary {
     color: var(--terciary-color);
     -webkit-text-stroke: var(--cuarternary-color) 0.05rem;
+}
+
+.main_tittle {
+    font-family: "Luckiest Guy", cursive;
+    font-weight: 400;
+    font-size: 6rem;
+    padding: 2vw;
+    text-align: center;
+    color: var(--terciary-color);
+    -webkit-text-stroke: var(--cuarternary-color) 0.3rem;
+}
+
+.subtittle {
+    font-family: "Luckiest Guy", cursive;
+    font-weight: 400;
+    font-size: 4rem;
+    color: var(--primary-color-lighter);
+    -webkit-text-stroke: var(--primary-color) 0.2rem;
 }
