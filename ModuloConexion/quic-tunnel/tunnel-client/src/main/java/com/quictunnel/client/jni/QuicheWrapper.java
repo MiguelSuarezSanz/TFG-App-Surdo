@@ -39,6 +39,8 @@ public class QuicheWrapper {
      *
      * @param host          IP o hostname del servidor.
      * @param port          Puerto del servidor.
+     * @param serverName     Nombre del servidor para la verificación TLS (SNI).
+     *                       Debe coincidir con el CN o SAN del certificado del servidor.
      * @param caCertPath    Ruta al certificado de la CA para verificar al servidor.
      * @param clientCertPath Ruta al certificado del cliente (mTLS).
      * @param clientKeyPath  Ruta a la clave privada del cliente (mTLS).
@@ -48,6 +50,7 @@ public class QuicheWrapper {
     public native long connect(
             String host,
             int port,
+            String serverName,
             String caCertPath,
             String clientCertPath,
             String clientKeyPath

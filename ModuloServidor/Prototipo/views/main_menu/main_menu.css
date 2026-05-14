@@ -11,13 +11,6 @@
     align-content: center;
 }
 
-.main_tittle {
-    font-size: 8rem;
-    padding: 2vw;
-    color: var(--terciary-color);
-    -webkit-text-stroke: var(--cuarternary-color) 0.01rem;
-}
-
 a {
     min-width: 48%;
     min-height: calc(40vh - 2vw);

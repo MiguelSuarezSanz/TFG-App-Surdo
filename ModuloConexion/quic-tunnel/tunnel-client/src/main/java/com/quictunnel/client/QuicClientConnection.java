@@ -170,12 +170,13 @@ public class QuicClientConnection {
         long handle = quiche.connect(
                 config.getHost(),
                 config.getPort(),
+                config.getServerName(),
                 config.getCaCertPath(),
                 config.getCertPath(),
                 config.getKeyPath()
         );
 
-        if (handle < 0) {
+        if (handle == -1) {
             String error = quiche.getLastError(-1);
             throw new TunnelException(
                     TunnelError.Type.CONNECTION_FAILED,
