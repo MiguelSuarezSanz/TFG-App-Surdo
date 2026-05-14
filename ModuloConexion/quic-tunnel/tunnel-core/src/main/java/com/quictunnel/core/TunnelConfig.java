@@ -21,6 +21,7 @@ public class TunnelConfig {
 
     // Conexión
     private final String host;
+    private final String serverName;
     private final int port;
 
     // Certificados
@@ -40,6 +41,7 @@ public class TunnelConfig {
 
     private TunnelConfig(Builder builder) {
         this.host = builder.host;
+        this.serverName = builder.serverName;
         this.port = builder.port;
         this.caCertPath = builder.caCertPath;
         this.certPath = builder.certPath;
@@ -58,6 +60,7 @@ public class TunnelConfig {
 
     // Getters
     public String getHost() { return host; }
+    public String getServerName() { return serverName != null ? serverName : host; }  // ← añadir
     public int getPort() { return port; }
     public String getCaCertPath() { return caCertPath; }
     public String getCertPath() { return certPath; }
@@ -73,6 +76,7 @@ public class TunnelConfig {
 
         // Conexión
         private String host;
+        private String serverName;
         private int port;
 
         // Certificados
@@ -97,6 +101,17 @@ public class TunnelConfig {
          */
         public Builder host(String host) {
             this.host = host;
+            return this;
+        }
+
+        /**
+         * Nombre del servidor para la verificación TLS (SNI).
+         * Debe coincidir con el CN o SAN del certificado del servidor.
+         * Si no se especifica, se usa el host.
+         * Necesario cuando host es una IP, ya que las IPs no son válidas en SNI.
+         */
+        public Builder serverName(String serverName) {  // ← añadir método
+            this.serverName = serverName;
             return this;
         }
 

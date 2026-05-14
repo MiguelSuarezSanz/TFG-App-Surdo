@@ -25,7 +25,7 @@ public class ConexionMandoActivity extends AppCompatActivity {
 
         try {
             TunnelConfig config = TunnelConfig.builder()
-                    .host("192.168.3.16")
+                    .host("10.0.2.2")
                     .port(4242)
                     .caCert(copyAssetToFile("ca.crt"))
                     .cert(copyAssetToFile("client.crt"))

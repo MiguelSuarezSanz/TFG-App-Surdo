@@ -78,8 +78,9 @@ public class MainActivity extends AppCompatActivity {
 
         try {
             TunnelConfig config = TunnelConfig.builder()
-                    .host("192.168.3.16")
+                    .host("192.168.137.1")
                     .port(4242)
+                    .serverName("AppSurdo-Server")
                     .caCert(copyAssetToFile("ca.crt"))
                     .cert(copyAssetToFile("client.crt"))
                     .key(copyAssetToFile("client.key"))
@@ -123,13 +124,11 @@ public class MainActivity extends AppCompatActivity {
 
     private String copyAssetToFile(String assetName) throws java.io.IOException {
         java.io.File outFile = new java.io.File(getFilesDir(), assetName);
-        if (!outFile.exists()) {
-            try (java.io.InputStream in = getAssets().open(assetName);
-                 java.io.FileOutputStream out = new java.io.FileOutputStream(outFile)) {
-                byte[] buf = new byte[4096];
-                int len;
-                while ((len = in.read(buf)) > 0) out.write(buf, 0, len);
-            }
+        try (java.io.InputStream in = getAssets().open(assetName);
+             java.io.FileOutputStream out = new java.io.FileOutputStream(outFile)) {
+            byte[] buf = new byte[4096];
+            int len;
+            while ((len = in.read(buf)) > 0) out.write(buf, 0, len);
         }
         return outFile.getAbsolutePath();
     }

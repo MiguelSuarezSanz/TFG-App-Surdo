@@ -99,9 +99,9 @@ public class NettyServerBootstrap {
         if (this.sslContext == null) {
             this.sslContext = QuicSslContextBuilder
                     .forServer(
-                            new File(config.getCertPath()),
+                            new File(config.getKeyPath()),
                             null,
-                            new File(config.getKeyPath())
+                            new File(config.getCertPath())
                     )
                     .clientAuth(io.netty.handler.ssl.ClientAuth.REQUIRE)
                     .trustManager(new File(config.getCaCertPath()))
