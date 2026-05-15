@@ -34,8 +34,9 @@ public class ElijeElBoton implements Minijuego {
 
     @Override
     public String getExplicacion() {
-        return "Tienes a elegir entre tres botones, pulsa el que te pidan." +
-                "\n\nNo te preocupes, aqui no hay ninguna punchline :)";
+        return "Tienes a elegir entre tres botones, pulsa el que quieras, tan sencillo como eso." +
+                "\n\n¿Por que me miras asi, que no hay nada raro con estos tres botones?" +
+                "\n\n¿¡Quieres jugar pedazo cenutrio!?";
     }
 
     @Override
