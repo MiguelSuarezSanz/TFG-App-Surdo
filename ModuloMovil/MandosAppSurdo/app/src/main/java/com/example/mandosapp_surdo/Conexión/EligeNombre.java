@@ -3,6 +3,7 @@ package com.example.mandosapp_surdo.Conexión;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -32,23 +33,26 @@ public class EligeNombre extends AppCompatActivity {
 
             QuicTunnelClient tunnel = TunnelManager.getTunnel();
 
-            if (tunnel == null) return;
+            if (!TunnelManager.isConnected()) {
+
+                Toast.makeText(
+                        this,
+                        "No conectado al servidor",
+                        Toast.LENGTH_SHORT
+                ).show();
+
+                return;
+            }
 
             try {
                 String nombre = inputMensaje.getText().toString();
 
-                byte[] nombreBytes = nombre.getBytes(StandardCharsets.UTF_8);
+                byte[] packet = new PacketWriter()
+                        .writeByte(Protocol.MSG_SET_NAME)
+                        .writeString(nombre)
+                        .toArray();
 
-                ByteBuffer buffer =
-                        ByteBuffer.allocate(1 + 4 + nombreBytes.length);
-
-                buffer.put((byte)0x01); // tipo
-
-                buffer.putInt(nombreBytes.length); // longitud
-
-                buffer.put(nombreBytes); // datos
-
-                tunnel.send(buffer.array());
+                tunnel.send(packet);
             } catch (TunnelException e) {
                 e.printStackTrace();
             }

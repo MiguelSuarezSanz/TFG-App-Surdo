@@ -161,7 +161,7 @@ public class Conexion extends AppCompatActivity {
         }
     }
 
-    private void connect(String codigo){
+    private void connect(String codigo) {
         try {
             TunnelConfig config = TunnelConfig.builder()
                     .host(IpEncryptor.decrypt(codigo))
@@ -178,14 +178,31 @@ public class Conexion extends AppCompatActivity {
             TunnelManager.setTunnel(tunnel);
 
             tunnel.setListener(new TunnelListener() {
+
                 @Override
                 public void onConnected(TunnelConnection c) {
+
                     Log.i("Tunnel", "Conectado!");
+
+                    Intent intent =
+                            new Intent(Conexion.this, EligeNombre.class);
+
+                    startActivity(intent);
                 }
 
                 @Override
                 public void onDataReceived(TunnelConnection c, byte[] payload) {
-                    Log.i("Tunnel", "Datos: " + new String(payload));
+
+                    PacketReader reader = new PacketReader(payload);
+
+                    byte type = reader.readByte();
+
+                    if (type == Protocol.MSG_SET_NAME) {
+
+                        String nombre = reader.readString();
+
+                        Log.i("Tunnel", "Nombre recibido: " + nombre);
+                    }
                 }
 
                 @Override
@@ -200,19 +217,10 @@ public class Conexion extends AppCompatActivity {
             });
             tunnel.connect();
 
-            final Intent myIntent = new Intent(Conexion.this, EligeNombre.class);
-            startActivity(myIntent);
-
         } catch (TunnelException | java.io.IOException e) {
             Log.e("Tunnel", "Error al iniciar: " + e.getMessage());
             //Mensaje de error al usuario
         }
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        if (tunnel != null) tunnel.stop();
     }
 
     private String copyAssetToFile(String assetName) throws java.io.IOException {
@@ -225,4 +233,5 @@ public class Conexion extends AppCompatActivity {
         }
         return outFile.getAbsolutePath();
     }
+
 }
