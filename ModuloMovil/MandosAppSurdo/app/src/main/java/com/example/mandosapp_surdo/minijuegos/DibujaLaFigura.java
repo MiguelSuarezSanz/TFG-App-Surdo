@@ -53,9 +53,8 @@ public class DibujaLaFigura implements Minijuego {
 
     @Override
     public String getExplicacion() {
-        return "¡Usa el móvil como un pincel en el aire!\n\n" +
-                "Se mostrarán 3 figuras en secuencia. Tienes 5 segundos para dibujar cada una.\n\n" +
-                "Figuras posibles:\n○ Círculo  □ Cuadrado  △ Triángulo  ★ Estrella  ⬡ Hexágono";
+        return "No hay nada como la disociacion, porque ahora estas pensando en superar a Da Vinci con un ladrillo de hierro" +
+                "\n\nla percepcion de la realidad totalmente alterada y con la dopamina por las nubes, Suerte diamante en bruto.";
     }
 
     @Override

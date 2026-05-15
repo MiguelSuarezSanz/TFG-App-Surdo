@@ -33,7 +33,8 @@ public class DueloAMediodia implements Minijuego {
 
     @Override
     public String getExplicacion() {
-        return "Lo que todo hombre deseo una vez, un duelo a muerte de vaqueros.\n\n¡Desenfunde rapido forastero!";
+        return "Lo que todo hombre deseo una vez, un duelo a muerte de vaqueros." +
+                "\n\n¡Desenfunde rapido forastero!";
     }
 
     @Override
