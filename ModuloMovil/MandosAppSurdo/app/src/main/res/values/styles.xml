@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="CodeChar">
+        android:layout_width="40dp"
+        android:layout_height="50dp"
+        android:layout_marginHorizontal="4dp"
+        android:gravity="center"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:textColor="#212121"
+        android:maxLength="1"
+        android:inputType="textCapCharacters"
+        android:background="@drawable/bg_char_field"
+        android:textAlignment="center"
+        android:paddingBottom="4dp"
+    </style>
+
+
+</resources>

@@ -1,4 +1,4 @@
-package com.example.mandosapp_surdo;
+package com.example.mandosapp_surdo.NsDondePonerte;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
@@ -20,6 +20,8 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import com.example.mandosapp_surdo.R;
 import com.google.android.material.button.MaterialButton;
 import java.util.Random;
 

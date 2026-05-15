@@ -24,6 +24,7 @@ public class Ejemplo {
             .caCert("certs/ca.crt")
             .cert("certs/server.crt")
             .key("certs/server.key")
+            .keepaliveInterval(15000)
             .build();
         System.out.println("Certificados OK");
 

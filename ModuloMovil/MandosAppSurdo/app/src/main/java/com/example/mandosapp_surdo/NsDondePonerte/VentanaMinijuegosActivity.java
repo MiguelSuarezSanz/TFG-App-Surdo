@@ -1,4 +1,4 @@
-package com.example.mandosapp_surdo;
+package com.example.mandosapp_surdo.NsDondePonerte;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -18,6 +18,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import com.example.mandosapp_surdo.R;
 import com.example.mandosapp_surdo.enume.Estado;
 import com.example.mandosapp_surdo.minijuegos.DiaPesca;
 import com.example.mandosapp_surdo.minijuegos.DibujaLaFigura;

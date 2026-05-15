@@ -5,8 +5,8 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.mandosapp_surdo.Minijuego;
-import com.example.mandosapp_surdo.ResultadoCallback;
+import com.example.mandosapp_surdo.NsDondePonerte.Minijuego;
+import com.example.mandosapp_surdo.NsDondePonerte.ResultadoCallback;
 
 public class SaludoCatalan implements Minijuego {
 

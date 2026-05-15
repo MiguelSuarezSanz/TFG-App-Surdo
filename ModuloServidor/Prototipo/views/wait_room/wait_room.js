@@ -34,3 +34,8 @@ function removerParticipante(participante) {
     }
     console.log(`Participante ${participante} no encontrado.`);   
 }
+
+function renderizar_codigo(codigoSala) {
+    let code = document.querySelector('.main_tittle');
+    code.innerHTML = `Código de la Sala: <br>${codigoSala}`;
+}

@@ -1,4 +1,4 @@
-package com.example.mandosapp_surdo;
+package com.example.mandosapp_surdo.NsDondePonerte;
 
 import android.content.Context;
 import android.graphics.Canvas;

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="24dp"
+    android:background="#F5F5F5">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Introduce el código"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:textColor="#212121"
+        android:layout_marginBottom="32dp"/>
+
+    <!-- Los 8 campos en fila -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <EditText android:id="@+id/char1" style="@style/CodeChar"/>
+        <EditText android:id="@+id/char2" style="@style/CodeChar"/>
+        <EditText android:id="@+id/char3" style="@style/CodeChar"/>
+        <EditText android:id="@+id/char4" style="@style/CodeChar"/>
+        <EditText android:id="@+id/char5" style="@style/CodeChar"/>
+        <EditText android:id="@+id/char6" style="@style/CodeChar"/>
+        <EditText android:id="@+id/char7" style="@style/CodeChar"/>
+        <EditText android:id="@+id/char8" style="@style/CodeChar"/>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnConectar"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="Conectar"
+        android:enabled="false"
+        android:backgroundTint="#2196F3"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"/>
+
+</LinearLayout>
