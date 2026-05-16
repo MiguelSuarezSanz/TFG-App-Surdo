@@ -11,16 +11,30 @@ let participantes = []
 localStorage.setItem("puntuaciones", "");
 
 function renderizar_participantes() {
-    let participants = document.querySelector('.participants');
-    let localStorage = ""
+
+    let participants =
+        document.querySelector('.participants');
+
+    let participantesStorage = "";
+
     participants.innerHTML = "";
+
     participantes.forEach(element => {
+
         let span = document.createElement('b');
+
         span.innerHTML = element;
+
         participants.append(span);
-        localStorage += element+",";
+
+        participantesStorage += element + ",";
+
     });
-    localStorage.setItem("participantes", localStorage.slice(0, -1));
+
+    localStorage.setItem(
+        "participantes",
+        participantesStorage.slice(0, -1)
+    );
 }
 
 function annadirParticipante(participante) {

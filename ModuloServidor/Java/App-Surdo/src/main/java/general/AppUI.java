@@ -1,3 +1,5 @@
+package general;
+
 import me.friwi.jcefmaven.CefAppBuilder;
 import me.friwi.jcefmaven.MavenCefAppHandlerAdapter;
 import org.cef.CefApp;
@@ -41,6 +43,12 @@ public class AppUI {
         CefApp cefApp = builder.build();
         CefClient client = cefApp.createClient();
 
+        CefMessageRouter router = CefMessageRouter.create(
+            new CefMessageRouter.CefMessageRouterConfig("cefQuery", "cefQueryCancel")
+        );
+
+        client.addMessageRouter(router);
+
         // Cargar el HTML con ruta absoluta
         File archivoHtml = new File("../../Prototipo/views/index/index.html").getAbsoluteFile();
         CefBrowser browser = client.createBrowser(
@@ -48,27 +56,9 @@ public class AppUI {
             false,
             false
         );
-        
-        // Puente JS → Java
+
+        // Puente JS <-> Java
         PuenteJava puente = new PuenteJava(browser);
-
-        CefMessageRouter router = CefMessageRouter.create(
-            new CefMessageRouter.CefMessageRouterConfig("cefQuery", "cefQueryCancel")
-        );
-
-        router.addHandler(new CefMessageRouterHandlerAdapter() {
-        	@Override
-        	public boolean onQuery(CefBrowser browser, CefFrame frame,
-        	                       long queryId, String request,
-        	                       boolean persistent, CefQueryCallback callback) {
-
-        	    puente.botonPulsado(request);
-        	    callback.success("OK");
-        	    return true;
-        	}
-        }, true);
-
-        client.addMessageRouter(router);
 
         // Ventana Swing maximizada
         JFrame ventana = new JFrame("App-Surdo");
@@ -85,6 +75,47 @@ public class AppUI {
         ventana.setExtendedState(JFrame.MAXIMIZED_BOTH);
         ventana.setSize(1024, 768);
         ventana.setVisible(true);
+
+        router.addHandler(new CefMessageRouterHandlerAdapter() {
+        	@Override
+        	public boolean onQuery(CefBrowser browser, CefFrame frame,
+        	                       long queryId, String request,
+        	                       boolean persistent, CefQueryCallback callback) {
+        		if (request.equals("exit")) {
+        		    callback.success("Cerrando aplicación");
+
+        		    SwingUtilities.invokeLater(() -> {
+        		        try {
+        		            if (browser != null) {
+        		                browser.close(true);
+        		            }
+
+        		            if (client != null) {
+        		                client.dispose();
+        		            }
+
+        		            if (cefApp != null) {
+        		                cefApp.dispose();
+        		            }
+
+        		            if (ventana != null) {
+        		                ventana.dispose();
+        		            }
+
+        		        } catch (Exception e) {
+        		            e.printStackTrace();
+        		            System.exit(0);
+        		        }
+        		    });
+
+        		    return true;
+        		}
+        		
+        	    puente.botonPulsado(request);
+        	    callback.success("OK");
+        	    return true;
+        	}
+        }, true);
         
         System.out.println("Launched");
         

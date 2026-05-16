@@ -199,10 +199,13 @@ public class Conexion extends AppCompatActivity {
                 @Override
                 public void onConnected(TunnelConnection c) {
 
-                    Log.i("Tunnel", "Conectado!");
+                    Log.e("Tunnel", "ON CONNECTED");
 
                     Intent intent =
-                            new Intent(Conexion.this, EligeNombre.class);
+                            new Intent(
+                                    Conexion.this,
+                                    EligeNombre.class
+                            );
 
                     startActivity(intent);
                 }
@@ -221,11 +224,41 @@ public class Conexion extends AppCompatActivity {
                 }
 
                 @Override
-                public void onError(TunnelConnection c, TunnelError error) {
-                    Log.e("Tunnel", "Error: " + error.getType());
+                public void onError(
+                        TunnelConnection c,
+                        TunnelError error
+                ) {
+
+                    Log.e(
+                            "Tunnel",
+                            "ERROR -> " +
+                                    error.getType() +
+                                    " | " +
+                                    error.getMessage()
+                    );
                 }
             });
-            tunnel.connect();
+            Log.e("Tunnel", "Intentando conectar...");
+
+            new Thread(() -> {
+
+                try {
+
+                    Log.e("Tunnel", "ANTES CONNECT");
+
+                    tunnel.connect();
+
+                    Log.e("Tunnel", "DESPUES CONNECT");
+
+                } catch (Exception e) {
+
+                    Log.e(
+                            "Tunnel",
+                            "EXCEPCION -> " + e.getMessage()
+                    );
+                }
+
+            }).start();
 
         } catch (TunnelException | java.io.IOException e) {
             Log.e("Tunnel", "Error al iniciar: " + e.getMessage());

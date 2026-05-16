@@ -3,6 +3,8 @@ package gestiones_tunnel;
 import com.quictunnel.core.*;
 import com.quictunnel.server.*;
 
+import general.PuenteJava;
+
 public class ServidorTunnel {
 
     private static QuicTunnelServer server;
@@ -76,14 +78,20 @@ public class ServidorTunnel {
 
     private static void registrarPackets() {
 
-        dispatcher.register(
-                Protocol.MSG_SET_NAME,
-                reader -> {
+    	dispatcher.register(
+    	        Protocol.MSG_SET_NAME,
+    	        reader -> {
 
-                    String nombre =
-                            reader.readString();
-                }
-        );
+    	            String nombre =
+    	                    reader.readString();
+
+    	            PuenteJava.getInstancia()
+    	                    .lamarJavascript(
+    	                            "annadirParticipante",
+    	                            "'" + nombre + "'"
+    	                    );
+    	        }
+    	);
     }
     
     private static String obtenerCodigoConexion() {
