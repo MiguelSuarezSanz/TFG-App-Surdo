@@ -1,8 +1,16 @@
 import java.util.ArrayList;
 
+import org.cef.browser.CefBrowser;
+
 public class PuenteJava {
 	
+	private final CefBrowser browser;
+	
 	static Reproductor musicHandeler = new Reproductor();
+	
+	public PuenteJava(CefBrowser browser) {
+		this.browser = browser;
+	}
 
     public void botonPulsado(String mensaje) {
     	String[] splitted = mensaje.split(",");
@@ -32,5 +40,13 @@ public class PuenteJava {
     public void enviarTexto(String texto) {
         System.out.println("Texto recibido desde HTML: " + texto);
     }
+    
+    public void lamarJavascript(String metodoJs) {
+    	browser.executeJavaScript(metodoJs+"();", browser.getURL(), 0);
+	}
+    
+    public void lamarJavascript(String metodoJs,String args) {
+    	browser.executeJavaScript(metodoJs+"("+args+");", browser.getURL(), 0);
+	}
 
 }

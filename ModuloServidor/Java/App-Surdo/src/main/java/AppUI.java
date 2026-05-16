@@ -85,7 +85,7 @@ public class AppUI {
         ventana.setExtendedState(JFrame.MAXIMIZED_BOTH);
         ventana.setSize(1024, 768);
         ventana.setVisible(true);
-
+        
         System.out.println("Launched");
         
     }
