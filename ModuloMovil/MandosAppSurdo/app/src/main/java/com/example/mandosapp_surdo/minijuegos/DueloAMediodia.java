@@ -5,8 +5,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import com.example.mandosapp_surdo.Minijuego;
-import com.example.mandosapp_surdo.ResultadoCallback;
+import com.example.mandosapp_surdo.NsDondePonerte.Minijuego;
+import com.example.mandosapp_surdo.NsDondePonerte.ResultadoCallback;
 
 public class DueloAMediodia implements Minijuego {
 
@@ -33,7 +33,8 @@ public class DueloAMediodia implements Minijuego {
 
     @Override
     public String getExplicacion() {
-        return "Lo que todo hombre deseo una vez, un duelo a muerte de vaqueros.\n\n¡Desenfunde rapido forastero!";
+        return "Lo que todo hombre deseo una vez, un duelo a muerte de vaqueros." +
+                "\n\n¡Desenfunde rapido forastero!";
     }
 
     @Override
