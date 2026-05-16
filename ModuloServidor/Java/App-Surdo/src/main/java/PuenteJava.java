@@ -2,6 +2,8 @@ import java.util.ArrayList;
 
 import org.cef.browser.CefBrowser;
 
+import gestiones_tunnel.ServidorTunnel;
+
 public class PuenteJava {
 	
 	private final CefBrowser browser;
@@ -30,7 +32,22 @@ public class PuenteJava {
 			musicHandeler.detener();
 			musicHandeler.cargar(args.get(0));
 			break;
+			
+		case "iniciarServidor":
 
+		    String codigo =
+		            ServidorTunnel.iniciar();
+
+		    lamarJavascript(
+		            "mostrarCodigoConexion",
+		            "'" + codigo + "'"
+		    );
+
+		    break;
+		    
+		case "exit":
+            System.exit(0);
+            
 		default:
 			System.err.println("Método no encontrado");
 			break;

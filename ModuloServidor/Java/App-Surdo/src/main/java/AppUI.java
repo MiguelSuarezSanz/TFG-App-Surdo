@@ -41,8 +41,16 @@ public class AppUI {
         CefApp cefApp = builder.build();
         CefClient client = cefApp.createClient();
 
+        // Cargar el HTML con ruta absoluta
+        File archivoHtml = new File("../../Prototipo/views/index/index.html").getAbsoluteFile();
+        CefBrowser browser = client.createBrowser(
+            archivoHtml.toURI().toString(),
+            false,
+            false
+        );
+        
         // Puente JS → Java
-        PuenteJava puente = new PuenteJava();
+        PuenteJava puente = new PuenteJava(browser);
 
         CefMessageRouter router = CefMessageRouter.create(
             new CefMessageRouter.CefMessageRouterConfig("cefQuery", "cefQueryCancel")
@@ -61,14 +69,6 @@ public class AppUI {
         }, true);
 
         client.addMessageRouter(router);
-
-        // Cargar el HTML con ruta absoluta
-        File archivoHtml = new File("../../Prototipo/views/index/index.html").getAbsoluteFile();
-        CefBrowser browser = client.createBrowser(
-            archivoHtml.toURI().toString(),
-            false,
-            false
-        );
 
         // Ventana Swing maximizada
         JFrame ventana = new JFrame("App-Surdo");

@@ -1,4 +1,11 @@
-window.addEventListener('load', llamarJava('cargarMusica,WaitRoom'));
+window.addEventListener('load', iniciarPantalla);
+
+function iniciarPantalla() {
+
+    llamarJava('cargarMusica,WaitRoom');
+
+    llamarJava('iniciarServidor');
+}
 
 let participantes = []
 localStorage.setItem("puntuaciones", "");
@@ -38,4 +45,11 @@ function removerParticipante(participante) {
 function renderizar_codigo(codigoSala) {
     let code = document.querySelector('.main_tittle');
     code.innerHTML = `Código de la Sala: <br>${codigoSala}`;
+}
+
+function mostrarCodigoConexion(codigo) {
+
+    document.getElementById("codigoSala")
+        .innerHTML =
+            "Código de la Sala:<br>" + codigo;
 }

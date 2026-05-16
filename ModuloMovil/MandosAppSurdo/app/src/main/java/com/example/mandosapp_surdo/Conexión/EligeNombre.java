@@ -7,13 +7,10 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.mandosapp_surdo.Conexión.TunnelManager;
+import com.example.mandosapp_surdo.Conexión.Packets.PacketWriter;
 import com.example.mandosapp_surdo.R;
 import com.quictunnel.client.QuicTunnelClient;
 import com.quictunnel.core.TunnelException;
-
-import java.nio.ByteBuffer;
-import java.nio.charset.StandardCharsets;
 
 public class EligeNombre extends AppCompatActivity {
 
