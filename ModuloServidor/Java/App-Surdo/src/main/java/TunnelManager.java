@@ -1,4 +1,7 @@
 
+import com.quictunnel.core.*;
+import com.quictunnel.server.*;
+
 public class TunnelManager {
 
     private static TunnelConnection connection;

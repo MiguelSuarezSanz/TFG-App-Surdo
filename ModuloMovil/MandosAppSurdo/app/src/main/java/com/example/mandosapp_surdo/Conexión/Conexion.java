@@ -35,6 +35,9 @@ public class Conexion extends AppCompatActivity {
     private Button btnConectar;
     private QuicTunnelClient tunnel;
 
+    private final PacketDispatcher dispatcher =
+            new PacketDispatcher();
+
     // Caracteres permitidos: letras A-Z y números 0-9
     private final Pattern ALLOWED = Pattern.compile("[A-Za-z0-9]");
 
@@ -59,6 +62,19 @@ public class Conexion extends AppCompatActivity {
         for (int i = 0; i < fields.size(); i++) {
             setupField(fields.get(i), i);
         }
+
+        dispatcher.register(
+                Protocol.MSG_SET_NAME,
+                reader -> {
+
+                    String nombre = reader.readString();
+
+                    Log.i(
+                            "Tunnel",
+                            "Nombre recibido: " + nombre
+                    );
+                }
+        );
 
         btnConectar.setOnClickListener(v -> {
             StringBuilder codigo = new StringBuilder();
@@ -191,18 +207,11 @@ public class Conexion extends AppCompatActivity {
                 }
 
                 @Override
-                public void onDataReceived(TunnelConnection c, byte[] payload) {
-
-                    PacketReader reader = new PacketReader(payload);
-
-                    byte type = reader.readByte();
-
-                    if (type == Protocol.MSG_SET_NAME) {
-
-                        String nombre = reader.readString();
-
-                        Log.i("Tunnel", "Nombre recibido: " + nombre);
-                    }
+                public void onDataReceived(
+                        TunnelConnection c,
+                        byte[] payload
+                ) {
+                    dispatcher.handle(payload);
                 }
 
                 @Override
