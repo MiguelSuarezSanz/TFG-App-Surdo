@@ -95,6 +95,10 @@ public class QuicClientConnection {
         activeConnection.set(connection);
         reconnectPolicy.reset();
 
+        config.getCallbackExecutor().execute(() ->
+                listener.onConnected(connection)
+        );
+
         // Arrancamos el hilo de recepción
         receiveExecutor.execute(this::receiveLoop);
 
