@@ -18,7 +18,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-
 import com.example.mandosapp_surdo.R;
 import com.example.mandosapp_surdo.enume.Estado;
 import com.example.mandosapp_surdo.minijuegos.DiaPesca;
@@ -45,12 +44,10 @@ public class VentanaMinijuegosActivity extends AppCompatActivity implements Sens
     private View pantallaGameOver;
 
     // Menú
-    private TextView txtMaxPuntuacion;
+    private TextView txtEsperandoServidor;
 
-    // Explicación
+    // Explicación — solo título y botón listo
     private TextView txtTituloMinijuego;
-    private TextView txtExplicacion;
-    private TextView txtPuntuacionActual;
 
     // Juego — compartido
     private TextView txtTemporizador;
@@ -87,7 +84,7 @@ public class VentanaMinijuegosActivity extends AppCompatActivity implements Sens
 
     // Game Over
     private TextView txtPuntuacionFinal;
-    private TextView txtMensajeRecord;
+    private TextView txtComentarioDerrota;
 
     // =========================================================
     // SENSORES
@@ -96,20 +93,17 @@ public class VentanaMinijuegosActivity extends AppCompatActivity implements Sens
     private Sensor rotationSensor;
     private Sensor accelerometerSensor;
 
-    // Datos de sensor compartidos
-    private final float[] rotationMatrix = new float[9];
+    private final float[] rotationMatrix    = new float[9];
     private final float[] orientationAngles = new float[3];
-    private final float[] gravity = new float[3];
-    private static final float ALPHA = 0.8f;
+    private final float[] gravity           = new float[3];
+    private static final float ALPHA        = 0.8f;
 
     // =========================================================
     // ESTADO DEL JUEGO
     // =========================================================
     private int puntuacion = 0;
-    private int maxPuntuacion = 0;
     private static final String PREFS_NAME = "minijuegos_prefs";
     private static final String KEY_MAX = "max_puntuacion";
-
     private List<Minijuego> listaMinijuegos;
     private Minijuego minijuegoActual;
     private final Random  random  = new Random();
@@ -129,7 +123,6 @@ public class VentanaMinijuegosActivity extends AppCompatActivity implements Sens
 
         vincularVistas();
         inicializarSensores();
-        cargarMaxPuntuacion();
         crearListaMinijuegos();
         mostrarPantalla(Estado.MENU);
 
@@ -159,34 +152,28 @@ public class VentanaMinijuegosActivity extends AppCompatActivity implements Sens
     // =========================================================
     // INICIALIZACIÓN
     // =========================================================
-
     private void vincularVistas() {
-
-        pantallaMenu        = findViewById(R.id.pantallaMenu);
+        pantallaMenu  = findViewById(R.id.pantallaMenu);
         pantallaExplicacion = findViewById(R.id.pantallaExplicacion);
-        pantallaJuego       = findViewById(R.id.pantallaJuego);
-        pantallaGameOver    = findViewById(R.id.pantallaGameOver);
+        pantallaJuego = findViewById(R.id.pantallaJuego);
+        pantallaGameOver = findViewById(R.id.pantallaGameOver);
 
-        txtMaxPuntuacion    = findViewById(R.id.txtMaxPuntuacion);
-        txtTituloMinijuego  = findViewById(R.id.txtTituloMinijuego);
-        txtExplicacion      = findViewById(R.id.txtExplicacion);
-        txtPuntuacionActual = findViewById(R.id.txtPuntuacionActual);
-        txtTemporizador     = findViewById(R.id.txtTemporizador);
+        txtEsperandoServidor = findViewById(R.id.txtEsperandoServidor);
+        txtTituloMinijuego = findViewById(R.id.txtTituloMinijuego);
+        txtTemporizador = findViewById(R.id.txtTemporizador);
 
-        // Minijuego: Elije el Boton
         contenedorBotones = findViewById(R.id.contenedorBotones);
         btn1 = findViewById(R.id.btn1);
         btn2 = findViewById(R.id.btn2);
         btn3 = findViewById(R.id.btn3);
 
-        // Minijuego: Un Simple Boton
-        contenedorBoton = findViewById(R.id.contenedorSimpleBoton);
+        contenedorBoton  = findViewById(R.id.contenedorSimpleBoton);
         btnSimple = findViewById(R.id.botonSimple);
         instruccionesBtnSimple = findViewById(R.id.txtInstruccionSimpleBoton);
 
         contenedorGiroscopio = findViewById(R.id.contenedorGiroscopio);
-        imagen               = findViewById(R.id.imagen);
-        txtEstadoGiro        = findViewById(R.id.txtEstadoGiro);
+        imagen  = findViewById(R.id.imagen);
+        txtEstadoGiro = findViewById(R.id.txtEstadoGiro);
 
         contenedorAcelerometro = findViewById(R.id.contenedorAcelerometro);
         txtEmojiAccel          = findViewById(R.id.txtEmojiAccel);
@@ -196,13 +183,13 @@ public class VentanaMinijuegosActivity extends AppCompatActivity implements Sens
         txtEmojiPesca    = findViewById(R.id.txtEmojiPesca);
         txtEstadoPesca   = findViewById(R.id.txtEstadoPesca);
 
-        contenedorDibujo   = findViewById(R.id.contenedorDibujo);
-        txtFiguraObjetivo  = findViewById(R.id.txtFiguraObjetivo);
-        txtEstadoDibujo    = findViewById(R.id.txtEstadoDibujo);
+        contenedorDibujo = findViewById(R.id.contenedorDibujo);
+        txtFiguraObjetivo = findViewById(R.id.txtFiguraObjetivo);
+        txtEstadoDibujo = findViewById(R.id.txtEstadoDibujo);
         txtResultadoDibujo = findViewById(R.id.txtResultadoDibujo);
 
         txtPuntuacionFinal = findViewById(R.id.txtPuntuacionFinal);
-        txtMensajeRecord   = findViewById(R.id.txtMensajeRecord);
+        txtComentarioDerrota = findViewById(R.id.txtComentarioDerrota);
     }
 
     private void inicializarSensores() {
@@ -213,23 +200,8 @@ public class VentanaMinijuegosActivity extends AppCompatActivity implements Sens
         }
     }
 
-    private void cargarMaxPuntuacion() {
-        SharedPreferences prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
-        maxPuntuacion = prefs.getInt(KEY_MAX, 0);
-        txtMaxPuntuacion.setText("Máxima puntuación: " + maxPuntuacion);
-    }
-
-    private void guardarMaxPuntuacion() {
-        if (puntuacion > maxPuntuacion) {
-            maxPuntuacion = puntuacion;
-            getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
-                    .edit().putInt(KEY_MAX, maxPuntuacion).apply();
-        }
-    }
-
     // =========================================================
     // LISTA DE MINIJUEGOS
-    // Para añadir uno nuevo: instancialo aquí y añádelo a la lista.
     // =========================================================
     private void crearListaMinijuegos() {
         listaMinijuegos = new ArrayList<>();
@@ -244,7 +216,6 @@ public class VentanaMinijuegosActivity extends AppCompatActivity implements Sens
     // =========================================================
     // FLUJO DEL JUEGO
     // =========================================================
-
     private void iniciarPartida() {
         puntuacion = 0;
         siguienteMinijuego();
@@ -254,8 +225,6 @@ public class VentanaMinijuegosActivity extends AppCompatActivity implements Sens
         minijuegoActual = listaMinijuegos.get(random.nextInt(listaMinijuegos.size()));
         mostrarPantalla(Estado.EXPLICACION);
         txtTituloMinijuego.setText(minijuegoActual.getTitulo());
-        txtExplicacion.setText(minijuegoActual.getExplicacion());
-        txtPuntuacionActual.setText("Puntuación: " + puntuacion);
     }
 
     private void iniciarMinijuegoActual() {
@@ -281,15 +250,18 @@ public class VentanaMinijuegosActivity extends AppCompatActivity implements Sens
     }
 
     private void mostrarGameOver() {
-        guardarMaxPuntuacion();
+
         mostrarPantalla(Estado.GAME_OVER);
         txtPuntuacionFinal.setText("Puntuación: " + puntuacion);
-        txtMensajeRecord.setText(puntuacion >= maxPuntuacion && puntuacion > 0
-                ? "🏆 ¡Nuevo récord!" : "");
-        handler.postDelayed(() -> {
-            txtMaxPuntuacion.setText("Máxima puntuación: " + maxPuntuacion);
-            mostrarPantalla(Estado.MENU);
-        }, 3000);
+        txtComentarioDerrota.setText("");
+
+        // Guardar récord por si se necesita en el futuro
+        SharedPreferences prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+        int maxPuntuacion = prefs.getInt(KEY_MAX, 0);
+        if (puntuacion > maxPuntuacion)
+            prefs.edit().putInt(KEY_MAX, puntuacion).apply();
+
+        handler.postDelayed(() -> mostrarPantalla(Estado.MENU), 4000);
     }
 
     // =========================================================
@@ -298,10 +270,10 @@ public class VentanaMinijuegosActivity extends AppCompatActivity implements Sens
 
     private void mostrarPantalla(Estado estado) {
         estadoActual = estado;
-        pantallaMenu.setVisibility(        estado == Estado.MENU        ? View.VISIBLE : View.GONE);
-        pantallaExplicacion.setVisibility( estado == Estado.EXPLICACION ? View.VISIBLE : View.GONE);
-        pantallaJuego.setVisibility(       estado == Estado.JUEGO       ? View.VISIBLE : View.GONE);
-        pantallaGameOver.setVisibility(    estado == Estado.GAME_OVER   ? View.VISIBLE : View.GONE);
+        pantallaMenu.setVisibility(estado == Estado.MENU ? View.VISIBLE : View.GONE);
+        pantallaExplicacion.setVisibility(estado == Estado.EXPLICACION ? View.VISIBLE : View.GONE);
+        pantallaJuego.setVisibility(estado == Estado.JUEGO ? View.VISIBLE : View.GONE);
+        pantallaGameOver.setVisibility(estado == Estado.GAME_OVER ? View.VISIBLE : View.GONE);
     }
 
     private void ocultarTodosLosContenedoresJuego() {
@@ -310,12 +282,13 @@ public class VentanaMinijuegosActivity extends AppCompatActivity implements Sens
         contenedorAcelerometro.setVisibility(View.GONE);
         contenedorPesca.setVisibility(View.GONE);
         contenedorDibujo.setVisibility(View.GONE);
+        contenedorBoton.setVisibility(View.GONE);
         txtTemporizador.setText("");
         imagen.setVisibility(View.INVISIBLE);
     }
 
     // =========================================================
-    // SENSORES — Distribuye datos a cada minijuego
+    // SENSORES
     // =========================================================
 
     private void registrarSensoresSiNecesario() {
@@ -337,8 +310,8 @@ public class VentanaMinijuegosActivity extends AppCompatActivity implements Sens
             SensorManager.getRotationMatrixFromVector(rotationMatrix, event.values);
             SensorManager.getOrientation(rotationMatrix, orientationAngles);
             float pitch = (float) Math.toDegrees(orientationAngles[1]);
-            float roll  = (float) Math.toDegrees(orientationAngles[2]);
-            float yaw   = (float) Math.toDegrees(orientationAngles[0]);
+            float roll = (float) Math.toDegrees(orientationAngles[2]);
+            float yaw = (float) Math.toDegrees(orientationAngles[0]);
 
             if (minijuegoActual instanceof DueloAMediodia)
                 ((DueloAMediodia) minijuegoActual).onDatosGiro(pitch, roll);
@@ -364,33 +337,4 @@ public class VentanaMinijuegosActivity extends AppCompatActivity implements Sens
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {}
-
-    // =========================================================
-    //
-    //  MINIJUEGO 5 — DIBUJAR FIGURAS EN EL AIRE
-    //
-    //  El programa elige 3 figuras al azar de entre:
-    //  Círculo, Cuadrado, Triángulo, Estrella, Hexágono.
-    //  El jugador tiene 5s para dibujar cada una moviendo
-    //  el móvil como si fuera un pincel en el aire.
-    //
-    //  La trayectoria se obtiene integrando el giroscopio
-    //  (yaw + pitch) y se analizan estas características:
-    //    · Número de esquinas (cambios bruscos de dirección)
-    //    · Si la trayectoria es cerrada (inicio ≈ fin)
-    //    · Varianza angular (suavidad de la curva)
-    //    · Ratio de aspecto (ancho/alto de la bounding box)
-    //
-    // =========================================================
-
-    private enum Figura {
-        CIRCULO   ("○ Círculo",   "Haz un movimiento circular continuo y ciérralo"),
-        CUADRADO  ("□ Cuadrado",  "Dibuja 4 lados con esquinas de ~90°"),
-        TRIANGULO ("△ Triángulo", "Dibuja 3 lados con esquinas bruscas"),
-        ESTRELLA  ("★ Estrella",  "Dibuja picos arriba/abajo alternando (≥5)"),
-        HEXAGONO  ("⬡ Hexágono",  "Dibuja 6 lados con esquinas de ~120°");
-
-        final String nombre, pista;
-        Figura(String n, String p) { nombre = n; pista = p; }
-    }
 }
