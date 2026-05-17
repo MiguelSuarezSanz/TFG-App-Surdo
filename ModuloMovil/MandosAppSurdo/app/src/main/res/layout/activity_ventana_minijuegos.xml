@@ -8,6 +8,7 @@
 
     <!-- =====================================================
          PANTALLA 1: MENÚ PRINCIPAL
+         Solo muestra el texto de espera y el botón local
     ===================================================== -->
     <LinearLayout
         android:id="@+id/pantallaMenu"
@@ -19,29 +20,21 @@
         android:visibility="visible">
 
         <TextView
+            android:id="@+id/txtEsperandoServidor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="🎮 MINIJUEGOS"
-            android:textColor="#FFFFFF"
-            android:textSize="36sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="12dp"/>
-
-        <TextView
-            android:id="@+id/txtMaxPuntuacion"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Máxima puntuación: 0"
+            android:text="⏳ Esperando respuesta del servidor..."
             android:textColor="#A0A0C0"
             android:textSize="18sp"
+            android:gravity="center"
             android:layout_marginBottom="48dp"/>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnJugar"
-            android:layout_width="200dp"
+            android:layout_width="220dp"
             android:layout_height="64dp"
-            android:text="¡JUGAR!"
-            android:textSize="20sp"
+            android:text="Jugar en local"
+            android:textSize="18sp"
             android:textStyle="bold"
             android:textAllCaps="false"
             app:backgroundTint="#6C63FF"
@@ -51,6 +44,7 @@
 
     <!-- =====================================================
          PANTALLA 2: EXPLICACIÓN DEL MINIJUEGO
+         Solo título del minijuego y botón de listo
     ===================================================== -->
     <LinearLayout
         android:id="@+id/pantallaExplicacion"
@@ -65,33 +59,12 @@
             android:id="@+id/txtTituloMinijuego"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Minijuego"
-            android:textColor="#FFFFFF"
-            android:textSize="28sp"
-            android:textStyle="bold"
-            android:gravity="center"
-            android:layout_marginBottom="24dp"/>
-
-        <TextView
-            android:id="@+id/txtExplicacion"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:text=""
-            android:textColor="#D0D0E8"
-            android:textSize="17sp"
-            android:gravity="center"
-            android:lineSpacingMultiplier="1.4"
-            android:layout_marginBottom="32dp"/>
-
-        <TextView
-            android:id="@+id/txtPuntuacionActual"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Puntuación: 0"
-            android:textColor="#6C63FF"
-            android:textSize="20sp"
+            android:textColor="#FFFFFF"
+            android:textSize="32sp"
             android:textStyle="bold"
-            android:layout_marginBottom="40dp"/>
+            android:gravity="center"
+            android:layout_marginBottom="64dp"/>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnListo"
@@ -128,7 +101,7 @@
             android:textStyle="bold"
             android:layout_marginBottom="8dp"/>
 
-        <!-- MINIJUEGO: BOTONES (apilados en vertical) -->
+        <!-- MINIJUEGO: BOTONES -->
         <LinearLayout
             android:id="@+id/contenedorBotones"
             android:layout_width="match_parent"
@@ -257,7 +230,6 @@
         </LinearLayout>
 
         <!-- MINIJUEGO: DIBUJAR FIGURAS -->
-        <!-- FrameLayout para superponer el canvas de dibujo con los textos -->
         <FrameLayout
             android:id="@+id/contenedorDibujo"
             android:layout_width="match_parent"
@@ -265,9 +237,6 @@
             android:layout_weight="1"
             android:visibility="gone">
 
-            <!-- FiguraView se inserta aquí por código (posición 0, detrás de los textos) -->
-
-            <!-- Textos superpuestos encima del canvas -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -297,7 +266,6 @@
 
             </LinearLayout>
 
-            <!-- Resultado (correcto/incorrecto) centrado en el canvas -->
             <TextView
                 android:id="@+id/txtResultadoDibujo"
                 android:layout_width="wrap_content"
@@ -310,7 +278,7 @@
 
         </FrameLayout>
 
-        <!-- MINIJUEGO Un simple boton -->
+        <!-- MINIJUEGO: UN SIMPLE BOTÓN -->
         <LinearLayout
             android:id="@+id/contenedorSimpleBoton"
             android:layout_width="match_parent"
@@ -342,6 +310,7 @@
 
     <!-- =====================================================
          PANTALLA 4: GAME OVER
+         Puntuación + comentario aleatorio de derrota
     ===================================================== -->
     <LinearLayout
         android:id="@+id/pantallaGameOver"
@@ -369,23 +338,25 @@
             android:textColor="#FFFFFF"
             android:textSize="26sp"
             android:textStyle="bold"
-            android:layout_marginBottom="12dp"/>
+            android:layout_marginBottom="24dp"/>
 
         <TextView
-            android:id="@+id/txtMensajeRecord"
+            android:id="@+id/txtComentarioDerrota"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=""
-            android:textColor="#FFD700"
-            android:textSize="20sp"
+            android:textColor="#A0A0C0"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:lineSpacingMultiplier="1.3"
             android:layout_marginBottom="32dp"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Volviendo al menú..."
-            android:textColor="#A0A0C0"
-            android:textSize="16sp"/>
+            android:textColor="#505070"
+            android:textSize="14sp"/>
 
     </LinearLayout>
 

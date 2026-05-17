@@ -11,6 +11,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.mandosapp_surdo.NsDondePonerte.VentanaMinijuegosActivity;
 import com.example.mandosapp_surdo.R;
 
 public class MainActivity extends AppCompatActivity {
@@ -28,9 +29,6 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-        // Estos son los colores que se le pasaran al segundo mando
-        String[] colores = new String[] {"Rojo", "Amarillo", "Verde", "Azul"};
-
         final Button mando1 = findViewById(R.id.mando1);
         final Button mando2 = findViewById(R.id.mando2);
         final Button mando3 = findViewById(R.id.mando3);
@@ -42,10 +40,12 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(myIntent);
             }
         });
-
+        mando2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Intent myIntent = new Intent(MainActivity.this, VentanaMinijuegosActivity.class);
+                startActivity(myIntent);
+            }
+        });
     }
-
-
-
-
 }

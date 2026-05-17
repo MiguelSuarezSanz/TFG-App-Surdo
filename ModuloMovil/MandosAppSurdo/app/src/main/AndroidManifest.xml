@@ -14,6 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MandosAppSurdo">
         <activity
+            android:name=".NsDondePonerte.ConexionPantallaActivity"
+            android:exported="false" />
+        <activity
             android:name=".Conexión.EligeNombre"
             android:exported="false" />
         <activity
