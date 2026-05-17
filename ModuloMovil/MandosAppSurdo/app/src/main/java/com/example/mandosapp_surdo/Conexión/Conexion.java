@@ -240,7 +240,8 @@ public class Conexion extends AppCompatActivity {
             });
             Log.e("Tunnel", "Intentando conectar...");
 
-            new Thread(() -> {
+            tunnel.connect();
+            /*new Thread(() -> {
 
                 try {
 
@@ -250,6 +251,19 @@ public class Conexion extends AppCompatActivity {
 
                     Log.e("Tunnel", "DESPUES CONNECT");
 
+                    runOnUiThread(() -> {
+
+                        Log.e("Tunnel", "ABRIENDO ACTIVITY");
+
+                        Intent intent =
+                                new Intent(
+                                        Conexion.this,
+                                        EligeNombre.class
+                                );
+
+                        startActivity(intent);
+                    });
+
                 } catch (Exception e) {
 
                     Log.e(
@@ -258,7 +272,7 @@ public class Conexion extends AppCompatActivity {
                     );
                 }
 
-            }).start();
+            }).start();*/
 
         } catch (TunnelException | java.io.IOException e) {
             Log.e("Tunnel", "Error al iniciar: " + e.getMessage());
