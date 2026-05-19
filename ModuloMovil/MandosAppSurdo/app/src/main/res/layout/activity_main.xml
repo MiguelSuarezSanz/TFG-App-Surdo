@@ -9,48 +9,37 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="206dp"
-        android:layout_height="35dp"
-        android:text="Test Mandos"
+        android:layout_width="302dp"
+        android:layout_height="95dp"
+        android:text="App-Surdo"
         android:textAlignment="center"
-        android:textSize="24sp"
+        android:textSize="60sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.2" />
+        app:layout_constraintVertical_bias="0.295" />
 
-    <Button
-        android:id="@+id/mando1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
-        android:text="Mando 1"
-        app:layout_constraintBottom_toTopOf="@+id/mando2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
-
-    <Button
-        android:id="@+id/mando2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="76dp"
-        android:text="Mando 2"
-        app:layout_constraintBottom_toTopOf="@+id/mando3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/mando3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="156dp"
-        android:text="Mando 3"
+    <LinearLayout
+        android:layout_width="414dp"
+        android:layout_height="212dp"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginBottom="50dp">
+
+        <Button
+            android:id="@+id/mando1"
+            android:layout_width="202dp"
+            android:layout_height="match_parent"
+            android:text="Prueba Conexion" />
+
+        <Button
+            android:id="@+id/mando2"
+            android:layout_width="204dp"
+            android:layout_height="match_parent"
+            android:text="Prueba Minijuego" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -16,10 +16,10 @@ public class ElijeElBoton implements Minijuego {
     private LinearLayout botonera;
     private MaterialButton btn1, btn2, btn3;
     private final String[] NOMBRES = {"Rojo", "Amarillo", "Verde", "Azul"};
-    private final int[]    COLORES = {Color.RED, Color.YELLOW, Color.GREEN, Color.BLUE};
+    private final int[] COLORES = {Color.RED, Color.YELLOW, Color.GREEN, Color.BLUE};
     private ResultadoCallback callback;
     private boolean activo = false;
-    private final Random random  = new Random();
+    private final Random random = new Random();
 
     public ElijeElBoton (LinearLayout botonera, MaterialButton btn1, MaterialButton btn2, MaterialButton btn3) {
         this.botonera = botonera;
@@ -40,35 +40,47 @@ public class ElijeElBoton implements Minijuego {
     }
 
     @Override
-    public void iniciar(ResultadoCallback callback) {
-
-        this.callback = callback;
-        this.activo = true;
+    public void iniciar(ResultadoCallback cb) {
+        this.callback = cb;
+        this.activo   = true;
         botonera.setVisibility(View.VISIBLE);
-        int idxObj = random.nextInt(NOMBRES.length);
-        int colorObj = COLORES[idxObj];
-        int otro1, otro2;
-        do { otro1 = random.nextInt(NOMBRES.length); } while (otro1 == idxObj);
-        do { otro2 = random.nextInt(NOMBRES.length); } while (otro2 == idxObj || otro2 == otro1);
 
-        List<Integer> indices = new ArrayList<>();
-        indices.add(idxObj); indices.add(otro1); indices.add(otro2);
-        Collections.shuffle(indices);
+        // --- Color elegido (el correcto, siempre en btn1) ---
+        int idxElegido    = random.nextInt(NOMBRES.length);
+        int colorElegido  = COLORES[idxElegido];
+        String nombreElegido = NOMBRES[idxElegido];
 
-        int c1 = COLORES[indices.get(0)];
-        int c2 = COLORES[indices.get(1)];
-        int c3 = COLORES[indices.get(2)];
+        // --- Color del fondo de btn2 (distinto al elegido) ---
+        int idxFondoBtn2;
+        do { idxFondoBtn2 = random.nextInt(NOMBRES.length); }
+        while (idxFondoBtn2 == idxElegido);
+        int colorFondoBtn2 = COLORES[idxFondoBtn2];
 
-        btn1.setBackgroundTintList(ColorStateList.valueOf(c1));
-        btn2.setBackgroundTintList(ColorStateList.valueOf(c2));
-        btn3.setBackgroundTintList(ColorStateList.valueOf(c3));
-        btn1.setText(""); btn3.setText("");
-        btn2.setText(NOMBRES[idxObj]);
-        btn2.setTextColor(colorObj);
+        // --- Color del texto de btn3 (distinto al elegido, puede coincidir con fondoBtn2) ---
+        int idxTextoBtn3;
+        do { idxTextoBtn3 = random.nextInt(NOMBRES.length); }
+        while (idxTextoBtn3 == idxElegido);
+        String nombreTextoBtn3 = NOMBRES[idxTextoBtn3];
 
-        btn1.setOnClickListener(v -> { if (activo) evaluar(c1, colorObj); });
-        btn2.setOnClickListener(v -> { if (activo) evaluar(c2, colorObj); });
-        btn3.setOnClickListener(v -> { if (activo) evaluar(c3, colorObj); });
+        // ---- BTN 1: fondo = color elegido, sin texto ----
+        btn1.setBackgroundTintList(ColorStateList.valueOf(colorElegido));
+        btn1.setText("");
+
+        // ---- BTN 2: fondo distinto al elegido, texto = nombre elegido en NEGRO ----
+        btn2.setBackgroundTintList(ColorStateList.valueOf(colorFondoBtn2));
+        btn2.setText(nombreElegido);
+        btn2.setTextColor(Color.BLACK);
+
+        // ---- BTN 3: fondo gris, texto = otro color, letras en color elegido ----
+        btn3.setBackgroundTintList(ColorStateList.valueOf(Color.GRAY));
+        btn3.setText(nombreTextoBtn3);
+        btn3.setTextColor(colorElegido);
+
+        int ganador = (int) (Math.random() * 3) + 1;
+
+        btn1.setOnClickListener(v -> { if (activo) { evaluar(1, ganador); } });
+        btn2.setOnClickListener(v -> { if (activo) { evaluar(2, ganador); } });
+        btn3.setOnClickListener(v -> { if (activo) { evaluar(3, ganador); } });
     }
 
     private void evaluar(int pulsado, int objetivo) {

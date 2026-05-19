@@ -31,7 +31,6 @@ public class MainActivity extends AppCompatActivity {
 
         final Button mando1 = findViewById(R.id.mando1);
         final Button mando2 = findViewById(R.id.mando2);
-        final Button mando3 = findViewById(R.id.mando3);
 
         mando1.setOnClickListener(new View.OnClickListener() {
             @Override
