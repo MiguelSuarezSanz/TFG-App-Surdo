@@ -1,5 +1,7 @@
 package gestiones_tunnel;
 
+import java.util.ArrayList;
+
 import com.quictunnel.core.*;
 import com.quictunnel.server.*;
 
@@ -11,7 +13,10 @@ public class ServidorTunnel {
 
     private static final PacketDispatcher dispatcher =
             new PacketDispatcher();
-
+    
+    private static final ArrayList<String> participantes =
+			    new ArrayList<>();
+    
     public static String iniciar() {
 
         try {

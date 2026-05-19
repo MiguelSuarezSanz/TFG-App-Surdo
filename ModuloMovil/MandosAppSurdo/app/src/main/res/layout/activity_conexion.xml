@@ -45,4 +45,20 @@
         android:textColor="#FFFFFF"
         android:textSize="16sp"/>
 
+    <EditText
+        android:id="@+id/editNombre"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:hint="Nombre"
+        android:visibility="gone"/>
+
+    <Button
+        android:id="@+id/btnListo"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Listo"
+        android:visibility="gone"/>
+
 </LinearLayout>

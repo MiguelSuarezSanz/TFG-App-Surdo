@@ -10,7 +10,8 @@
         android:id="@+id/inputMensaje"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Escribe un mensaje"/>
+        android:layout_marginTop="30dp"
+        android:hint="Nombre"/>
 
     <Button
         android:id="@+id/btnEnviar"
