@@ -17,6 +17,7 @@ import android.widget.EditText;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.mandosapp_surdo.Conexión.Packets.PacketDispatcher;
+import com.example.mandosapp_surdo.Conexión.Packets.PacketWriter;
 import com.example.mandosapp_surdo.NsDondePonerte.IpEncryptor;
 import com.example.mandosapp_surdo.R;
 import com.quictunnel.client.QuicTunnelClient;
@@ -36,6 +37,9 @@ public class Conexion extends AppCompatActivity {
     private Button btnConectar;
     private QuicTunnelClient tunnel;
 
+    private EditText editNombre;
+    private Button btnListo;
+
     private final PacketDispatcher dispatcher =
             new PacketDispatcher();
 
@@ -46,6 +50,9 @@ public class Conexion extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_conexion);
+
+        editNombre = findViewById(R.id.editNombre);
+        btnListo = findViewById(R.id.btnListo);
 
         btnConectar = findViewById(R.id.btnConectar);
 
@@ -89,6 +96,32 @@ public class Conexion extends AppCompatActivity {
 
         // Abre el teclado en el primer campo automáticamente
         fields.get(0).requestFocus();
+
+        btnListo.setOnClickListener(v -> {
+
+            String nombre =
+                    editNombre
+                            .getText()
+                            .toString()
+                            .trim();
+
+            PacketWriter writer =
+                    new PacketWriter();
+
+            writer.writeByte(
+                    Protocol.MSG_SET_NAME
+            );
+
+            writer.writeString(nombre);
+
+            try {
+                tunnel.send(
+                        writer.toArray()
+                );
+            } catch (TunnelException e) {
+                throw new RuntimeException(e);
+            }
+        });
     }
 
     private void setupField(EditText editText, int index) {
@@ -201,6 +234,12 @@ public class Conexion extends AppCompatActivity {
 
                     Log.e("Tunnel", "ON CONNECTED");
 
+                    /*runOnUiThread(() -> {
+
+                        editNombre.setVisibility(View.VISIBLE);
+                        btnListo.setVisibility(View.VISIBLE);
+                    });*/
+
                     Intent intent =
                             new Intent(
                                     Conexion.this,
@@ -208,6 +247,7 @@ public class Conexion extends AppCompatActivity {
                             );
 
                     startActivity(intent);
+
                 }
 
                 @Override
