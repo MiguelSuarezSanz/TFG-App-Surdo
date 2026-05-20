@@ -113,32 +113,33 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn1"
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:layout_marginBottom="16dp"
+                android:layout_width="225dp"
+                android:layout_height="225dp"
+                android:layout_margin="5dp"
                 android:text=""
                 android:textSize="20sp"
                 android:textAllCaps="false"
-                app:cornerRadius="20dp"/>
+                app:cornerRadius="500dp"/>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn2"
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:layout_marginBottom="16dp"
+                android:layout_width="225dp"
+                android:layout_height="225dp"
+                android:layout_margin="5dp"
                 android:text=""
-                android:textSize="20sp"
+                android:textSize="35sp"
                 android:textAllCaps="false"
-                app:cornerRadius="20dp"/>
+                app:cornerRadius="500dp"/>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn3"
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
+                android:layout_width="225dp"
+                android:layout_height="225dp"
+                android:layout_margin="5dp"
                 android:text=""
-                android:textSize="20sp"
+                android:textSize="35sp"
                 android:textAllCaps="false"
-                app:cornerRadius="20dp"/>
+                app:cornerRadius="500dp"/>
 
         </LinearLayout>
 
@@ -171,7 +172,7 @@
 
         </LinearLayout>
 
-        <!-- MINIJUEGO: MOVIMIENTO ADELANTE/ATRÁS -->
+        <!-- MINIJUEGO: SALUDO TRADICIONAL CATALAN -->
         <LinearLayout
             android:id="@+id/contenedorAcelerometro"
             android:layout_width="match_parent"
@@ -181,12 +182,12 @@
             android:padding="24dp"
             android:visibility="gone">
 
-            <TextView
-                android:id="@+id/txtEmojiAccel"
+            <ImageView
+                android:id="@+id/foto_cuchillo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="📱"
-                android:textSize="72sp"/>
+                android:rotation="45"
+                app:srcCompat="@drawable/cuchillo"/>
 
             <TextView
                 android:id="@+id/txtEstadoAccel"

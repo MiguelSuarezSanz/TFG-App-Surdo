@@ -43,9 +43,17 @@ public class CurtKobainSimulator implements Minijuego {
     @Override public String getTitulo() { return "Kurt Cobain Simulator"; }
 
     @Override
-    public String getExplicacion() {
-        return "¿Que vueltas da la vida no? Hace unos años estabas en la cima, y mirate ahora, apunto de volarte los sesos" +
+    public String getIntroduccion() {
+        return "¿Que vueltas da la vida no? Hace unos años estabas en la cima, y mirate ahora, " +
+                "apunto de volarte los sesos" +
                 "\n\n¿Que tal si dejas el destino de tu vida a la suerte?";
+    }
+
+    @Override
+    public String getExplicacion() {
+        return "Primero, agita el movil para cargar el arma, y luego debes posicionar el movil en " +
+                "angulo apuntando a tu cara antes de que acabe el tiempo, si tuvistes suerte, ganas, " +
+                "si no, pierdes";
     }
 
     @Override

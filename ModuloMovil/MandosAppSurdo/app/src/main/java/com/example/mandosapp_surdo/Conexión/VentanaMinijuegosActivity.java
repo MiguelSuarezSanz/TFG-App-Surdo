@@ -13,6 +13,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
@@ -31,6 +32,7 @@ import com.example.mandosapp_surdo.minijuegos.ElijeElBoton;
 import com.example.mandosapp_surdo.minijuegos.SaludoCatalan;
 import com.example.mandosapp_surdo.minijuegos.SimpleBoton;
 import com.google.android.material.button.MaterialButton;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -39,19 +41,12 @@ public class VentanaMinijuegosActivity extends AppCompatActivity implements Sens
 
     private Estado estadoActual = Estado.MENU;
 
-    // =========================================================
-    // VISTAS — Pantallas
-    // =========================================================
-    private View pantallaMenu;
-    private View pantallaExplicacion;
-    private View pantallaJuego;
-    private View pantallaGameOver;
-
-    // Menú
-    private TextView txtEsperandoServidor;
-
-    // Explicación — solo título y botón listo
-    private TextView txtTituloMinijuego;
+    // Distintas Pantallas para cada etapa del HUB (Sujeta a campbios cuando union con server)
+    private View menu;
+    private View titulo;
+    private TextView tituloMinijuego;
+    private View juego;
+    private View gameOver;
 
     // Juego — compartido
     private TextView txtTemporizador;
@@ -61,7 +56,7 @@ public class VentanaMinijuegosActivity extends AppCompatActivity implements Sens
     private MaterialButton btnSimple;
     private TextView instruccionesBtnSimple;
 
-    // Minijuego: Botones
+    // Minijuego: Elije el Boton
     private LinearLayout contenedorBotones;
     private MaterialButton btn1, btn2, btn3;
 
@@ -72,7 +67,7 @@ public class VentanaMinijuegosActivity extends AppCompatActivity implements Sens
 
     // Minijuego: Acelerómetro (movimiento)
     private LinearLayout contenedorAcelerometro;
-    private TextView txtEmojiAccel;
+    private ImageView fotoCuchillo;
     private TextView txtEstadoAccel;
 
     // Minijuego: Pesca
@@ -80,11 +75,11 @@ public class VentanaMinijuegosActivity extends AppCompatActivity implements Sens
     private TextView txtEmojiPesca;
     private TextView txtEstadoPesca;
 
-    // Minijuego: Dibujo de figuras
+    /* Minijuego: Dibujo de figuras (Actualmente en desuso)
     private FrameLayout contenedorDibujo;
     private TextView txtFiguraObjetivo;
     private TextView txtEstadoDibujo;
-    private TextView txtResultadoDibujo;
+    private TextView txtResultadoDibujo; */
 
     // Minijuego: Duelo a la Irlandesa
     private LinearLayout contenedorDueloIrlandes;
@@ -100,13 +95,13 @@ public class VentanaMinijuegosActivity extends AppCompatActivity implements Sens
     // SENSORES
     // =========================================================
     private SensorManager sensorManager;
-    private Sensor rotationSensor;
-    private Sensor accelerometerSensor;
+    private Sensor giroscopio;
+    private Sensor acelerometro;
 
-    private final float[] rotationMatrix    = new float[9];
-    private final float[] orientationAngles = new float[3];
-    private final float[] gravity           = new float[3];
-    private static final float ALPHA        = 0.8f;
+    private final float[] rotacion = new float[9];
+    private final float[] angulos = new float[3];
+    private final float[] gravedad = new float[3];
+    private static final float ALPHA = 0.8f;
 
     // =========================================================
     // ESTADO DEL JUEGO
@@ -135,7 +130,6 @@ public class VentanaMinijuegosActivity extends AppCompatActivity implements Sens
         inicializarSensores();
         crearListaMinijuegos();
         mostrarPantalla(Estado.MENU);
-
         findViewById(R.id.btnJugar).setOnClickListener(v -> iniciarPartida());
         findViewById(R.id.btnListo).setOnClickListener(v -> iniciarMinijuegoActual());
     }
@@ -163,13 +157,11 @@ public class VentanaMinijuegosActivity extends AppCompatActivity implements Sens
     // INICIALIZACIÓN
     // =========================================================
     private void vincularVistas() {
-        pantallaMenu  = findViewById(R.id.pantallaMenu);
-        pantallaExplicacion = findViewById(R.id.pantallaExplicacion);
-        pantallaJuego = findViewById(R.id.pantallaJuego);
-        pantallaGameOver = findViewById(R.id.pantallaGameOver);
-
-        txtEsperandoServidor = findViewById(R.id.txtEsperandoServidor);
-        txtTituloMinijuego = findViewById(R.id.txtTituloMinijuego);
+        menu = findViewById(R.id.pantallaMenu);
+        titulo = findViewById(R.id.pantallaExplicacion);
+        juego = findViewById(R.id.pantallaJuego);
+        gameOver = findViewById(R.id.pantallaGameOver);
+        tituloMinijuego = findViewById(R.id.txtTituloMinijuego);
         txtTemporizador = findViewById(R.id.txtTemporizador);
 
         contenedorBotones = findViewById(R.id.contenedorBotones);
@@ -186,17 +178,17 @@ public class VentanaMinijuegosActivity extends AppCompatActivity implements Sens
         txtEstadoGiro = findViewById(R.id.txtEstadoGiro);
 
         contenedorAcelerometro = findViewById(R.id.contenedorAcelerometro);
-        txtEmojiAccel          = findViewById(R.id.txtEmojiAccel);
-        txtEstadoAccel         = findViewById(R.id.txtEstadoAccel);
+        fotoCuchillo = findViewById(R.id.foto_cuchillo);
+        txtEstadoAccel = findViewById(R.id.txtEstadoAccel);
 
-        contenedorPesca  = findViewById(R.id.contenedorPesca);
-        txtEmojiPesca    = findViewById(R.id.txtEmojiPesca);
-        txtEstadoPesca   = findViewById(R.id.txtEstadoPesca);
+        contenedorPesca = findViewById(R.id.contenedorPesca);
+        txtEmojiPesca = findViewById(R.id.txtEmojiPesca);
+        txtEstadoPesca = findViewById(R.id.txtEstadoPesca);
 
-        contenedorDibujo = findViewById(R.id.contenedorDibujo);
+        /* contenedorDibujo = findViewById(R.id.contenedorDibujo);
         txtFiguraObjetivo = findViewById(R.id.txtFiguraObjetivo);
         txtEstadoDibujo = findViewById(R.id.txtEstadoDibujo);
-        txtResultadoDibujo = findViewById(R.id.txtResultadoDibujo);
+        txtResultadoDibujo = findViewById(R.id.txtResultadoDibujo); */
 
         contenedorDueloIrlandes = findViewById(R.id.contenedorDueloIrlandes);
         vistaLiquido = findViewById(R.id.vistaLiquido);
@@ -210,8 +202,8 @@ public class VentanaMinijuegosActivity extends AppCompatActivity implements Sens
     private void inicializarSensores() {
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         if (sensorManager != null) {
-            rotationSensor      = sensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR);
-            accelerometerSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+            giroscopio = sensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR);
+            acelerometro = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         }
     }
 
@@ -223,7 +215,7 @@ public class VentanaMinijuegosActivity extends AppCompatActivity implements Sens
         listaMinijuegos.add(new ElijeElBoton(contenedorBotones, btn1, btn2, btn3));
         listaMinijuegos.add(new CurtKobainSimulator(contenedorGiroscopio, imagen, txtEstadoGiro, txtTemporizador));
         listaMinijuegos.add(new SimpleBoton(contenedorBoton, btnSimple, instruccionesBtnSimple, txtTemporizador));
-        listaMinijuegos.add(new SaludoCatalan(contenedorAcelerometro, txtEmojiAccel, txtEstadoAccel, txtTemporizador));
+        listaMinijuegos.add(new SaludoCatalan(contenedorAcelerometro, txtEstadoAccel, txtTemporizador));
         listaMinijuegos.add(new DiaPesca(contenedorPesca, txtEmojiPesca, txtEstadoPesca, txtTemporizador, handler));
         listaMinijuegos.add(new DueloIrlandes(contenedorDueloIrlandes, vistaLiquido, txtPorcentajeCerveza, txtEstadoCerveza, txtTemporizador));
         // listaMinijuegos.add(new DibujaLaFigura(contenedorDibujo, txtFiguraObjetivo, txtEstadoDibujo, txtResultadoDibujo, txtTemporizador, handler));
@@ -240,7 +232,7 @@ public class VentanaMinijuegosActivity extends AppCompatActivity implements Sens
     private void siguienteMinijuego() {
         minijuegoActual = listaMinijuegos.get(random.nextInt(listaMinijuegos.size()));
         mostrarPantalla(Estado.EXPLICACION);
-        txtTituloMinijuego.setText(minijuegoActual.getTitulo());
+        tituloMinijuego.setText(minijuegoActual.getTitulo());
     }
 
     private void iniciarMinijuegoActual() {
@@ -286,10 +278,10 @@ public class VentanaMinijuegosActivity extends AppCompatActivity implements Sens
 
     private void mostrarPantalla(Estado estado) {
         estadoActual = estado;
-        pantallaMenu.setVisibility(estado == Estado.MENU ? View.VISIBLE : View.GONE);
-        pantallaExplicacion.setVisibility(estado == Estado.EXPLICACION ? View.VISIBLE : View.GONE);
-        pantallaJuego.setVisibility(estado == Estado.JUEGO ? View.VISIBLE : View.GONE);
-        pantallaGameOver.setVisibility(estado == Estado.GAME_OVER ? View.VISIBLE : View.GONE);
+        menu.setVisibility(estado == Estado.MENU ? View.VISIBLE : View.GONE);
+        titulo.setVisibility(estado == Estado.EXPLICACION ? View.VISIBLE : View.GONE);
+        juego.setVisibility(estado == Estado.JUEGO ? View.VISIBLE : View.GONE);
+        gameOver.setVisibility(estado == Estado.GAME_OVER ? View.VISIBLE : View.GONE);
     }
 
     private void ocultarTodosLosContenedoresJuego() {
@@ -297,7 +289,7 @@ public class VentanaMinijuegosActivity extends AppCompatActivity implements Sens
         contenedorGiroscopio.setVisibility(View.GONE);
         contenedorAcelerometro.setVisibility(View.GONE);
         contenedorPesca.setVisibility(View.GONE);
-        contenedorDibujo.setVisibility(View.GONE);
+        //contenedorDibujo.setVisibility(View.GONE);
         contenedorBoton.setVisibility(View.GONE);
         contenedorDueloIrlandes.setVisibility(View.GONE);
         txtTemporizador.setText("");
@@ -312,10 +304,10 @@ public class VentanaMinijuegosActivity extends AppCompatActivity implements Sens
         if (sensorManager == null) return;
         sensorManager.unregisterListener(this);
         if (estadoActual == Estado.JUEGO) {
-            if (rotationSensor != null)
-                sensorManager.registerListener(this, rotationSensor, SensorManager.SENSOR_DELAY_GAME);
-            if (accelerometerSensor != null)
-                sensorManager.registerListener(this, accelerometerSensor, SensorManager.SENSOR_DELAY_GAME);
+            if (giroscopio != null)
+                sensorManager.registerListener(this, giroscopio, SensorManager.SENSOR_DELAY_GAME);
+            if (acelerometro != null)
+                sensorManager.registerListener(this, acelerometro, SensorManager.SENSOR_DELAY_GAME);
         }
     }
 
@@ -324,11 +316,11 @@ public class VentanaMinijuegosActivity extends AppCompatActivity implements Sens
         if (minijuegoActual == null || estadoActual != Estado.JUEGO) return;
 
         if (event.sensor.getType() == Sensor.TYPE_ROTATION_VECTOR) {
-            SensorManager.getRotationMatrixFromVector(rotationMatrix, event.values);
-            SensorManager.getOrientation(rotationMatrix, orientationAngles);
-            float pitch = (float) Math.toDegrees(orientationAngles[1]);
-            float roll = (float) Math.toDegrees(orientationAngles[2]);
-            float yaw = (float) Math.toDegrees(orientationAngles[0]);
+            SensorManager.getRotationMatrixFromVector(rotacion, event.values);
+            SensorManager.getOrientation(rotacion, angulos);
+            float pitch = (float) Math.toDegrees(angulos[1]);
+            float roll = (float) Math.toDegrees(angulos[2]);
+            float yaw = (float) Math.toDegrees(angulos[0]);
 
             if (minijuegoActual instanceof CurtKobainSimulator)
                 ((CurtKobainSimulator) minijuegoActual).onDatosGiro(pitch, roll);
@@ -339,12 +331,12 @@ public class VentanaMinijuegosActivity extends AppCompatActivity implements Sens
         }
 
         if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
-            gravity[0] = ALPHA * gravity[0] + (1 - ALPHA) * event.values[0];
-            gravity[1] = ALPHA * gravity[1] + (1 - ALPHA) * event.values[1];
-            gravity[2] = ALPHA * gravity[2] + (1 - ALPHA) * event.values[2];
-            float lx = event.values[0] - gravity[0];
-            float ly = event.values[1] - gravity[1];
-            float lz = event.values[2] - gravity[2];
+            gravedad[0] = ALPHA * gravedad[0] + (1 - ALPHA) * event.values[0];
+            gravedad[1] = ALPHA * gravedad[1] + (1 - ALPHA) * event.values[1];
+            gravedad[2] = ALPHA * gravedad[2] + (1 - ALPHA) * event.values[2];
+            float lx = event.values[0] - gravedad[0];
+            float ly = event.values[1] - gravedad[1];
+            float lz = event.values[2] - gravedad[2];
             float mag = (float) Math.sqrt(lx * lx + ly * ly + lz * lz);
 
             if (minijuegoActual instanceof SaludoCatalan)

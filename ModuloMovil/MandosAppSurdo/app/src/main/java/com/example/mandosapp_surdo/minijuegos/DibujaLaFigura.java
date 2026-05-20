@@ -49,12 +49,18 @@ public class DibujaLaFigura implements Minijuego {
         this.contenedor.addView(this.figuraView, 0);
     }
 
-    @Override public String getTitulo() { return "✏️ Dibuja en el aire"; }
+    @Override
+    public String getTitulo() { return "✏️ Dibuja en el aire"; }
+
+    public String getIntroduccion() {
+        return "No hay nada como la disociacion, porque ahora estas pensando en superar a Da Vinci con un ladrillo de hierro" +
+                "\n\nla percepcion de la realidad totalmente alterada y con la dopamina por las nubes, Suerte diamante en bruto.";
+    }
 
     @Override
     public String getExplicacion() {
-        return "No hay nada como la disociacion, porque ahora estas pensando en superar a Da Vinci con un ladrillo de hierro" +
-                "\n\nla percepcion de la realidad totalmente alterada y con la dopamina por las nubes, Suerte diamante en bruto.";
+        return "Utiliza tu movil para dibujar las formas que te pidan en el aire, si consigues " +
+                "dibujar 3 figuras, ganas, si fallas en el intento, pierdes";
     }
 
     @Override
