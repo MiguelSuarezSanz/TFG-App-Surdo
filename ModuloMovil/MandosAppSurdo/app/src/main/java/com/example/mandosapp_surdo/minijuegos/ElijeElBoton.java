@@ -3,12 +3,10 @@ import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.view.View;
 import android.widget.LinearLayout;
-import com.example.mandosapp_surdo.NsDondePonerte.Minijuego;
-import com.example.mandosapp_surdo.NsDondePonerte.ResultadoCallback;
+import com.example.mandosapp_surdo.interfaces.Minijuego;
+import com.example.mandosapp_surdo.interfaces.ResultadoCallback;
 import com.google.android.material.button.MaterialButton;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+
 import java.util.Random;
 
 public class ElijeElBoton implements Minijuego {

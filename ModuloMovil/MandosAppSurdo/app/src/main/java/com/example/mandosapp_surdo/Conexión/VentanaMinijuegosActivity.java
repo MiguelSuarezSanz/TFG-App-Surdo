@@ -1,4 +1,4 @@
-package com.example.mandosapp_surdo.NsDondePonerte;
+package com.example.mandosapp_surdo.Conexión;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -18,6 +18,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import com.example.mandosapp_surdo.interfaces.Minijuego;
+import com.example.mandosapp_surdo.interfaces.ResultadoCallback;
 import com.example.mandosapp_surdo.R;
 import com.example.mandosapp_surdo.enume.Estado;
 import com.example.mandosapp_surdo.minijuegos.CurtKobainSimulator;

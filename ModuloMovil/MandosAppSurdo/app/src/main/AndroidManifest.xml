@@ -23,11 +23,7 @@
             android:name=".Conexión.Conexion"
             android:exported="false" />
         <activity
-            android:name=".NsDondePonerte.VentanaMinijuegosActivity"
-            android:exported="false"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".NsDondePonerte.MandoUnificadoActivity"
+            android:name=".Conexión.VentanaMinijuegosActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
