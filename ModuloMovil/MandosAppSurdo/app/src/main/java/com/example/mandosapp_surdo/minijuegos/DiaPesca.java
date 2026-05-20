@@ -6,14 +6,14 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.mandosapp_surdo.NsDondePonerte.Minijuego;
-import com.example.mandosapp_surdo.NsDondePonerte.ResultadoCallback;
+import com.example.mandosapp_surdo.interfaces.Minijuego;
+import com.example.mandosapp_surdo.interfaces.ResultadoCallback;
 import com.example.mandosapp_surdo.enume.Fase;
 
 import java.util.Random;
 
 public class DiaPesca implements Minijuego {
-    private final float SHAKE_THRESHOLD  = 35.0f;
+    private final float SHAKE_THRESHOLD  = 50.0f;
     private final long  TIEMPO_LANZAR_MS = 5000;
     private final long  TIEMPO_ESPERA_MS = 15000;
     private final long  TIEMPO_SACAR_MS  = 3000;
@@ -49,7 +49,7 @@ public class DiaPesca implements Minijuego {
     @Override
     public void iniciar(ResultadoCallback cb) {
         this.callback = cb;
-        this.activo   = true;
+        this.activo = true;
         contenedor.setVisibility(View.VISIBLE);
         iniciarFaseLanzar();
     }
@@ -65,7 +65,10 @@ public class DiaPesca implements Minijuego {
                 tiempo.setText("⏱ Lanzar: " + (ms / 1000 + 1) + "s");
             }
             @Override public void onFinish() {
-                if (activo) { activo = false; callback.onPerdio(); }
+                if (activo) {
+                    activo = false;
+                    callback.onPerdio();
+                }
             }
         }.start();
     }
@@ -100,7 +103,7 @@ public class DiaPesca implements Minijuego {
         fase = Fase.PEZ_ACTIVO;
         timer.cancel();
         emoji.setText("🐟");
-        texto.setText("¡¡PICA!! ¡Sacude para sacarlo!");
+        texto.setText("¡¡A PICADO, AGITA!!");
 
         timer = new CountDownTimer(TIEMPO_SACAR_MS, 100) {
             @Override public void onTick(long ms) {

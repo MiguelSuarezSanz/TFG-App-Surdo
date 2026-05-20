@@ -5,8 +5,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import com.example.mandosapp_surdo.NsDondePonerte.Minijuego;
-import com.example.mandosapp_surdo.NsDondePonerte.ResultadoCallback;
+import com.example.mandosapp_surdo.interfaces.Minijuego;
+import com.example.mandosapp_surdo.interfaces.ResultadoCallback;
 import java.util.Random;
 
 public class CurtKobainSimulator implements Minijuego {
