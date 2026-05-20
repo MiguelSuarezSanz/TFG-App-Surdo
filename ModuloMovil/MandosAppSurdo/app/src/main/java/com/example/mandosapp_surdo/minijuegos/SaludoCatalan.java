@@ -8,11 +8,14 @@ import android.widget.TextView;
 import com.example.mandosapp_surdo.NsDondePonerte.Minijuego;
 import com.example.mandosapp_surdo.NsDondePonerte.ResultadoCallback;
 
+import java.util.Random;
+
 public class SaludoCatalan implements Minijuego {
 
-    private static final long  TIEMPO_LIMITE_MS   = 5000;
-    private static final float MOVE_THRESHOLD     = 12.0f;
-    private static final int CAMBIOS_NECESARIOS = 4;
+    private static final long  TIEMPO_LIMITE_MS = 5000;
+    private static final float MOVE_THRESHOLD = 12.0f;
+    private int cuchilladas;
+    private Random random = new Random();
     private ResultadoCallback callback;
     private CountDownTimer timer;
     private boolean activo = false;
@@ -46,10 +49,11 @@ public class SaludoCatalan implements Minijuego {
         this.activo  = true;
         this.cambios = 0;
         this.ultimoEje = 0;
+        cuchilladas = (int)(5 + ((Math.random() * (20 - 5))));
 
         contenedor.setVisibility(View.VISIBLE);
         emoji.setText("↔️");
-        texto.setText("Movimientos: 0 / " + CAMBIOS_NECESARIOS);
+        texto.setText("Movimientos: 0 / " + cuchilladas);
 
         timer = new CountDownTimer(TIEMPO_LIMITE_MS, 100) {
             @Override public void onTick(long ms) {
@@ -67,8 +71,8 @@ public class SaludoCatalan implements Minijuego {
                 (ultimoEje < -MOVE_THRESHOLD && ejeY > MOVE_THRESHOLD)) {
             cambios++;
             ultimoEje = ejeY;
-            texto.setText("Movimientos: " + cambios + " / " + CAMBIOS_NECESARIOS);
-            if (cambios >= CAMBIOS_NECESARIOS) {
+            texto.setText("Movimientos: " + cambios + " / " + cuchilladas);
+            if (cambios >= cuchilladas) {
                 activo = false;
                 timer.cancel();
 

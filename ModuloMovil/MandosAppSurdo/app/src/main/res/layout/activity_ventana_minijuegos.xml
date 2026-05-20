@@ -306,6 +306,57 @@
 
         </LinearLayout>
 
+        <!-- MINIJUEGO: DUELO A LA IRLANDESA -->
+        <LinearLayout
+            android:id="@+id/contenedorDueloIrlandes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="24dp"
+            android:visibility="gone">
+
+            <!-- Porcentaje restante -->
+            <TextView
+                android:id="@+id/txtPorcentajeCerveza"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="🍺 100%"
+                android:textColor="#FFFFFF"
+                android:textSize="28sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="16dp"/>
+
+            <!-- Vaso: contenedor gris que simula el vidrio -->
+            <FrameLayout
+                android:layout_width="120dp"
+                android:layout_height="280dp"
+                android:background="#33FFFFFF"
+                android:layout_marginBottom="16dp">
+
+                <!-- Bloque ámbar: es la cerveza, su altura se reduce por código -->
+                <View
+                    android:id="@+id/vistaLiquido"
+                    android:layout_width="match_parent"
+                    android:layout_height="280dp"
+                    android:layout_gravity="bottom"
+                    android:background="#FFA000"/>
+
+            </FrameLayout>
+
+            <!-- Mensaje de estado -->
+            <TextView
+                android:id="@+id/txtEstadoCerveza"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="¡Inclina el móvil y bebe!"
+                android:textColor="#D0D0E8"
+                android:textSize="17sp"
+                android:gravity="center"
+                android:layout_marginTop="8dp"/>
+
+        </LinearLayout>
+
     </LinearLayout>
 
     <!-- =====================================================

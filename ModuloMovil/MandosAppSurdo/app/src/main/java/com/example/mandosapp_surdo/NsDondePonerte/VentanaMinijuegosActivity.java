@@ -23,6 +23,7 @@ import com.example.mandosapp_surdo.enume.Estado;
 import com.example.mandosapp_surdo.minijuegos.CurtKobainSimulator;
 import com.example.mandosapp_surdo.minijuegos.DiaPesca;
 import com.example.mandosapp_surdo.minijuegos.DibujaLaFigura;
+import com.example.mandosapp_surdo.minijuegos.DueloIrlandes;
 import com.example.mandosapp_surdo.minijuegos.ElijeElBoton;
 import com.example.mandosapp_surdo.minijuegos.SaludoCatalan;
 import com.example.mandosapp_surdo.minijuegos.SimpleBoton;
@@ -81,6 +82,12 @@ public class VentanaMinijuegosActivity extends AppCompatActivity implements Sens
     private TextView txtFiguraObjetivo;
     private TextView txtEstadoDibujo;
     private TextView txtResultadoDibujo;
+
+    // Minijuego: Duelo a la Irlandesa
+    private LinearLayout contenedorDueloIrlandes;
+    private View vistaLiquido;
+    private TextView txtPorcentajeCerveza;
+    private TextView txtEstadoCerveza;
 
     // Game Over
     private TextView txtPuntuacionFinal;
@@ -188,6 +195,11 @@ public class VentanaMinijuegosActivity extends AppCompatActivity implements Sens
         txtEstadoDibujo = findViewById(R.id.txtEstadoDibujo);
         txtResultadoDibujo = findViewById(R.id.txtResultadoDibujo);
 
+        contenedorDueloIrlandes = findViewById(R.id.contenedorDueloIrlandes);
+        vistaLiquido = findViewById(R.id.vistaLiquido);
+        txtPorcentajeCerveza = findViewById(R.id.txtPorcentajeCerveza);
+        txtEstadoCerveza = findViewById(R.id.txtEstadoCerveza);
+
         txtPuntuacionFinal = findViewById(R.id.txtPuntuacionFinal);
         txtComentarioDerrota = findViewById(R.id.txtComentarioDerrota);
     }
@@ -210,7 +222,8 @@ public class VentanaMinijuegosActivity extends AppCompatActivity implements Sens
         listaMinijuegos.add(new SimpleBoton(contenedorBoton, btnSimple, instruccionesBtnSimple, txtTemporizador));
         listaMinijuegos.add(new SaludoCatalan(contenedorAcelerometro, txtEmojiAccel, txtEstadoAccel, txtTemporizador));
         listaMinijuegos.add(new DiaPesca(contenedorPesca, txtEmojiPesca, txtEstadoPesca, txtTemporizador, handler));
-        //listaMinijuegos.add(new DibujaLaFigura(contenedorDibujo, txtFiguraObjetivo, txtEstadoDibujo, txtResultadoDibujo, txtTemporizador, handler));
+        listaMinijuegos.add(new DueloIrlandes(contenedorDueloIrlandes, vistaLiquido, txtPorcentajeCerveza, txtEstadoCerveza, txtTemporizador));
+        // listaMinijuegos.add(new DibujaLaFigura(contenedorDibujo, txtFiguraObjetivo, txtEstadoDibujo, txtResultadoDibujo, txtTemporizador, handler));
     }
 
     // =========================================================
@@ -283,6 +296,7 @@ public class VentanaMinijuegosActivity extends AppCompatActivity implements Sens
         contenedorPesca.setVisibility(View.GONE);
         contenedorDibujo.setVisibility(View.GONE);
         contenedorBoton.setVisibility(View.GONE);
+        contenedorDueloIrlandes.setVisibility(View.GONE);
         txtTemporizador.setText("");
         imagen.setVisibility(View.INVISIBLE);
     }
@@ -317,6 +331,8 @@ public class VentanaMinijuegosActivity extends AppCompatActivity implements Sens
                 ((CurtKobainSimulator) minijuegoActual).onDatosGiro(pitch, roll);
             if (minijuegoActual instanceof DibujaLaFigura)
                 ((DibujaLaFigura) minijuegoActual).onDatosGiro(pitch, yaw);
+            if (minijuegoActual instanceof DueloIrlandes)
+                ((DueloIrlandes) minijuegoActual).onDatosGiro(pitch);
         }
 
         if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
