@@ -96,7 +96,15 @@ public class SimpleBoton implements Minijuego {
         activo = false;
         timer.cancel();
         boton.setOnClickListener(null);
-        boolean debioPulsar = (debesPulsar && coloresCoinc) || (!debesPulsar && !coloresCoinc);
+
+        // Caso especial: si el color pedido no coincide con el color del boton, ganaras automaticamente
+        if (!debesPulsar && !coloresCoinc) {
+            callback.onGano();
+            return;
+        }
+
+        // Evaluacion normal
+        boolean debioPulsar = debesPulsar && coloresCoinc;
         boolean gano = (pulso == debioPulsar);
 
         if (gano) {
