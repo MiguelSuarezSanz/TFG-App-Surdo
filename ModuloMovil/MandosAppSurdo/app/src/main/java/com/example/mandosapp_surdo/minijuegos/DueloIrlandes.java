@@ -40,16 +40,12 @@ public class DueloIrlandes implements Minijuego {
 
     // ---- Estado ----
     private ResultadoCallback callback;
-    private boolean activo      = false;
-    private float   porcentaje  = 100f;  // 0..100
-    private float   pitchActual = 0f;
-
+    private boolean activo = false;
+    private float porcentaje = 100f;  // 0..100
+    private float pitchActual = 0f;
     private CountDownTimer timerGlobal;
     private CountDownTimer timerTick;
-
     private final Random random = new Random();
-
-    // Altura máxima del bloque de líquido en píxeles (se calcula al iniciar)
     private int alturaMaxPx = 0;
 
     public DueloIrlandes(LinearLayout contenedor, View vistaLiquido, TextView txtPorcentaje, TextView txtEstado, TextView txtTemporizador) {
@@ -62,6 +58,12 @@ public class DueloIrlandes implements Minijuego {
 
     @Override
     public String getTitulo() { return "Duelo a la Irlandesa"; }
+
+    @Override
+    public String getIntroduccion() {
+        return "No hay ninguna fiesta igual que el dia de San Patricio," +
+                "\n\n¿Como que se celebra el 27 de marzo y no el 27 de mayo?";
+    }
 
     @Override
     public String getExplicacion() {

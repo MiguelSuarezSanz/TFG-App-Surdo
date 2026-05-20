@@ -26,15 +26,21 @@ public class ElijeElBoton implements Minijuego {
         this.btn3 = btn3;
     }
 
-    @Override public String getTitulo() {
+    @Override
+    public String getTitulo() {
         return "Elije el Boton";
     }
 
     @Override
-    public String getExplicacion() {
+    public String getIntroduccion() {
         return "Tienes a elegir entre tres botones, pulsa el que quieras, tan sencillo como eso." +
                 "\n\n¿Por que me miras asi, que no hay nada raro con estos tres botones?" +
                 "\n\n¿¡Quieres jugar pedazo cenutrio!?";
+    }
+
+    @Override
+    public String getExplicacion() {
+        return "Elige entre tres botones, si pulsas el correcto, ganas, si no, pierdes";
     }
 
     @Override

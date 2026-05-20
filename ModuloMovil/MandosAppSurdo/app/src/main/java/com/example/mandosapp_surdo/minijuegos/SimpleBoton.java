@@ -43,9 +43,14 @@ public class SimpleBoton implements Minijuego {
     }
 
     @Override
+    public String getIntroduccion() {
+        return "No te preocupes, solo te vas a encontrar un boton, nada raro va a pasar :)";
+    }
+
+    @Override
     public String getExplicacion() {
-        return "No te preocupes, solo te vas a encontrar un boton, nada raro va a pasar, " +
-                "\n\n Solo sigue las instrucciones y no fallaras el minijuego";
+        return "Sigue las instrucciones que te den y pulsa o no pulses el boton segun tu criterio y " +
+                "lo que te hayan mandado";
     }
 
     @Override
