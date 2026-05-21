@@ -234,19 +234,19 @@ public class Conexion extends AppCompatActivity {
 
                     Log.e("Tunnel", "ON CONNECTED");
 
-                    /*runOnUiThread(() -> {
+                    runOnUiThread(() -> {
 
                         editNombre.setVisibility(View.VISIBLE);
                         btnListo.setVisibility(View.VISIBLE);
-                    });*/
+                    });
 
-                    Intent intent =
+                    /*Intent intent =
                             new Intent(
                                     Conexion.this,
                                     EligeNombre.class
                             );
 
-                    startActivity(intent);
+                    startActivity(intent);*/
 
                 }
 
