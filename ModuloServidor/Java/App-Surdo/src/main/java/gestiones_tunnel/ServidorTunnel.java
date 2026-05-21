@@ -57,7 +57,17 @@ public class ServidorTunnel {
                 public void onDisconnected(
                         TunnelConnection conn
                 ) {
+                	String nombre =
+                	        Participantes.eliminar(conn);
 
+                	if (nombre != null) {
+
+                	    PuenteJava.getInstancia()
+                	            .lamarJavascript(
+                	                    "removerParticipante",
+                	                    "'" + nombre + "'"
+                	            );
+                	}
                 }
 
                 @Override
@@ -87,14 +97,50 @@ public class ServidorTunnel {
     	        Protocol.MSG_SET_NAME,
     	        reader -> {
 
-    	            String nombre =
-    	                    reader.readString();
+    	        	String nombre =
+    	        	        reader.readString();
 
-    	            PuenteJava.getInstancia()
-    	                    .lamarJavascript(
-    	                            "annadirParticipante",
-    	                            "'" + nombre + "'"
-    	                    );
+    	        	if (Participantes.existe(nombre)) {
+
+    	        	    PacketWriter writer =
+    	        	            new PacketWriter();
+
+    	        	    writer.writeByte(Protocol.MSG_NAME_ERROR);
+    	        	    writer.writeString("Nombre ya en uso");
+
+    	        	    try {
+							TunnelManager
+							        .getConnection()
+							        .send(writer.toArray());
+						} catch (TunnelException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+
+    	        	    return;
+    	        	}
+
+    	        	Participantes.annadir(conn, nombre);
+
+    	        	PuenteJava.getInstancia()
+    	        	        .lamarJavascript(
+    	        	                "annadirParticipante",
+    	        	                "'" + nombre + "'"
+    	        	        );
+    	        	
+    	        	PacketWriter writer =
+    	        	        new PacketWriter();
+
+    	        	writer.writeByte(Protocol.MSG_NAME_OK);
+
+    	        	try {
+						TunnelManager
+						        .getConnection()
+						        .send(writer.toArray());
+					} catch (TunnelException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
     	        }
     	);
     }

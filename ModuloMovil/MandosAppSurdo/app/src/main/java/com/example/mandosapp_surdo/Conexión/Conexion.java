@@ -84,6 +84,39 @@ public class Conexion extends AppCompatActivity {
                 }
         );
 
+        dispatcher.register(
+                Protocol.MSG_NAME_ERROR,
+                reader -> {
+
+                    String error =
+                            reader.readString();
+
+                    runOnUiThread(() -> {
+
+                        editNombre.setError(error);
+
+                        editNombre.requestFocus();
+                    });
+                }
+        );
+
+        dispatcher.register(
+                Protocol.MSG_NAME_OK,
+                reader -> {
+
+                    runOnUiThread(() -> {
+
+                        Intent intent =
+                                new Intent(
+                                        Conexion.this,
+                                        VentanaMinijuegosActivity.class
+                                );
+
+                        startActivity(intent);
+                    });
+                }
+        );
+
         btnConectar.setOnClickListener(v -> {
             StringBuilder codigo = new StringBuilder();
 
@@ -100,24 +133,16 @@ public class Conexion extends AppCompatActivity {
         btnListo.setOnClickListener(v -> {
 
             String nombre =
-                    editNombre
-                            .getText()
-                            .toString()
-                            .trim();
+                    editNombre.getText().toString().trim();
 
             PacketWriter writer =
                     new PacketWriter();
 
-            writer.writeByte(
-                    Protocol.MSG_SET_NAME
-            );
-
+            writer.writeByte(Protocol.MSG_SET_NAME);
             writer.writeString(nombre);
 
             try {
-                tunnel.send(
-                        writer.toArray()
-                );
+                tunnel.send(writer.toArray());
             } catch (TunnelException e) {
                 throw new RuntimeException(e);
             }
@@ -240,14 +265,6 @@ public class Conexion extends AppCompatActivity {
                         btnListo.setVisibility(View.VISIBLE);
                     });
 
-                    /*Intent intent =
-                            new Intent(
-                                    Conexion.this,
-                                    EligeNombre.class
-                            );
-
-                    startActivity(intent);*/
-
                 }
 
                 @Override
@@ -281,38 +298,6 @@ public class Conexion extends AppCompatActivity {
             Log.e("Tunnel", "Intentando conectar...");
 
             tunnel.connect();
-            /*new Thread(() -> {
-
-                try {
-
-                    Log.e("Tunnel", "ANTES CONNECT");
-
-                    tunnel.connect();
-
-                    Log.e("Tunnel", "DESPUES CONNECT");
-
-                    runOnUiThread(() -> {
-
-                        Log.e("Tunnel", "ABRIENDO ACTIVITY");
-
-                        Intent intent =
-                                new Intent(
-                                        Conexion.this,
-                                        EligeNombre.class
-                                );
-
-                        startActivity(intent);
-                    });
-
-                } catch (Exception e) {
-
-                    Log.e(
-                            "Tunnel",
-                            "EXCEPCION -> " + e.getMessage()
-                    );
-                }
-
-            }).start();*/
 
         } catch (TunnelException | java.io.IOException e) {
             Log.e("Tunnel", "Error al iniciar: " + e.getMessage());
