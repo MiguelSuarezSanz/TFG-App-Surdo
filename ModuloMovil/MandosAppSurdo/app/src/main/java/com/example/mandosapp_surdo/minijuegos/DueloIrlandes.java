@@ -36,7 +36,6 @@ public class DueloIrlandes implements Minijuego {
     private final View         vistaLiquido;   // bloque ámbar que se reduce
     private final TextView     txtPorcentaje;  // "🍺 75%"
     private final TextView     txtEstado;      // mensaje de estado
-    private final TextView     txtTemporizador;
 
     // ---- Estado ----
     private ResultadoCallback callback;
@@ -48,12 +47,11 @@ public class DueloIrlandes implements Minijuego {
     private final Random random = new Random();
     private int alturaMaxPx = 0;
 
-    public DueloIrlandes(LinearLayout contenedor, View vistaLiquido, TextView txtPorcentaje, TextView txtEstado, TextView txtTemporizador) {
-        this.contenedor      = contenedor;
-        this.vistaLiquido    = vistaLiquido;
-        this.txtPorcentaje   = txtPorcentaje;
-        this.txtEstado       = txtEstado;
-        this.txtTemporizador = txtTemporizador;
+    public DueloIrlandes(LinearLayout contenedor, View vistaLiquido, TextView txtPorcentaje, TextView txtEstado) {
+        this.contenedor = contenedor;
+        this.vistaLiquido = vistaLiquido;
+        this.txtPorcentaje = txtPorcentaje;
+        this.txtEstado = txtEstado;
     }
 
     @Override
@@ -103,9 +101,7 @@ public class DueloIrlandes implements Minijuego {
 
         // Timer global de 10 segundos
         timerGlobal = new CountDownTimer(TIEMPO_LIMITE_MS, 100) {
-            @Override public void onTick(long ms) {
-                if (activo) txtTemporizador.setText("⏱ " + (ms / 1000 + 1) + "s");
-            }
+            @Override public void onTick(long ms) { }
             @Override public void onFinish() {
                 if (activo) perder("⏰ ¡Se acabó el tiempo!");
             }

@@ -20,12 +20,10 @@ public class SaludoCatalan implements Minijuego {
     private float ultimoEje = 0;
     private LinearLayout contenedor;
     private TextView texto;
-    private TextView tiempo;
 
-    public SaludoCatalan(LinearLayout contenedor, TextView texto, TextView tiempo) {
+    public SaludoCatalan(LinearLayout contenedor, TextView texto) {
         this.contenedor = contenedor;
         this.texto = texto;
-        this.tiempo = tiempo;
     }
 
     @Override
@@ -56,9 +54,7 @@ public class SaludoCatalan implements Minijuego {
         texto.setText("0 / " + cuchilladas);
 
         timer = new CountDownTimer(TIEMPO_LIMITE_MS, 100) {
-            @Override public void onTick(long ms) {
-                tiempo.setText("⏱ " + (ms / 1000 + 1) + "s");
-            }
+            @Override public void onTick(long ms) { }
             @Override public void onFinish() {
                 if (activo) { activo = false; callback.onPerdio(); }
             }

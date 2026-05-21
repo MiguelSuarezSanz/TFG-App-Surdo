@@ -24,7 +24,6 @@ public class CurtKobainSimulator implements Minijuego {
     private final LinearLayout contenedor;
     private final ImageView imagen;
     private final TextView estado;
-    private final TextView tiempo;
 
     // ---- Estado ----
     private ResultadoCallback callback;
@@ -33,11 +32,10 @@ public class CurtKobainSimulator implements Minijuego {
     private int numeroCamara = 0;
     private CountDownTimer timerDisparo;
 
-    public CurtKobainSimulator(LinearLayout contenedor, ImageView imagen, TextView estado, TextView tiempo) {
+    public CurtKobainSimulator(LinearLayout contenedor, ImageView imagen, TextView estado) {
         this.contenedor = contenedor;
         this.imagen = imagen;
         this.estado = estado;
-        this.tiempo = tiempo;
     }
 
     @Override public String getTitulo() { return "Kurt Cobain Simulator"; }
@@ -64,7 +62,6 @@ public class CurtKobainSimulator implements Minijuego {
         this.cargado  = false;
         contenedor.setVisibility(View.VISIBLE);
         imagen.setVisibility(View.INVISIBLE);
-        tiempo.setText("");
         estado.setText("Sacude para cargar el revolver");
     }
 
@@ -80,9 +77,7 @@ public class CurtKobainSimulator implements Minijuego {
 
             // 10 segundos para posicionar el móvil; si se acaba, pierde
             timerDisparo = new CountDownTimer(10000, 100) {
-                @Override public void onTick(long ms) {
-                    tiempo.setText("⏱ " + (ms / 1000 + 1) + "s");
-                }
+                @Override public void onTick(long ms) { }
                 @Override public void onFinish() {
                     if (activo) {
                         activo = false;
@@ -106,7 +101,6 @@ public class CurtKobainSimulator implements Minijuego {
             activo = false;
             if (timerDisparo != null) timerDisparo.cancel();
             int numeroDisparo = random.nextInt(6) + 1;  // 1–6
-            tiempo.setText("");
 
             if (numeroDisparo == numeroCamara) {
                 callback.onPerdio();
@@ -121,6 +115,5 @@ public class CurtKobainSimulator implements Minijuego {
         activo = false;
         if (timerDisparo != null) timerDisparo.cancel();
         imagen.setVisibility(View.INVISIBLE);
-        tiempo.setText("");
     }
 }

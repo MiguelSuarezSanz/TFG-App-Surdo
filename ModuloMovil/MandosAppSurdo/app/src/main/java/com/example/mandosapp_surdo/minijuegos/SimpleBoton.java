@@ -20,7 +20,6 @@ public class SimpleBoton implements Minijuego {
     private final LinearLayout contenedor;
     private final MaterialButton boton;
     private final TextView texto;
-    private final TextView tiempo;
     private final Random random = new Random();
 
     // ---- Estado ----
@@ -30,11 +29,10 @@ public class SimpleBoton implements Minijuego {
     private boolean coloresCoinc = false; // true = color botón == color pedido
     private CountDownTimer timer;
 
-    public SimpleBoton(LinearLayout contenedor, MaterialButton boton, TextView texto, TextView tiempo) {
+    public SimpleBoton(LinearLayout contenedor, MaterialButton boton, TextView texto) {
         this.contenedor = contenedor;
         this.boton = boton;
         this.texto = texto;
-        this.tiempo = tiempo;
     }
 
     @Override
@@ -86,9 +84,7 @@ public class SimpleBoton implements Minijuego {
 
         // Timer: al agotarse cuenta como "no pulsó"
         timer = new CountDownTimer(TIEMPO_LIMITE_MS, 100) {
-            @Override public void onTick(long ms) {
-                tiempo.setText("⏱ " + (ms / 1000 + 1) + "s");
-            }
+            @Override public void onTick(long ms) {}
             @Override public void onFinish() {
                 if (activo) {
                     evaluar(false); // tiempo agotado = no pulsó

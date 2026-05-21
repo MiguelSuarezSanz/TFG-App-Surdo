@@ -48,9 +48,6 @@ public class VentanaMinijuegosActivity extends AppCompatActivity implements Sens
     private View juego;
     private View gameOver;
 
-    // Juego — compartido
-    private TextView txtTemporizador;
-
     // Minijuego: Un Simple Boton
     private LinearLayout contenedorBoton;
     private MaterialButton btnSimple;
@@ -162,7 +159,6 @@ public class VentanaMinijuegosActivity extends AppCompatActivity implements Sens
         juego = findViewById(R.id.pantallaJuego);
         gameOver = findViewById(R.id.pantallaGameOver);
         tituloMinijuego = findViewById(R.id.txtTituloMinijuego);
-        txtTemporizador = findViewById(R.id.txtTemporizador);
 
         contenedorBotones = findViewById(R.id.contenedorBotones);
         btn1 = findViewById(R.id.btn1);
@@ -213,11 +209,11 @@ public class VentanaMinijuegosActivity extends AppCompatActivity implements Sens
     private void crearListaMinijuegos() {
         listaMinijuegos = new ArrayList<>();
         listaMinijuegos.add(new ElijeElBoton(contenedorBotones, btn1, btn2, btn3));
-        listaMinijuegos.add(new CurtKobainSimulator(contenedorGiroscopio, imagen, txtEstadoGiro, txtTemporizador));
-        listaMinijuegos.add(new SimpleBoton(contenedorBoton, btnSimple, instruccionesBtnSimple, txtTemporizador));
-        listaMinijuegos.add(new SaludoCatalan(contenedorAcelerometro, txtEstadoAccel, txtTemporizador));
-        listaMinijuegos.add(new DiaPesca(contenedorPesca, txtEmojiPesca, txtEstadoPesca, txtTemporizador, handler));
-        listaMinijuegos.add(new DueloIrlandes(contenedorDueloIrlandes, vistaLiquido, txtPorcentajeCerveza, txtEstadoCerveza, txtTemporizador));
+        listaMinijuegos.add(new CurtKobainSimulator(contenedorGiroscopio, imagen, txtEstadoGiro));
+        listaMinijuegos.add(new SimpleBoton(contenedorBoton, btnSimple, instruccionesBtnSimple));
+        listaMinijuegos.add(new SaludoCatalan(contenedorAcelerometro, txtEstadoAccel));
+        listaMinijuegos.add(new DiaPesca(contenedorPesca, txtEmojiPesca, txtEstadoPesca, handler));
+        listaMinijuegos.add(new DueloIrlandes(contenedorDueloIrlandes, vistaLiquido, txtPorcentajeCerveza, txtEstadoCerveza));
         // listaMinijuegos.add(new DibujaLaFigura(contenedorDibujo, txtFiguraObjetivo, txtEstadoDibujo, txtResultadoDibujo, txtTemporizador, handler));
     }
 
@@ -292,7 +288,6 @@ public class VentanaMinijuegosActivity extends AppCompatActivity implements Sens
         //contenedorDibujo.setVisibility(View.GONE);
         contenedorBoton.setVisibility(View.GONE);
         contenedorDueloIrlandes.setVisibility(View.GONE);
-        txtTemporizador.setText("");
         imagen.setVisibility(View.INVISIBLE);
     }
 

@@ -27,14 +27,12 @@ public class DiaPesca implements Minijuego {
     private LinearLayout contenedor;
     private TextView emoji;
     private TextView texto;
-    private TextView tiempo;
     private Handler handler;
 
-    public DiaPesca(LinearLayout contenedor, TextView emoji, TextView texto, TextView tiempo, Handler handler) {
+    public DiaPesca(LinearLayout contenedor, TextView emoji, TextView texto, Handler handler) {
         this.contenedor = contenedor;
         this.emoji = emoji;
         this.texto = texto;
-        this.tiempo = tiempo;
         this.handler = handler;
     }
 
@@ -71,9 +69,7 @@ public class DiaPesca implements Minijuego {
         texto.setText("¡Sacude para lanzar el cebo!");
 
         timer = new CountDownTimer(TIEMPO_LANZAR_MS, 100) {
-            @Override public void onTick(long ms) {
-                tiempo.setText("⏱ Lanzar: " + (ms / 1000 + 1) + "s");
-            }
+            @Override public void onTick(long ms) { }
             @Override public void onFinish() {
                 if (activo) {
                     activo = false;
@@ -90,7 +86,6 @@ public class DiaPesca implements Minijuego {
         timer.cancel();
         emoji.setText("🌊");
         texto.setText("El cebo está en el agua... ¡espera!");
-        tiempo.setText("");
 
         // El pez aparece en un instante aleatorio entre 2s y el final de los 15s
         long tiempoPez = 2000 + (long)(random.nextFloat() * (TIEMPO_ESPERA_MS - 2000));
@@ -117,9 +112,7 @@ public class DiaPesca implements Minijuego {
         texto.setText("¡¡A PICADO, AGITA!!");
 
         timer = new CountDownTimer(TIEMPO_SACAR_MS, 100) {
-            @Override public void onTick(long ms) {
-                tiempo.setText("⏱ " + (ms / 1000 + 1) + "s");
-            }
+            @Override public void onTick(long ms) { }
             @Override public void onFinish() {
                 if (activo) { activo = false; callback.onPerdio(); }
             }
