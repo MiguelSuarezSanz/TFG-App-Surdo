@@ -14,11 +14,11 @@ public class DueloIrlandes implements Minijuego {
     private static final long TIEMPO_LIMITE_MS = 15000;
 
     // ---- Umbrales de ángulo (pitch negativo = inclinado hacia delante) ----
-    private static final float ANGULO_LENTO_MIN    =  0f;
-    private static final float ANGULO_LENTO_MAX    = 15f;
-    private static final float ANGULO_MEDIO_MAX    = 40f;
-    private static final float ANGULO_NORMAL_MAX   = 45f;
-    private static final float ANGULO_RAPIDO_MAX   = 60f;
+    private static final float ANGULO_LENTO_MIN = 0f;
+    private static final float ANGULO_LENTO_MAX = 15f;
+    private static final float ANGULO_MEDIO_MAX = 40f;
+    private static final float ANGULO_NORMAL_MAX = 45f;
+    private static final float ANGULO_RAPIDO_MAX = 60f;
     // Más de 60 → pierde automáticamente
 
     // ---- Velocidades de vaciado (% por tick de 100ms) ----
@@ -35,7 +35,6 @@ public class DueloIrlandes implements Minijuego {
     private final LinearLayout contenedor;
     private final View         vistaLiquido;   // bloque ámbar que se reduce
     private final TextView     txtPorcentaje;  // "🍺 75%"
-    private final TextView     txtEstado;      // mensaje de estado
 
     // ---- Estado ----
     private ResultadoCallback callback;
@@ -47,11 +46,10 @@ public class DueloIrlandes implements Minijuego {
     private final Random random = new Random();
     private int alturaMaxPx = 0;
 
-    public DueloIrlandes(LinearLayout contenedor, View vistaLiquido, TextView txtPorcentaje, TextView txtEstado) {
+    public DueloIrlandes(LinearLayout contenedor, View vistaLiquido, TextView txtPorcentaje) {
         this.contenedor = contenedor;
         this.vistaLiquido = vistaLiquido;
         this.txtPorcentaje = txtPorcentaje;
-        this.txtEstado = txtEstado;
     }
 
     @Override
@@ -96,7 +94,6 @@ public class DueloIrlandes implements Minijuego {
             actualizarVistaLiquido();
         });
 
-        txtEstado.setText("¡Inclina el móvil y bebe!");
         txtPorcentaje.setText("🍺 100%");
 
         // Timer global de 10 segundos
@@ -134,8 +131,7 @@ public class DueloIrlandes implements Minijuego {
         }
 
         // ---- Zona sin beber: ángulo negativo o 0 (móvil hacia atrás o recto) ----
-        if (angulo <= ANGULO_LENTO_MIN) {
-            txtEstado.setText("¡Inclina más el móvil!");
+        if (angulo <= ANGULO_LENTO_MIN) {;
             return;
         }
 
@@ -145,28 +141,25 @@ public class DueloIrlandes implements Minijuego {
         if (angulo <= ANGULO_LENTO_MAX) {
             // 0–15°: velocidad lenta
             velocidad = VEL_LENTO;
-            txtEstado.setText("Muy despacio... inclina más 🐢");
-
+            txtPorcentaje.setText("!!!BEBE, BEBE, BEBE!!!");
         } else if (angulo <= ANGULO_MEDIO_MAX) {
             // 15–40°: velocidad media
             velocidad = VEL_MEDIO;
-            txtEstado.setText("Bien, sigue así 👍");
-
+            txtPorcentaje.setText("!!!BEBE, BEBE, BEBE!!!");
         } else if (angulo <= ANGULO_NORMAL_MAX) {
             // 40–45°: velocidad normal
             velocidad = VEL_NORMAL;
-            txtEstado.setText("¡Perfecto! 🍺");
-
+            txtPorcentaje.setText("!!!BEBE, BEBE, BEBE!!!");
         } else {
             // 45–60°: velocidad rápida con riesgo de derrame
             velocidad = VEL_RAPIDO;
+            txtPorcentaje.setText("CUIDADO, VAS MUY RAPIDO");
 
             // 30% de probabilidad por segundo = 3% por tick de 100ms
             if (random.nextFloat() < PROB_DERRAME_POR_TICK) {
                 perder("💦 ¡Se ha derramado la cerveza!");
                 return;
             }
-            txtEstado.setText("¡Cuidado, vas muy rápido! ⚠️");
         }
 
         // ---- Reducir el porcentaje ----
@@ -198,14 +191,12 @@ public class DueloIrlandes implements Minijuego {
     private void ganar() {
         activo = false;
         cancelarTimers();
-        txtEstado.setText("¡Salud! 🏆");
         callback.onGano();
     }
 
     private void perder(String mensaje) {
         activo = false;
         cancelarTimers();
-        txtEstado.setText(mensaje);
         callback.onPerdio();
     }
 

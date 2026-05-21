@@ -82,7 +82,6 @@ public class VentanaMinijuegosActivity extends AppCompatActivity implements Sens
     private LinearLayout contenedorDueloIrlandes;
     private View vistaLiquido;
     private TextView txtPorcentajeCerveza;
-    private TextView txtEstadoCerveza;
 
     // Game Over
     private TextView txtPuntuacionFinal;
@@ -189,7 +188,6 @@ public class VentanaMinijuegosActivity extends AppCompatActivity implements Sens
         contenedorDueloIrlandes = findViewById(R.id.contenedorDueloIrlandes);
         vistaLiquido = findViewById(R.id.vistaLiquido);
         txtPorcentajeCerveza = findViewById(R.id.txtPorcentajeCerveza);
-        txtEstadoCerveza = findViewById(R.id.txtEstadoCerveza);
 
         txtPuntuacionFinal = findViewById(R.id.txtPuntuacionFinal);
         txtComentarioDerrota = findViewById(R.id.txtComentarioDerrota);
@@ -213,7 +211,7 @@ public class VentanaMinijuegosActivity extends AppCompatActivity implements Sens
         listaMinijuegos.add(new SimpleBoton(contenedorBoton, btnSimple, instruccionesBtnSimple));
         listaMinijuegos.add(new SaludoCatalan(contenedorAcelerometro, txtEstadoAccel));
         listaMinijuegos.add(new DiaPesca(contenedorPesca, txtEmojiPesca, txtEstadoPesca, handler));
-        listaMinijuegos.add(new DueloIrlandes(contenedorDueloIrlandes, vistaLiquido, txtPorcentajeCerveza, txtEstadoCerveza));
+        listaMinijuegos.add(new DueloIrlandes(contenedorDueloIrlandes, vistaLiquido, txtPorcentajeCerveza));
         // listaMinijuegos.add(new DibujaLaFigura(contenedorDibujo, txtFiguraObjetivo, txtEstadoDibujo, txtResultadoDibujo, txtTemporizador, handler));
     }
 
