@@ -5,7 +5,8 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Conexión.MainActivity">
+    tools:context=".Conexión.MainActivity"
+    android:background="@drawable/fondomain">
 
     <TextView
         android:id="@+id/textView"
@@ -13,7 +14,12 @@
         android:layout_height="95dp"
         android:text="App-Surdo"
         android:textAlignment="center"
+        android:textColor="#fbff00"
         android:textSize="60sp"
+        android:shadowColor="#ff8800"
+        android:shadowDx="4"
+        android:shadowDy="4"
+        android:shadowRadius="0"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
