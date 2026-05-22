@@ -304,10 +304,11 @@
         android:visibility="gone">
 
         <TextView
+            android:id="@+id/tituloFinJuego"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
-            android:text="💀 GAME OVER"
+            android:text="PLACEHOLDER"
             android:textColor="#FF5252"
             android:textSize="40sp"
             android:textStyle="bold" />
