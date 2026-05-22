@@ -9,7 +9,6 @@ import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -26,7 +25,6 @@ import com.example.mandosapp_surdo.R;
 import com.example.mandosapp_surdo.enume.Estado;
 import com.example.mandosapp_surdo.minijuegos.CurtKobainSimulator;
 import com.example.mandosapp_surdo.minijuegos.DiaPesca;
-import com.example.mandosapp_surdo.minijuegos.DibujaLaFigura;
 import com.example.mandosapp_surdo.minijuegos.DueloIrlandes;
 import com.example.mandosapp_surdo.minijuegos.ElijeElBoton;
 import com.example.mandosapp_surdo.minijuegos.SaludoCatalan;
@@ -46,6 +44,8 @@ public class VentanaMinijuegosActivity extends AppCompatActivity implements Sens
     private View titulo;
     private TextView tituloMinijuego;
     private View juego;
+
+    private View victoria;
     private View gameOver;
 
     // Minijuego: Un Simple Boton
@@ -71,12 +71,6 @@ public class VentanaMinijuegosActivity extends AppCompatActivity implements Sens
     private LinearLayout contenedorPesca;
     private TextView txtEmojiPesca;
     private TextView txtEstadoPesca;
-
-    /* Minijuego: Dibujo de figuras (Actualmente en desuso)
-    private FrameLayout contenedorDibujo;
-    private TextView txtFiguraObjetivo;
-    private TextView txtEstadoDibujo;
-    private TextView txtResultadoDibujo; */
 
     // Minijuego: Duelo a la Irlandesa
     private LinearLayout contenedorDueloIrlandes;
@@ -180,11 +174,6 @@ public class VentanaMinijuegosActivity extends AppCompatActivity implements Sens
         txtEmojiPesca = findViewById(R.id.txtEmojiPesca);
         txtEstadoPesca = findViewById(R.id.txtEstadoPesca);
 
-        /* contenedorDibujo = findViewById(R.id.contenedorDibujo);
-        txtFiguraObjetivo = findViewById(R.id.txtFiguraObjetivo);
-        txtEstadoDibujo = findViewById(R.id.txtEstadoDibujo);
-        txtResultadoDibujo = findViewById(R.id.txtResultadoDibujo); */
-
         contenedorDueloIrlandes = findViewById(R.id.contenedorDueloIrlandes);
         vistaLiquido = findViewById(R.id.vistaLiquido);
         txtPorcentajeCerveza = findViewById(R.id.txtPorcentajeCerveza);
@@ -212,7 +201,6 @@ public class VentanaMinijuegosActivity extends AppCompatActivity implements Sens
         listaMinijuegos.add(new SaludoCatalan(contenedorAcelerometro, txtEstadoAccel));
         listaMinijuegos.add(new DiaPesca(contenedorPesca, txtEmojiPesca, txtEstadoPesca, handler));
         listaMinijuegos.add(new DueloIrlandes(contenedorDueloIrlandes, vistaLiquido, txtPorcentajeCerveza));
-        // listaMinijuegos.add(new DibujaLaFigura(contenedorDibujo, txtFiguraObjetivo, txtEstadoDibujo, txtResultadoDibujo, txtTemporizador, handler));
     }
 
     // =========================================================
@@ -256,13 +244,6 @@ public class VentanaMinijuegosActivity extends AppCompatActivity implements Sens
         mostrarPantalla(Estado.GAME_OVER);
         txtPuntuacionFinal.setText("Puntuación: " + puntuacion);
         txtComentarioDerrota.setText("");
-
-        // Guardar récord por si se necesita en el futuro
-        SharedPreferences prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
-        int maxPuntuacion = prefs.getInt(KEY_MAX, 0);
-        if (puntuacion > maxPuntuacion)
-            prefs.edit().putInt(KEY_MAX, puntuacion).apply();
-
         handler.postDelayed(() -> mostrarPantalla(Estado.MENU), 4000);
     }
 
@@ -283,7 +264,6 @@ public class VentanaMinijuegosActivity extends AppCompatActivity implements Sens
         contenedorGiroscopio.setVisibility(View.GONE);
         contenedorAcelerometro.setVisibility(View.GONE);
         contenedorPesca.setVisibility(View.GONE);
-        //contenedorDibujo.setVisibility(View.GONE);
         contenedorBoton.setVisibility(View.GONE);
         contenedorDueloIrlandes.setVisibility(View.GONE);
         imagen.setVisibility(View.INVISIBLE);
@@ -317,8 +297,6 @@ public class VentanaMinijuegosActivity extends AppCompatActivity implements Sens
 
             if (minijuegoActual instanceof CurtKobainSimulator)
                 ((CurtKobainSimulator) minijuegoActual).onDatosGiro(pitch, roll);
-            if (minijuegoActual instanceof DibujaLaFigura)
-                ((DibujaLaFigura) minijuegoActual).onDatosGiro(pitch, yaw);
             if (minijuegoActual instanceof DueloIrlandes)
                 ((DueloIrlandes) minijuegoActual).onDatosGiro(pitch);
         }
