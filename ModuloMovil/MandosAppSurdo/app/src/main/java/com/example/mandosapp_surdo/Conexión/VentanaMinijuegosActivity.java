@@ -41,11 +41,7 @@ public class VentanaMinijuegosActivity extends AppCompatActivity implements Sens
 
     // Distintas Pantallas para cada etapa del HUB (Sujeta a campbios cuando union con server)
     private View menu;
-    private View titulo;
-    private TextView tituloMinijuego;
     private View juego;
-
-    private View victoria;
     private View gameOver;
 
     // Minijuego: Un Simple Boton
@@ -79,7 +75,7 @@ public class VentanaMinijuegosActivity extends AppCompatActivity implements Sens
 
     // Game Over
     private TextView txtPuntuacionFinal;
-    private TextView txtComentarioDerrota;
+    private TextView tituloFinJuego;
 
     // =========================================================
     // SENSORES
@@ -97,8 +93,6 @@ public class VentanaMinijuegosActivity extends AppCompatActivity implements Sens
     // ESTADO DEL JUEGO
     // =========================================================
     private int puntuacion = 0;
-    private static final String PREFS_NAME = "minijuegos_prefs";
-    private static final String KEY_MAX = "max_puntuacion";
     private List<Minijuego> listaMinijuegos;
     private Minijuego minijuegoActual;
     private final Random  random  = new Random();
@@ -148,10 +142,8 @@ public class VentanaMinijuegosActivity extends AppCompatActivity implements Sens
     // =========================================================
     private void vincularVistas() {
         menu = findViewById(R.id.pantallaMenu);
-        titulo = findViewById(R.id.pantallaExplicacion);
         juego = findViewById(R.id.pantallaJuego);
         gameOver = findViewById(R.id.pantallaGameOver);
-        tituloMinijuego = findViewById(R.id.txtTituloMinijuego);
 
         contenedorBotones = findViewById(R.id.contenedorBotones);
         btn1 = findViewById(R.id.btn1);
@@ -179,7 +171,7 @@ public class VentanaMinijuegosActivity extends AppCompatActivity implements Sens
         txtPorcentajeCerveza = findViewById(R.id.txtPorcentajeCerveza);
 
         txtPuntuacionFinal = findViewById(R.id.txtPuntuacionFinal);
-        txtComentarioDerrota = findViewById(R.id.txtComentarioDerrota);
+        tituloFinJuego = findViewById(R.id.tituloFinJuego);
     }
 
     private void inicializarSensores() {
@@ -208,13 +200,12 @@ public class VentanaMinijuegosActivity extends AppCompatActivity implements Sens
     // =========================================================
     private void iniciarPartida() {
         puntuacion = 0;
-        siguienteMinijuego();
+        siguienteMinijuego(random.nextInt(listaMinijuegos.size()));
     }
 
-    private void siguienteMinijuego() {
-        minijuegoActual = listaMinijuegos.get(random.nextInt(listaMinijuegos.size()));
-        mostrarPantalla(Estado.EXPLICACION);
-        tituloMinijuego.setText(minijuegoActual.getTitulo());
+    private void siguienteMinijuego(int numero) {
+        minijuegoActual = listaMinijuegos.get(numero);
+        iniciarMinijuegoActual();
     }
 
     private void iniciarMinijuegoActual() {
@@ -223,27 +214,31 @@ public class VentanaMinijuegosActivity extends AppCompatActivity implements Sens
         minijuegoActual.iniciar(new ResultadoCallback() {
             @Override public void onGano() {
                 runOnUiThread(() -> {
-                    puntuacion++;
                     minijuegoActual.detener();
                     ocultarTodosLosContenedoresJuego();
-                    handler.postDelayed(() -> siguienteMinijuego(), 800);
+                    mostrarGameOver("gano");
                 });
             }
             @Override public void onPerdio() {
                 runOnUiThread(() -> {
                     minijuegoActual.detener();
                     ocultarTodosLosContenedoresJuego();
-                    mostrarGameOver();
+                    mostrarGameOver("perdio");
                 });
             }
         });
     }
 
-    private void mostrarGameOver() {
+    private void mostrarGameOver(String condicion) {
 
         mostrarPantalla(Estado.GAME_OVER);
-        txtPuntuacionFinal.setText("Puntuación: " + puntuacion);
-        txtComentarioDerrota.setText("");
+
+        if (condicion.equals("gano")) {
+            tituloFinJuego.setText("HAS GANADO");
+            puntuacion++;
+        } else if (condicion.equals("perdio")) {
+            tituloFinJuego.setText("HAS PERDIDO");
+        }
         handler.postDelayed(() -> mostrarPantalla(Estado.MENU), 4000);
     }
 
@@ -254,7 +249,6 @@ public class VentanaMinijuegosActivity extends AppCompatActivity implements Sens
     private void mostrarPantalla(Estado estado) {
         estadoActual = estado;
         menu.setVisibility(estado == Estado.MENU ? View.VISIBLE : View.GONE);
-        titulo.setVisibility(estado == Estado.EXPLICACION ? View.VISIBLE : View.GONE);
         juego.setVisibility(estado == Estado.JUEGO ? View.VISIBLE : View.GONE);
         gameOver.setVisibility(estado == Estado.GAME_OVER ? View.VISIBLE : View.GONE);
     }
