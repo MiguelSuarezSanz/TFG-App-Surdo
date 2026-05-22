@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -42,6 +43,9 @@ public class Conexion extends AppCompatActivity {
 
     private final PacketDispatcher dispatcher =
             new PacketDispatcher();
+
+    private boolean entrandoAMinijuego = false;
+
 
     // Caracteres permitidos: letras A-Z y números 0-9
     private final Pattern ALLOWED = Pattern.compile("[A-Za-z0-9]");
@@ -112,7 +116,9 @@ public class Conexion extends AppCompatActivity {
                                         VentanaMinijuegosActivity.class
                                 );
 
+                        entrandoAMinijuego = true;
                         startActivity(intent);
+                        finish();
                     });
                 }
         );
@@ -261,7 +267,16 @@ public class Conexion extends AppCompatActivity {
 
                     runOnUiThread(() -> {
 
+                        ((TextView) findViewById(R.id.txtCodigo))
+                                .setText("Introduce tu nombre");
+
+                        findViewById(R.id.layoutCodigo)
+                                .setVisibility(View.GONE);
+
+                        btnConectar.setVisibility(View.GONE);
+
                         editNombre.setVisibility(View.VISIBLE);
+
                         btnListo.setVisibility(View.VISIBLE);
                     });
 
@@ -316,4 +331,19 @@ public class Conexion extends AppCompatActivity {
         return outFile.getAbsolutePath();
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        if (
+                isFinishing()
+                        && !entrandoAMinijuego
+                        && tunnel != null
+        ) {
+
+            try {
+                tunnel.stop();
+            } catch (Exception ignored) {}
+        }
+    }
 }

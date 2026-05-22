@@ -8,6 +8,7 @@
     android:background="#F5F5F5">
 
     <TextView
+        android:id="@+id/txtCodigo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Introduce el código"
@@ -18,6 +19,7 @@
 
     <!-- Los 8 campos en fila -->
     <LinearLayout
+        android:id="@+id/layoutCodigo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"

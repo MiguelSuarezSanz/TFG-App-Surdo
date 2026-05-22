@@ -1,5 +1,7 @@
 package gestiones_tunnel;
 
+import com.quictunnel.core.TunnelConnection;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -12,7 +14,10 @@ public class PacketDispatcher {
         handlers.put(type, handler);
     }
 
-    public void handle(byte[] payload) {
+    public void handle(
+            TunnelConnection conn,
+            byte[] payload
+    ) {
 
         PacketReader reader =
                 new PacketReader(payload);
@@ -23,7 +28,7 @@ public class PacketDispatcher {
                 handlers.get(type);
 
         if (handler != null) {
-            handler.handle(reader);
+            handler.handle(conn, reader);
         }
     }
 }

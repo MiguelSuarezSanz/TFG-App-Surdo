@@ -50,24 +50,29 @@ public class ServidorTunnel {
                         byte[] payload
                 ) {
 
-                    dispatcher.handle(payload);
+                	dispatcher.handle(conn, payload);
                 }
 
                 @Override
                 public void onDisconnected(
                         TunnelConnection conn
                 ) {
-                	String nombre =
-                	        Participantes.eliminar(conn);
 
-                	if (nombre != null) {
+                    System.out.println("DESCONECTADO");
 
-                	    PuenteJava.getInstancia()
-                	            .lamarJavascript(
-                	                    "removerParticipante",
-                	                    "'" + nombre + "'"
-                	            );
-                	}
+                    String nombre =
+                            Participantes.eliminar(conn);
+
+                    System.out.println("ELIMINADO -> " + nombre);
+
+                    if (nombre != null) {
+
+                        PuenteJava.getInstancia()
+                                .lamarJavascript(
+                                        "removerParticipante",
+                                        "'" + nombre + "'"
+                                );
+                    }
                 }
 
                 @Override
@@ -95,8 +100,7 @@ public class ServidorTunnel {
 
     	dispatcher.register(
     	        Protocol.MSG_SET_NAME,
-    	        reader -> {
-
+    	        (conn, reader) -> {
     	        	String nombre =
     	        	        reader.readString();
 

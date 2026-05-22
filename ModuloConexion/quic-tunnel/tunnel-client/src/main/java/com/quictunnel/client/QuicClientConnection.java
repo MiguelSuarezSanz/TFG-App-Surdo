@@ -1,10 +1,7 @@
 package com.quictunnel.client;
 
 import com.quictunnel.client.jni.QuicheWrapper;
-import com.quictunnel.core.TunnelConfig;
-import com.quictunnel.core.TunnelError;
-import com.quictunnel.core.TunnelException;
-import com.quictunnel.core.TunnelListener;
+import com.quictunnel.core.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -110,17 +107,30 @@ public class QuicClientConnection {
      */
     public void stop() {
         log.info("Deteniendo QuicClientConnection...");
+
         running = false;
         reconnectPolicy.disable();
 
-        QuicheTunnelConnection connection = activeConnection.get();
+        QuicheTunnelConnection connection =
+                activeConnection.getAndSet(null);
+
         if (connection != null) {
+
+            connection.setState(
+                    TunnelConnection.State.DISCONNECTED
+            );
+
             connection.close();
+
+            config.getCallbackExecutor().execute(() ->
+                    listener.onDisconnected(connection)
+            );
         }
 
         if (receiveExecutor != null) {
             receiveExecutor.shutdownNow();
         }
+
         if (reconnectExecutor != null) {
             reconnectExecutor.shutdownNow();
         }
