@@ -219,55 +219,6 @@
 
         </LinearLayout>
 
-        <!-- MINIJUEGO: DIBUJAR FIGURAS -->
-        <FrameLayout
-            android:id="@+id/contenedorDibujo"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:visibility="gone">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="top"
-                android:gravity="center_horizontal"
-                android:orientation="vertical"
-                android:padding="16dp">
-
-                <TextView
-                    android:id="@+id/txtFiguraObjetivo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="4dp"
-                    android:text="Dibuja: ○ Círculo"
-                    android:textColor="#000000"
-                    android:textSize="26sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/txtEstadoDibujo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="Figura 1 de 3"
-                    android:textColor="#000000"
-                    android:textSize="15sp" />
-
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/txtResultadoDibujo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text=""
-                android:textColor="#000000"
-                android:textSize="28sp"
-                android:textStyle="bold" />
-
-        </FrameLayout>
-
         <!-- MINIJUEGO: UN SIMPLE BOTÓN -->
         <LinearLayout
             android:id="@+id/contenedorSimpleBoton"
