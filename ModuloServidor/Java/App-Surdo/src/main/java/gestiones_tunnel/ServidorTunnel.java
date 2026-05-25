@@ -3,6 +3,8 @@ package gestiones_tunnel;
 import java.util.ArrayList;
 import java.util.Random;
 
+import org.cef.browser.CefBrowser;
+
 import com.quictunnel.core.*;
 import com.quictunnel.server.*;
 
@@ -20,13 +22,11 @@ public class ServidorTunnel {
     
     private static final Random random =
             new Random();
-    
-    private static int cantidadMinijuegos;
-    private static int ultimoMinijuego;
-    
-    public static String iniciar() {
 
-        try {
+    
+    public static String iniciar(PuenteJava pj) {
+    	
+    	try {
 
             String codigo =
                     obtenerCodigoConexion();
@@ -41,7 +41,7 @@ public class ServidorTunnel {
 
             server = new QuicTunnelServer(config);
 
-            registrarPackets();
+            registrarPackets(pj);
 
             server.setListener(new TunnelListener() {
 
@@ -74,8 +74,7 @@ public class ServidorTunnel {
 
                     if (nombre != null) {
 
-                        PuenteJava.getInstancia()
-                                .lamarJavascript(
+                        pj.lamarJavascript(
                                         "removerParticipante",
                                         "'" + nombre + "'"
                                 );
@@ -103,7 +102,7 @@ public class ServidorTunnel {
         }
     }
 
-    private static void registrarPackets() {
+    private static void registrarPackets(PuenteJava pj) {
 
     	dispatcher.register(
     	        Protocol.MSG_SET_NAME,
@@ -133,8 +132,7 @@ public class ServidorTunnel {
 
     	        	Participantes.annadir(conn, nombre);
 
-    	        	PuenteJava.getInstancia()
-    	        	        .lamarJavascript(
+    	        	pj.lamarJavascript(
     	        	                "annadirParticipante",
     	        	                "'" + nombre + "'"
     	        	        );
@@ -159,7 +157,7 @@ public class ServidorTunnel {
     	        Protocol.MSG_MINIGAME_COUNT,
     	        (conn, reader) -> {
 
-    	            cantidadMinijuegos =
+    	            pj.cantidadMinijuegos =
     	                    reader.readInt();
     	        }
     	);
@@ -173,12 +171,9 @@ public class ServidorTunnel {
 
     	            String descripcion =
     	                    reader.readString();
-
-    	            PuenteJava.getInstancia()
-    	                    .lamarJavascript(
-    	                            "establecerMinijuego",
-    	                            "'" + nombre + "','" + descripcion + "'"
-    	                    );
+    	            System.out.println(nombre + "   " + descripcion);
+    	            pj.titulo = nombre;
+    	            pj.enunciado = descripcion;
     	        }
     	);
     }
@@ -203,24 +198,70 @@ public class ServidorTunnel {
         }
     }
     
-    public static void siguienteMinijuego() {
-
-        if (cantidadMinijuegos <= 0) {
+    public static void siguienteMinijuego(PuenteJava pj) {
+        if (pj.cantidadMinijuegos <= 0) {
             return;
         }
         
         int numero;
         
         do {
-	        numero = random.nextInt(cantidadMinijuegos);
-        } while(numero == ultimoMinijuego);
+	        numero = random.nextInt(pj.cantidadMinijuegos);
+        } while(numero == pj.ultimoMinijuego);
         
-        ultimoMinijuego = numero;
+        pj.ultimoMinijuego = numero;     
+
+        prepararMinijuego(numero);
         
-        iniciarMinijuego(numero);
+        pj.lamarJavascript(
+                "cambiarPagina",
+                "'../minigame_room/minagame_room.html'"
+        );
+        
+        System.out.println("2"+pj.titulo + "   " + pj.enunciado);
+        String[] minijuego = {pj.titulo,pj.enunciado};
+        
+        
+        new java.util.Timer().schedule(
+        	    new java.util.TimerTask() {
+        	        @Override
+        	        public void run() {
+        	            pj.lamarJavascript(
+        	                "establecerMinijuego",
+        	                "'" + pj.titulo + "@" + pj.enunciado + "'"
+        	            );
+        	        }
+        	    },
+        	    1000 // 1 segundo en milisegundos
+        	);
+        
     }
     
-    public static void iniciarMinijuego(int numero) {
+    public static void prepararMinijuego(int numero) {
+        PacketWriter writer =
+                new PacketWriter();
+
+        writer.writeByte(
+                Protocol.MSG_PREP_MINIGAME
+        );
+
+        writer.writeInt(numero);
+
+        try {
+
+            for (TunnelConnection conn
+                    : Participantes.getConexiones()) {
+
+                conn.send(writer.toArray());
+            }
+
+        } catch (TunnelException e) {
+
+            e.printStackTrace();
+        }
+    }
+    
+    public static void iniciarMinijuego() {
 
         PacketWriter writer =
                 new PacketWriter();
@@ -228,9 +269,7 @@ public class ServidorTunnel {
         writer.writeByte(
                 Protocol.MSG_PLAY_MINIGAME
         );
-
-        writer.writeInt(numero);
-
+        
         try {
 
             for (TunnelConnection conn

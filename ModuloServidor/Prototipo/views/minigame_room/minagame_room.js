@@ -80,11 +80,16 @@ function ordenarPuntuaciones() {
     return ranking;
 }
 
-function establecerMinijuego(nombre, descripcion) {
-
+function establecerMinijuego(texto) {
+    texto=texto.split("@")
+    
     document.querySelector('.main_tittle')
-        .innerHTML = nombre;
+        .innerHTML = texto[0];
 
     document.querySelector('.subtittle')
-        .innerHTML = descripcion;
+        .innerHTML = texto[1];
 }
+
+document.getElementById('btnIniciar').addEventListener('click', function () {
+    llamarJava('iniciarMinijuego');
+});

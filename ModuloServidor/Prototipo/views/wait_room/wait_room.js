@@ -67,3 +67,8 @@ function mostrarCodigoConexion(codigo) {
         .innerHTML =
             "Código de la Sala:<br>" + codigo;
 }
+
+document.getElementById('btnPrep').addEventListener('click', function () {
+    llamarJava('prepMinijuego,MainGame');
+    window.location.href = '../loanding/loanding.html';
+});
