@@ -80,7 +80,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:hint="Nombre"
-        android:textColor="@color/black" />
+        android:textColor="@color/black"
+        android:visibility="gone"/>
 
     <Button
         android:id="@+id/btnListo"
@@ -93,6 +94,7 @@
         android:textStyle="bold"
         android:text="Listo"
         app:strokeColor="@color/cuaternaryColor"
-        app:strokeWidth="3dp"/>
+        app:strokeWidth="3dp"
+        android:visibility="gone"/>
 
 </LinearLayout>
