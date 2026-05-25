@@ -76,7 +76,7 @@
 
     <EditText
         android:id="@+id/editNombre"
-        android:layout_width="376dp"
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:hint="Nombre"
