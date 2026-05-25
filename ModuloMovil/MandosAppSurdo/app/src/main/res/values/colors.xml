@@ -2,4 +2,19 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="primaryColor">#965dd6</color>
+    <color name="primaryColorLighter">#c490ff</color>
+    <color name="secondaryColor">#ff5b9f</color>
+    <color name="tertiaryColor">#fbff00</color>
+    <color name="cuaternaryColor">#fc7b09</color>
+    <color name="cuaternaryColorLighter">#ffb758</color>
+    <color name="fontColor">azure</color>
 </resources>
+
+<!-- -primary-color: #965dd6;
+    -primary-color-lighter: #c490ff;
+    -secundary-color: #ff5b9f;
+    -terciary-color: #fbff00;
+    -cuarternary-color: #fc7b09;
+    -cuarternary-color-lighter: #ffb758;
+    -font-color: azure; -->
