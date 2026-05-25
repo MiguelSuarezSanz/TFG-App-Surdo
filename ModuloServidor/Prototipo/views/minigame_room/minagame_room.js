@@ -1,55 +1,90 @@
-let participantes = localStorage.getItem("participantes").split(",");
-let puntuaciones = localStorage.getItem("puntuaciones").split(",");
+let participantes =
+    localStorage.getItem("participantes").split(",");
 
-if (puntuaciones.length != participantes.length) {
+let puntuacionesStorage =
+    localStorage.getItem("puntuaciones");
+
+let puntuaciones =
+    puntuacionesStorage
+        ? puntuacionesStorage.split(",").map(Number)
+        : [];
+
+// Si no coinciden tamaños, reiniciamos
+if (puntuaciones.length !== participantes.length) {
+
     puntuaciones = [];
-    participantes.forEach(element => {
+
+    participantes.forEach(() => {
         puntuaciones.push(0);
     });
 }
 
-function renderizar_puntuacioness() {
-    let participants = document.querySelector('.participants');
-    let puntuacionesOrdenadas = ordenarPuntuaciones();
-    let localStorage = ""
-    
+renderizarPuntuaciones();
+
+function renderizarPuntuaciones() {
+
+    let participants =
+        document.querySelector('.participants');
+
     participants.innerHTML = "";
 
-    for (const key in puntuacionesOrdenadas) {
-        const element = object[key];
+    let ranking =
+        ordenarPuntuaciones();
 
-        let span = document.createElement('b');
-        span.innerHTML = `${key}: ${element}`;
+    ranking.forEach(element => {
+
+        let span =
+            document.createElement('span');
+
+        span.innerHTML =
+            `${element.nombre}: ${element.puntos}pts`;
+
         participants.append(span);
-    }
-
-    puntuaciones.forEach(element => {
-        localStorage += element+",";
     });
-    
-    localStorage.setItem("puntuaciones", localStorage.slice(0, -1));
+
+    localStorage.setItem(
+        "puntuaciones",
+        puntuaciones.join(",")
+    );
 }
 
-function annadir_puntuaciones(participante, puntuacion) {
-    let index = participante.indexOf(participante);
-    if (index == -1) {
+function annadirPuntuacion(participante, puntos) {
+
+    let index =
+        participantes.indexOf(participante);
+
+    if (index === -1) {
         return;
     }
-    puntuacion[index] += puntuacion;
-    renderizar_puntuacioness();
+
+    puntuaciones[index] += puntos;
+
+    renderizarPuntuaciones();
 }
 
 function ordenarPuntuaciones() {
+
     let ranking = [];
 
     for (let i = 0; i < participantes.length; i++) {
+
         ranking.push({
-            key: Number(puntuaciones[i]),
-            value: participantes[i]
+            nombre: participantes[i],
+            puntos: Number(puntuaciones[i])
         });
     }
 
-    ranking.sort((a, b) => a.key - b.key);
+    // Mayor puntuación primero
+    ranking.sort((a, b) => b.puntos - a.puntos);
 
     return ranking;
+}
+
+function establecerMinijuego(nombre, descripcion) {
+
+    document.querySelector('.main_tittle')
+        .innerHTML = nombre;
+
+    document.querySelector('.subtittle')
+        .innerHTML = descripcion;
 }

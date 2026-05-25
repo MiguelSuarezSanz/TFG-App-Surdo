@@ -2,6 +2,7 @@ package gestiones_tunnel;
 
 import com.quictunnel.core.TunnelConnection;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,5 +29,11 @@ public class Participantes {
     ) {
 
         return participantes.remove(conn);
+    }
+    
+    public static Collection<TunnelConnection>
+    getConexiones() {
+
+        return participantes.keySet();
     }
 }

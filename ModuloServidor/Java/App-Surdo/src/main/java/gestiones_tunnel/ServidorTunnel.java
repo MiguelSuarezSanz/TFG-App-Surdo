@@ -1,6 +1,7 @@
 package gestiones_tunnel;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import com.quictunnel.core.*;
 import com.quictunnel.server.*;
@@ -16,6 +17,12 @@ public class ServidorTunnel {
     
     private static final ArrayList<String> participantes =
 			    new ArrayList<>();
+    
+    private static final Random random =
+            new Random();
+    
+    private static int cantidadMinijuegos;
+    private static int ultimoMinijuego;
     
     public static String iniciar() {
 
@@ -147,6 +154,33 @@ public class ServidorTunnel {
 					}
     	        }
     	);
+    	
+    	dispatcher.register(
+    	        Protocol.MSG_MINIGAME_COUNT,
+    	        (conn, reader) -> {
+
+    	            cantidadMinijuegos =
+    	                    reader.readInt();
+    	        }
+    	);
+    	
+    	dispatcher.register(
+    	        Protocol.MSG_REQUEST_MINIGAME_STATEMENT,
+    	        (conn, reader) -> {
+
+    	            String nombre =
+    	                    reader.readString();
+
+    	            String descripcion =
+    	                    reader.readString();
+
+    	            PuenteJava.getInstancia()
+    	                    .lamarJavascript(
+    	                            "establecerMinijuego",
+    	                            "'" + nombre + "','" + descripcion + "'"
+    	                    );
+    	        }
+    	);
     }
     
     private static String obtenerCodigoConexion() {
@@ -168,4 +202,47 @@ public class ServidorTunnel {
             return null;
         }
     }
+    
+    public static void siguienteMinijuego() {
+
+        if (cantidadMinijuegos <= 0) {
+            return;
+        }
+        
+        int numero;
+        
+        do {
+	        numero = random.nextInt(cantidadMinijuegos);
+        } while(numero == ultimoMinijuego);
+        
+        ultimoMinijuego = numero;
+        
+        iniciarMinijuego(numero);
+    }
+    
+    public static void iniciarMinijuego(int numero) {
+
+        PacketWriter writer =
+                new PacketWriter();
+
+        writer.writeByte(
+                Protocol.MSG_PLAY_MINIGAME
+        );
+
+        writer.writeInt(numero);
+
+        try {
+
+            for (TunnelConnection conn
+                    : Participantes.getConexiones()) {
+
+                conn.send(writer.toArray());
+            }
+
+        } catch (TunnelException e) {
+
+            e.printStackTrace();
+        }
+    }
+    
 }

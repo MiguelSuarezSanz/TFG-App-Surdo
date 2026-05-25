@@ -9,3 +9,7 @@ function llamarJava(metodod) {
         }
     });
 }
+
+function cambiarPagina(ruta) {
+    window.location.href = ruta;
+}

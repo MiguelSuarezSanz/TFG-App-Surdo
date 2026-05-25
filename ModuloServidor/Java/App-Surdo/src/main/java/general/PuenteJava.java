@@ -33,11 +33,6 @@ public class PuenteJava {
 		}
     	
     	switch (metodo) {
-		case "cargarMusica":
-			musicHandeler.detener();
-			musicHandeler.cargar(args.get(0));
-			break;
-			
 		case "iniciarServidor":
 
 		    String codigo =
@@ -52,7 +47,15 @@ public class PuenteJava {
 		    
 		case "exit":
             System.exit(0);
-            
+		
+		case "iniciarMinijuego":
+			
+			musicHandeler.detener();
+			musicHandeler.cargar(args.get(0));
+			
+			ServidorTunnel.siguienteMinijuego();
+			break;
+			
 		default:
 			System.err.println("Método no encontrado");
 			break;

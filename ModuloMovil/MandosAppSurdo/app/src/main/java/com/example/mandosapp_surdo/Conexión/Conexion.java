@@ -133,6 +133,28 @@ public class Conexion extends AppCompatActivity {
             connect(codigo.toString());
         });
 
+        dispatcher.register(
+                Protocol.MSG_PLAY_MINIGAME,
+                reader -> {
+
+                    int minijuego =
+                            reader.readInt();
+
+                    Intent intent =
+                            new Intent(
+                                    Conexion.this,
+                                    VentanaMinijuegosActivity.class
+                            );
+
+                    intent.putExtra(
+                            "minijuego",
+                            minijuego
+                    );
+
+                    startActivity(intent);
+                }
+        );
+
         // Abre el teclado en el primer campo automáticamente
         fields.get(0).requestFocus();
 

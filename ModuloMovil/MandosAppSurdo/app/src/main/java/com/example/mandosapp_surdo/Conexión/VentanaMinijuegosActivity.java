@@ -19,6 +19,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.mandosapp_surdo.Conexión.Packets.PacketDispatcher;
+import com.example.mandosapp_surdo.Conexión.Packets.PacketWriter;
 import com.example.mandosapp_surdo.interfaces.Minijuego;
 import com.example.mandosapp_surdo.interfaces.ResultadoCallback;
 import com.example.mandosapp_surdo.R;
@@ -30,6 +32,7 @@ import com.example.mandosapp_surdo.minijuegos.ElijeElBoton;
 import com.example.mandosapp_surdo.minijuegos.SaludoCatalan;
 import com.example.mandosapp_surdo.minijuegos.SimpleBoton;
 import com.google.android.material.button.MaterialButton;
+import com.quictunnel.core.TunnelException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -98,6 +101,10 @@ public class VentanaMinijuegosActivity extends AppCompatActivity implements Sens
     private final Random  random  = new Random();
     private final Handler handler = new Handler();
 
+    private final PacketDispatcher dispatcher =
+            new PacketDispatcher();
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -113,9 +120,20 @@ public class VentanaMinijuegosActivity extends AppCompatActivity implements Sens
         vincularVistas();
         inicializarSensores();
         crearListaMinijuegos();
+        enviarCantidadMinijuegos();
+
+        int minijuego =
+                getIntent().getIntExtra(
+                        "minijuego",
+                        -1
+                );
+
         mostrarPantalla(Estado.MENU);
-        findViewById(R.id.btnJugar).setOnClickListener(v -> iniciarPartida());
-        findViewById(R.id.btnListo).setOnClickListener(v -> iniciarMinijuegoActual());
+
+        if (minijuego != -1) {
+            siguienteMinijuego(minijuego);
+        }
+
     }
 
     @Override
@@ -204,7 +222,15 @@ public class VentanaMinijuegosActivity extends AppCompatActivity implements Sens
     }
 
     private void siguienteMinijuego(int numero) {
-        minijuegoActual = listaMinijuegos.get(numero);
+
+        minijuegoActual =
+                listaMinijuegos.get(numero);
+
+        enviarEnunciado(
+                minijuegoActual.getTitulo(),
+                minijuegoActual.getExplicacion()
+        );
+
         iniciarMinijuegoActual();
     }
 
@@ -315,4 +341,56 @@ public class VentanaMinijuegosActivity extends AppCompatActivity implements Sens
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {}
+
+    private void enviarEnunciado(
+            String nombre,
+            String enunciado
+    ) {
+
+        PacketWriter writer =
+                new PacketWriter();
+
+        writer.writeByte(
+                Protocol.MSG_REQUEST_MINIGAME_STATEMENT
+        );
+
+        writer.writeString(nombre);
+        writer.writeString(enunciado);
+
+        try {
+
+            TunnelManager
+                    .getTunnel()
+                    .send(writer.toArray());
+
+        } catch (TunnelException e) {
+
+            e.printStackTrace();
+        }
+    }
+
+    private void enviarCantidadMinijuegos() {
+
+        PacketWriter writer =
+                new PacketWriter();
+
+        writer.writeByte(
+                Protocol.MSG_MINIGAME_COUNT
+        );
+
+        writer.writeInt(
+                listaMinijuegos.size()
+        );
+
+        try {
+
+            TunnelManager
+                    .getTunnel()
+                    .send(writer.toArray());
+
+        } catch (TunnelException e) {
+
+            e.printStackTrace();
+        }
+    }
 }
