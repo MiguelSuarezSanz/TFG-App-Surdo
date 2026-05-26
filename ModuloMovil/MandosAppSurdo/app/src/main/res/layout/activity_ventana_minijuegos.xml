@@ -41,7 +41,8 @@
             app:backgroundTint="@color/tertiaryColor"
             app:cornerRadius="32dp"
             app:strokeColor="#fc7b09"
-            app:strokeWidth="3dp" />
+            app:strokeWidth="3dp"
+            android:visibility="gone"/>
 
     </LinearLayout>
 

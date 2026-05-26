@@ -11,6 +11,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -119,6 +120,14 @@ public class VentanaMinijuegosActivity extends AppCompatActivity implements Sens
             return insets;
         });
 
+        // Debug de VentanaMinijuegosActivity
+        Bundle extra = getIntent().getExtras();
+        Button botonDebug = findViewById(R.id.btnJugar);
+        boolean debug = extra.getBoolean("debug");
+
+        if (debug) {
+            botonDebug.setVisibility(View.VISIBLE);
+        }
         dispatcher.register(
                 Protocol.MSG_PREP_MINIGAME,
                 reader -> {
