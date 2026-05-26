@@ -100,4 +100,5 @@ body * {
     font-size: 4rem;
     color: var(--primary-color-lighter);
     -webkit-text-stroke: var(--primary-color) 0.2rem;
+    max-width: 80vw;
 }

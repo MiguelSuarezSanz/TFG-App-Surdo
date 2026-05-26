@@ -13,6 +13,12 @@ public class PuenteJava {
 	private final CefBrowser browser;
 	
 	static Reproductor musicHandeler = new Reproductor();
+    
+    public static int cantidadMinijuegos;
+    public static int ultimoMinijuego;
+    
+    public static String titulo;
+    public static String enunciado;
 	
 	public PuenteJava(CefBrowser browser) {
 		this.browser = browser;
@@ -36,7 +42,7 @@ public class PuenteJava {
 		case "iniciarServidor":
 
 		    String codigo =
-		            ServidorTunnel.iniciar();
+		            ServidorTunnel.iniciar(this);
 
 		    lamarJavascript(
 		            "mostrarCodigoConexion",
@@ -45,15 +51,24 @@ public class PuenteJava {
 
 		    break;
 		    
+		case "cargarMusica":
+			musicHandeler.detener();
+			musicHandeler.cargar(args.get(0));
+			break;
+			
 		case "exit":
             System.exit(0);
 		
-		case "iniciarMinijuego":
+		case "prepMinijuego":
 			
 			musicHandeler.detener();
 			musicHandeler.cargar(args.get(0));
 			
-			ServidorTunnel.siguienteMinijuego();
+			ServidorTunnel.siguienteMinijuego(this);
+			break;
+		
+		case "iniciarMinijuego":
+			ServidorTunnel.iniciarMinijuego();
 			break;
 			
 		default:

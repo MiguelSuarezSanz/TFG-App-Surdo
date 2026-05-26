@@ -8,6 +8,8 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -100,10 +102,10 @@ public class VentanaMinijuegosActivity extends AppCompatActivity implements Sens
     private List<Minijuego> listaMinijuegos;
     private Minijuego minijuegoActual;
     private final Random  random  = new Random();
-    private final Handler handler = new Handler();
+    private final Handler handler = new Handler(Looper.getMainLooper());
 
     private final PacketDispatcher dispatcher =
-            new PacketDispatcher();
+            GlobalDispatcher.get();
 
 
     @Override
@@ -126,6 +128,30 @@ public class VentanaMinijuegosActivity extends AppCompatActivity implements Sens
         if (debug) {
             botonDebug.setVisibility(View.VISIBLE);
         }
+        dispatcher.register(
+                Protocol.MSG_PREP_MINIGAME,
+                reader -> {
+                    Log.i(
+                            "Tunnel",
+                            "MSG_PREP"
+                    );
+
+                    int minijuego =
+                            reader.readInt();
+
+                    runOnUiThread(() ->
+                            siguienteMinijuego(minijuego)
+
+                    );
+                }
+        );
+
+        dispatcher.register(
+                Protocol.MSG_PLAY_MINIGAME,
+                reader -> {
+                    iniciarMinijuegoActual();
+                }
+        );
 
         vincularVistas();
         inicializarSensores();
@@ -163,6 +189,7 @@ public class VentanaMinijuegosActivity extends AppCompatActivity implements Sens
     protected void onDestroy() {
         super.onDestroy();
         handler.removeCallbacksAndMessages(null);
+        //dispatcher.clear();
     }
 
     // =========================================================
@@ -232,7 +259,10 @@ public class VentanaMinijuegosActivity extends AppCompatActivity implements Sens
     }
 
     private void siguienteMinijuego(int numero) {
-
+        Log.i(
+                "Tunnel",
+                "Siguienteminijuego"
+        );
         minijuegoActual =
                 listaMinijuegos.get(numero);
 
@@ -240,8 +270,6 @@ public class VentanaMinijuegosActivity extends AppCompatActivity implements Sens
                 minijuegoActual.getTitulo(),
                 minijuegoActual.getExplicacion()
         );
-
-        iniciarMinijuegoActual();
     }
 
     private void iniciarMinijuegoActual() {
@@ -356,7 +384,10 @@ public class VentanaMinijuegosActivity extends AppCompatActivity implements Sens
             String nombre,
             String enunciado
     ) {
-
+        Log.i(
+                "Tunnel",
+                "Enviar enunciado " + nombre
+        );
         PacketWriter writer =
                 new PacketWriter();
 
@@ -403,4 +434,5 @@ public class VentanaMinijuegosActivity extends AppCompatActivity implements Sens
             e.printStackTrace();
         }
     }
+
 }

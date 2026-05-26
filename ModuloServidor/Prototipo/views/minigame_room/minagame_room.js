@@ -80,11 +80,25 @@ function ordenarPuntuaciones() {
     return ranking;
 }
 
-function establecerMinijuego(nombre, descripcion) {
-
+function establecerMinijuego(texto) {
+    texto=texto.split("@")
+    
     document.querySelector('.main_tittle')
-        .innerHTML = nombre;
+        .innerHTML = texto[0];
 
     document.querySelector('.subtittle')
-        .innerHTML = descripcion;
+        .innerHTML = texto[1];
 }
+
+document.getElementById('btnIniciar').addEventListener('click', function () {
+    llamarJava('iniciarMinijuego');
+    this.style.display = "none"
+    document.getElementById("btnSiguiente").style.display = "block"
+});
+
+document.getElementById('btnSiguiente').addEventListener('click', function () {
+
+    llamarJava('prepMinijuego,MainGame');
+    this.style.display = "none"
+    document.getElementById("btnIniciar").style.display = "block"
+});

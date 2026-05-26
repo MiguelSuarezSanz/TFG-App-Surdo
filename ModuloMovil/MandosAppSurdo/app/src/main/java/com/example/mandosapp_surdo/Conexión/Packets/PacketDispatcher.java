@@ -26,4 +26,8 @@ public class PacketDispatcher {
             handler.handle(reader);
         }
     }
+
+    public void clear() {
+        handlers.clear();
+    }
 }

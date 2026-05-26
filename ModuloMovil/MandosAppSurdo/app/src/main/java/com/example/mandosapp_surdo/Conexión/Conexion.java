@@ -42,7 +42,7 @@ public class Conexion extends AppCompatActivity {
     private Button btnListo;
 
     private final PacketDispatcher dispatcher =
-            new PacketDispatcher();
+            GlobalDispatcher.get();
 
     private boolean entrandoAMinijuego = false;
 
@@ -309,6 +309,7 @@ public class Conexion extends AppCompatActivity {
                         TunnelConnection c,
                         byte[] payload
                 ) {
+                    Log.i("Tunnel", "RECIBIDO EN CONEXION: " + payload[0]);
                     dispatcher.handle(payload);
                 }
 
@@ -367,5 +368,6 @@ public class Conexion extends AppCompatActivity {
                 tunnel.stop();
             } catch (Exception ignored) {}
         }
+        //dispatcher.clear();
     }
 }

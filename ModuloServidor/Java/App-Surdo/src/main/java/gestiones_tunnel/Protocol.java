@@ -23,8 +23,8 @@ public final class Protocol {
     // Cliente -> servidor
     public static final byte MSG_REQUEST_MINIGAME_STATEMENT = 0x06;
 
-    // Servidor -> cliente
-    public static final byte MSG_SEND_MINIGAME_STATEMENT = 0x07;
+ 
+    public static final byte MSG_PREP_MINIGAME = 0x07;
 
     private Protocol() {}
 }
