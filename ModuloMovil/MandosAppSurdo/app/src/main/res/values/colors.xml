@@ -8,7 +8,6 @@
     <color name="tertiaryColor">#fbff00</color>
     <color name="cuaternaryColor">#fc7b09</color>
     <color name="cuaternaryColorLighter">#ffb758</color>
-    <color name="fontColor">azure</color>
 </resources>
 
 <!-- -primary-color: #965dd6;

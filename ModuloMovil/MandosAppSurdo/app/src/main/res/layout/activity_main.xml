@@ -63,7 +63,7 @@
             android:layout_height="150dp"
             android:layout_margin="5dp"
             android:backgroundTint="#c490ff"
-            android:text="Prueba Conexion"
+            android:text="Jugar"
             android:textSize="20sp"
             app:cornerRadius="200dp"
             app:strokeColor="#965DD5"
@@ -75,8 +75,9 @@
             android:layout_height="150dp"
             android:layout_margin="5dp"
             android:backgroundTint="#c490ff"
-            android:text="Prueba Minijuego"
-            app:cornerRadius="200dp" />
+            android:text="Debug Minijuegos"
+            app:cornerRadius="200dp"
+            android:visibility="gone"/>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,6 +9,7 @@ import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -116,6 +117,15 @@ public class VentanaMinijuegosActivity extends AppCompatActivity implements Sens
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        // Debug de VentanaMinijuegosActivity
+        Bundle extra = getIntent().getExtras();
+        Button botonDebug = findViewById(R.id.btnJugar);
+        boolean debug = extra.getBoolean("debug");
+
+        if (debug) {
+            botonDebug.setVisibility(View.VISIBLE);
+        }
 
         vincularVistas();
         inicializarSensores();
