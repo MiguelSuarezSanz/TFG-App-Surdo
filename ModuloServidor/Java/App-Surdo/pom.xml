@@ -24,7 +24,7 @@
             <version>1.0.0</version>
             <scope>system</scope>
             <systemPath>
-                C:\Users\ibano\[02_ESTUDIOS]\DAM_2\Proyecto Intermodular\TFG-App-Surdo\ModuloServidor\Java\App-Surdo\libs\tunnel-core-1.0.0.jar
+                ${project.basedir}\libs\tunnel-core-1.0.0.jar
             </systemPath>
         </dependency>
 
@@ -34,7 +34,7 @@
             <version>1.0.0</version>
             <scope>system</scope>
             <systemPath>
-                C:\Users\ibano\[02_ESTUDIOS]\DAM_2\Proyecto Intermodular\TFG-App-Surdo\ModuloServidor\Java\App-Surdo\libs\tunnel-server-1.0.0.jar
+                ${project.basedir}\libs\tunnel-server-1.0.0.jar
             </systemPath>
         </dependency>
 
