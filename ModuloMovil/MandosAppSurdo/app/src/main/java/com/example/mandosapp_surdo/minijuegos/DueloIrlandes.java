@@ -58,7 +58,7 @@ public class DueloIrlandes implements Minijuego {
     @Override
     public String getIntroduccion() {
         return "No hay ninguna fiesta igual que el dia de San Patricio," +
-                "\n\n¿Como que se celebra el 27 de marzo y no el 27 de mayo?";
+                "¿Como que se celebra el 27 de marzo y no el 27 de mayo?";
     }
 
     @Override
