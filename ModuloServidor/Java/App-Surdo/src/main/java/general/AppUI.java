@@ -70,7 +70,11 @@ public class AppUI {
                 ventana.dispose();
             }
         });
-
+        
+        Image icono = new ImageIcon(
+        	    ClassLoader.getSystemResource("icono.png")
+        	).getImage();
+        ventana.setIconImage(icono);
         ventana.getContentPane().add(browser.getUIComponent(), BorderLayout.CENTER);
         ventana.setExtendedState(JFrame.MAXIMIZED_BOTH);
         ventana.setSize(1024, 768);
