@@ -351,7 +351,6 @@ public class VentanaMinijuegosActivity extends AppCompatActivity implements Sens
             SensorManager.getOrientation(rotacion, angulos);
             float pitch = (float) Math.toDegrees(angulos[1]);
             float roll = (float) Math.toDegrees(angulos[2]);
-            float yaw = (float) Math.toDegrees(angulos[0]);
 
             if (minijuegoActual instanceof CurtKobainSimulator)
                 ((CurtKobainSimulator) minijuegoActual).onDatosGiro(pitch, roll);

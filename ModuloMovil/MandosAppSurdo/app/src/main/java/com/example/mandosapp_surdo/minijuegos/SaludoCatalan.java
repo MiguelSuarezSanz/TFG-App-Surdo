@@ -34,7 +34,7 @@ public class SaludoCatalan implements Minijuego {
     @Override
     public String getIntroduccion() {
         return "Hombre pero mira quien esta ahi, Giuseppe, tu amigo catalan de la uni." +
-                "\n\n¿Porque no vas a saludarlo al estilo de L'Hospitalet?";
+                "¿Porque no vas a saludarlo al estilo de L'Hospitalet?";
     }
 
     @Override

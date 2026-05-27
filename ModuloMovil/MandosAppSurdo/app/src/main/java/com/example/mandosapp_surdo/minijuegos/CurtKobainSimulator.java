@@ -49,8 +49,8 @@ public class CurtKobainSimulator implements Minijuego {
 
     @Override
     public String getExplicacion() {
-        return "Primero, agita el movil para cargar el arma, y luego debes posicionar el movil en " +
-                "angulo apuntando a tu cara antes de que acabe el tiempo, si tuvistes suerte, ganas, " +
+        return "Primero, agita el móvil para cargar el arma, y luego debes posicionar el móvil en " +
+                "ángulo apuntando a tu cara antes de que acabe el tiempo, si tuviste suerte, ganas, " +
                 "si no, pierdes";
     }
 
