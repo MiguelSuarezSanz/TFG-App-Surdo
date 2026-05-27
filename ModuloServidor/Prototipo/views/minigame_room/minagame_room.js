@@ -49,7 +49,7 @@ function renderizarPuntuaciones() {
 }
 
 function annadirPuntuacion(participante, puntos) {
-
+    
     let index =
         participantes.indexOf(participante);
 
@@ -57,7 +57,7 @@ function annadirPuntuacion(participante, puntos) {
         return;
     }
 
-    puntuaciones[index] += puntos;
+    puntuaciones[index] = puntos;
 
     renderizarPuntuaciones();
 }
@@ -93,12 +93,14 @@ function establecerMinijuego(texto) {
 document.getElementById('btnIniciar').addEventListener('click', function () {
     llamarJava('iniciarMinijuego');
     this.style.display = "none"
-    document.getElementById("btnSiguiente").style.display = "block"
 });
 
 document.getElementById('btnSiguiente').addEventListener('click', function () {
-
     llamarJava('prepMinijuego,MainGame');
     this.style.display = "none"
     document.getElementById("btnIniciar").style.display = "block"
 });
+
+function habilitarJugar(){
+    document.getElementById("btnSiguiente").style.display = "block"
+}

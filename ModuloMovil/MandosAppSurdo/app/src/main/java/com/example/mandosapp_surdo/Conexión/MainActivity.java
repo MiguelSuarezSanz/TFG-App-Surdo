@@ -48,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 final Intent myIntent = new Intent(MainActivity.this, Conexion.class);
+                myIntent.putExtra("debug", debug);
                 startActivity(myIntent);
             }
         });

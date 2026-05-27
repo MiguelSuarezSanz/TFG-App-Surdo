@@ -17,8 +17,7 @@ public class ServidorTunnel {
     private static final PacketDispatcher dispatcher =
             new PacketDispatcher();
     
-    private static final ArrayList<String> participantes =
-			    new ArrayList<>();
+
     
     private static final Random random =
             new Random();
@@ -36,7 +35,7 @@ public class ServidorTunnel {
                     .caCert("certs/ca.crt")
                     .cert("certs/server.crt")
                     .key("certs/server.key")
-                    .keepaliveInterval(15000)
+                    .keepaliveInterval(5000)
                     .build();
 
             server = new QuicTunnelServer(config);
@@ -176,6 +175,52 @@ public class ServidorTunnel {
     	            pj.enunciado = descripcion;
     	        }
     	);
+    	
+    	dispatcher.register(
+    	        Protocol.MSG_MINIGAME_RESULT,
+    	        (conn, reader) -> {
+
+    	            int puntuacion =
+    	                    reader.readInt();
+
+    	            Participantes.establecerPuntuacion(
+    	                    conn,
+    	                    puntuacion
+    	            );
+
+    	            pj.respuestas++;
+
+    	            if (pj.respuestas >=
+    	                    Participantes.getConexiones().size()) {
+
+    	                pj.respuestas = 0;
+
+    	                enviarPuntuaciones(pj);
+
+    	                pj.lamarJavascript(
+    	                        "habilitarJugar"
+    	                );
+    	            }
+    	        }
+    	);
+    }
+    
+    private static void enviarPuntuaciones(PuenteJava pj) 
+    {
+
+        for (TunnelConnection conn
+                : Participantes.getConexiones()) {
+
+            String nombre =
+                    Participantes.obtenerNombre(conn);
+
+            int puntuacion =
+                    Participantes.obtenerPuntuacion(conn);
+            
+            System.out.println("puntuación: " + puntuacion);
+            
+            pj.lamarJavascript("annadirPuntuacion", "'"+nombre +"','"+ puntuacion+"'");
+        }
     }
     
     private static String obtenerCodigoConexion() {

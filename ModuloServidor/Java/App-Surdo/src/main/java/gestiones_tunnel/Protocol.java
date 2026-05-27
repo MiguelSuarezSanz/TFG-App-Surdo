@@ -25,6 +25,9 @@ public final class Protocol {
 
  
     public static final byte MSG_PREP_MINIGAME = 0x07;
+    
+    public static final byte MSG_MINIGAME_RESULT = 0x08;
+    public static final byte MSG_SCORE_UPDATE = 0x09;
 
     private Protocol() {}
 }

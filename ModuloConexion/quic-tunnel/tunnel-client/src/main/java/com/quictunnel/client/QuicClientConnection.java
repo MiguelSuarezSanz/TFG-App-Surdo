@@ -56,6 +56,9 @@ public class QuicClientConnection {
      */
     private volatile boolean running;
 
+    private ExecutorService keepaliveExecutor;
+    private volatile long lastActivityTime;
+
     public QuicClientConnection(
             TunnelConfig config,
             TunnelListener listener,
@@ -99,6 +102,14 @@ public class QuicClientConnection {
         // Arrancamos el hilo de recepción
         receiveExecutor.execute(this::receiveLoop);
 
+        lastActivityTime = System.currentTimeMillis();
+        keepaliveExecutor = Executors.newSingleThreadExecutor(r -> {
+            Thread t = new Thread(r, "quic-keepalive");
+            t.setDaemon(true);
+            return t;
+        });
+        keepaliveExecutor.execute(this::keepaliveLoop);
+
         log.info("QuicClientConnection iniciada.");
     }
 
@@ -135,6 +146,10 @@ public class QuicClientConnection {
             reconnectExecutor.shutdownNow();
         }
 
+        if (keepaliveExecutor != null) {
+            keepaliveExecutor.shutdownNow();
+        }
+
         log.info("QuicClientConnection detenida.");
     }
 
@@ -152,6 +167,9 @@ public class QuicClientConnection {
                     "No hay conexión activa con el servidor"
             );
         }
+
+        lastActivityTime = System.currentTimeMillis();
+
         connection.send(payload);
     }
 
@@ -230,6 +248,7 @@ public class QuicClientConnection {
 
                 // Entregamos el payload al listener en el executor del juego
                 final byte[] finalPayload = payload;
+                lastActivityTime = System.currentTimeMillis();
                 config.getCallbackExecutor().execute(() ->
                         listener.onDataReceived(connection, finalPayload)
                 );
@@ -322,5 +341,29 @@ public class QuicClientConnection {
                     listener.onError(previousConnection, error)
             );
         }
+    }
+
+    private void keepaliveLoop() {
+        log.debug("Hilo de keepalive iniciado.");
+        while (running) {
+            try {
+                Thread.sleep(config.getKeepaliveIntervalMs());
+                QuicheTunnelConnection connection = activeConnection.get();
+                if (connection == null) continue;
+                long now = System.currentTimeMillis();
+                long sinceLastActivity = now - lastActivityTime;
+                if (sinceLastActivity >= config.getKeepaliveIntervalMs()) {
+                    log.debug("Enviando keepalive ({}ms sin actividad)", sinceLastActivity);
+                    connection.send(new byte[]{0x00}); // ping de 1 byte
+                    lastActivityTime = now;
+                }
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+                break;
+            } catch (TunnelException e) {
+                log.warn("Error al enviar keepalive: {}", e.getMessage());
+            }
+        }
+        log.debug("Hilo de keepalive terminado.");
     }
 }
