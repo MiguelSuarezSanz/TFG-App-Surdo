@@ -96,11 +96,13 @@ document.getElementById('btnIniciar').addEventListener('click', function () {
 });
 
 document.getElementById('btnSiguiente').addEventListener('click', function () {
-    llamarJava('prepMinijuego,MainGame');
+    llamarJava('prepMinijuego');
     this.style.display = "none"
+    document.getElementById("btnSalir").style.display = "none"
     document.getElementById("btnIniciar").style.display = "block"
 });
 
 function habilitarJugar(){
     document.getElementById("btnSiguiente").style.display = "block"
+    document.getElementById("btnSalir").style.display = "block"
 }

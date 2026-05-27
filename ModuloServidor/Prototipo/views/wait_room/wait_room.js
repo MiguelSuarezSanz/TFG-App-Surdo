@@ -69,6 +69,7 @@ function mostrarCodigoConexion(codigo) {
 }
 
 document.getElementById('btnPrep').addEventListener('click', function () {
-    llamarJava('prepMinijuego,MainGame');
+    llamarJava('cargarMusica,MainGame');
+    llamarJava('prepMinijuego');
     window.location.href = '../loanding/loanding.html';
 });

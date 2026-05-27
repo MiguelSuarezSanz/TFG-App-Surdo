@@ -69,10 +69,6 @@ public class PuenteJava {
             System.exit(0);
 		
 		case "prepMinijuego":
-			
-			musicHandeler.detener();
-			musicHandeler.cargar(args.get(0));
-			
 			ServidorTunnel.siguienteMinijuego(this);
 			break;
 		
