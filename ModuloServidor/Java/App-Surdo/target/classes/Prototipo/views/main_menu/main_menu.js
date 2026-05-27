@@ -1,1 +1,0 @@
-window.addEventListener('load', llamarJava('cargarMusica,MainMenu'));
