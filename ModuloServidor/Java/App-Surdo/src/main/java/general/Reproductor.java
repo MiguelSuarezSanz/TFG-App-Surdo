@@ -10,7 +10,7 @@ public class Reproductor {
     static int volumenGeneral = 60;
 
     public void cargar(String nArchivo) {
-    	String rutaArchivo = "../../Prototipo/resources/ost/" + nArchivo + ".wav";
+    	String rutaArchivo = "src/main/resources/Prototipo/resources/ost/" + nArchivo + ".wav";
         try {
             File archivo = new File(rutaArchivo);
             AudioInputStream audioStream = AudioSystem.getAudioInputStream(archivo);

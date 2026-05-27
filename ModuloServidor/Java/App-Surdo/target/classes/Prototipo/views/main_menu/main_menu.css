@@ -1,0 +1,32 @@
+.main_menu {
+    width: calc(100% - 4vw);
+    height: 65vh;
+    padding: 2vw;
+    gap: 1vw;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    align-content: center;
+}
+
+a {
+    min-width: 48%;
+    min-height: calc(40vh - 2vw);
+}
+
+button {
+    min-width: 100%;
+    min-height: calc(34vh - 2vw);
+    background-color: var(--primary-color);
+    font-size: 4.5rem;
+    border: 1rem solid var(--primary-color-lighter);
+    border-radius: 20rem;
+    padding: 1rem;
+    cursor: pointer;
+}
+
+button:hover {
+    border: 0.8rem solid var(--secundary-color);
+}

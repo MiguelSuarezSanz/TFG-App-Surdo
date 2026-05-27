@@ -50,7 +50,7 @@ public class AppUI {
         client.addMessageRouter(router);
 
         // Cargar el HTML con ruta absoluta
-        File archivoHtml = new File("../../Prototipo/views/index/index.html").getAbsoluteFile();
+        File archivoHtml = new File("src/main/resources/Prototipo/views/index/index.html").getAbsoluteFile();
         CefBrowser browser = client.createBrowser(
             archivoHtml.toURI().toString(),
             false,

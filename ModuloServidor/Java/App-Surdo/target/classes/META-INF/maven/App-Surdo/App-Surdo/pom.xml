@@ -19,24 +19,20 @@
 
         <!-- QUIC TUNNEL -->
         <dependency>
-            <groupId>com.quictunnel</groupId>
-            <artifactId>tunnel-core</artifactId>
-            <version>1.0.0</version>
-            <scope>system</scope>
-            <systemPath>
-                C:\Users\ibano\[02_ESTUDIOS]\DAM_2\Proyecto Intermodular\TFG-App-Surdo\ModuloServidor\Java\App-Surdo\libs\tunnel-core-1.0.0.jar
-            </systemPath>
-        </dependency>
+		    <groupId>com.quictunnel</groupId>
+		    <artifactId>tunnel-core</artifactId>
+		    <version>1.0</version>
+		    <scope>system</scope>
+		    <systemPath>${project.basedir}/libs/tunnel-server-1.0.0.jar</systemPath>
+		</dependency>
 
-        <dependency>
-            <groupId>com.quictunnel</groupId>
-            <artifactId>tunnel-server</artifactId>
-            <version>1.0.0</version>
-            <scope>system</scope>
-            <systemPath>
-                C:\Users\ibano\[02_ESTUDIOS]\DAM_2\Proyecto Intermodular\TFG-App-Surdo\ModuloServidor\Java\App-Surdo\libs\tunnel-server-1.0.0.jar
-            </systemPath>
-        </dependency>
+		<dependency>
+		    <groupId>com.quictunnel</groupId>
+		    <artifactId>tunnel-server</artifactId>
+		    <version>1.0</version>
+		    <scope>system</scope>
+		    <systemPath>${project.basedir}/libs/tunnel-server-1.0.0.jar</systemPath>
+		</dependency>
 
         <!-- NETTY -->
         <dependency>
