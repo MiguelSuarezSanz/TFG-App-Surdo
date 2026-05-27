@@ -1,6 +1,7 @@
 package general;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.cef.browser.CefBrowser;
 
@@ -19,7 +20,15 @@ public class PuenteJava {
     
     public static String titulo;
     public static String enunciado;
+    
+    public static final ArrayList<String> participantes =
+		    new ArrayList<>();
+    
+    public static HashMap<String, Integer> puntuaciones =
+            new HashMap<>();
 	
+    public static int respuestas;
+    
 	public PuenteJava(CefBrowser browser) {
 		this.browser = browser;
 	    instancia = this;
@@ -86,6 +95,7 @@ public class PuenteJava {
 	}
     
     public void lamarJavascript(String metodoJs,String args) {
+    	System.out.println(metodoJs+"("+args+");");
     	browser.executeJavaScript(metodoJs+"("+args+");", browser.getURL(), 0);
 	}
     

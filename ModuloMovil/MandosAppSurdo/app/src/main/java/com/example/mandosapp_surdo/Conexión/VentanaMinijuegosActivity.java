@@ -300,10 +300,15 @@ public class VentanaMinijuegosActivity extends AppCompatActivity implements Sens
         if (condicion.equals("gano")) {
             tituloFinJuego.setText("HAS GANADO");
             puntuacion++;
+            txtPuntuacionFinal.setText("Puntuación: " + puntuacion);
+
         } else if (condicion.equals("perdio")) {
             tituloFinJuego.setText("HAS PERDIDO");
+            txtPuntuacionFinal.setText("Puntuación: " + puntuacion);
         }
+        Log.i("Tunnel", "Puntuaicón: " + String.valueOf(puntuacion));
         handler.postDelayed(() -> mostrarPantalla(Estado.MENU), 4000);
+        enviarResultado();
     }
 
     // =========================================================
@@ -422,6 +427,29 @@ public class VentanaMinijuegosActivity extends AppCompatActivity implements Sens
         writer.writeInt(
                 listaMinijuegos.size()
         );
+
+        try {
+
+            TunnelManager
+                    .getTunnel()
+                    .send(writer.toArray());
+
+        } catch (TunnelException e) {
+
+            e.printStackTrace();
+        }
+    }
+
+    private void enviarResultado() {
+
+        PacketWriter writer =
+                new PacketWriter();
+
+        writer.writeByte(
+                Protocol.MSG_MINIGAME_RESULT
+        );
+
+        writer.writeInt(puntuacion);
 
         try {
 

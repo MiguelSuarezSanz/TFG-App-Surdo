@@ -63,9 +63,9 @@ public class DueloIrlandes implements Minijuego {
 
     @Override
     public String getExplicacion() {
-        return "¡Inclina el móvil hacia delante como si bebieras de una jarra!\n\n" +
-                "Vacía la cerveza antes de que se acabe el tiempo.\n\n" +
-                "⚠️ Si te inclinas demasiado... la derramarás.";
+        return "¡Inclina el móvil hacia delante como si bebieras de una jarra!" +
+                "Vacía la cerveza antes de que se acabe el tiempo." +
+                "Si te inclinas demasiado... la derramarás.";
     }
 
     @Override

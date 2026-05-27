@@ -75,6 +75,10 @@ public class Conexion extends AppCompatActivity {
             setupField(fields.get(i), i);
         }
 
+        // Debug de VentanaMinijuegosActivity
+        Bundle extra = getIntent().getExtras();
+        boolean debug = extra.getBoolean("debug");
+
         dispatcher.register(
                 Protocol.MSG_SET_NAME,
                 reader -> {
@@ -117,6 +121,7 @@ public class Conexion extends AppCompatActivity {
                                 );
 
                         entrandoAMinijuego = true;
+                        intent.putExtra("debug", debug);
                         startActivity(intent);
                         finish();
                     });
